@@ -1,4 +1,4 @@
-package pro.selecto.slothos
+package pro.selecto.slothos.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
