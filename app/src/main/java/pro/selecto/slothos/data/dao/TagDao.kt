@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import pro.selecto.slothos.data.Tag
+import pro.selecto.slothos.data.entities.Tag
 
 @Dao
 interface TagDao {

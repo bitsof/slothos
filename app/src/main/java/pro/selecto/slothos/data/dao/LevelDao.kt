@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import pro.selecto.slothos.data.Level
+import pro.selecto.slothos.data.entities.Level
 
 @Dao
 interface LevelDao {
