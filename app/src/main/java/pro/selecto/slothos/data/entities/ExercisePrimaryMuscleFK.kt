@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "exercise_muscle_fks",
+@Entity(tableName = "exercise_primary_muscle_fks",
     foreignKeys = [
         ForeignKey(
             entity = Exercise::class,
@@ -22,7 +22,7 @@ import androidx.room.PrimaryKey
             onDelete = ForeignKey.CASCADE
         )
     ])
-class ExerciseMuscleFK(
+class ExercisePrimaryMuscleFK(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     val exercise_id: Int,
