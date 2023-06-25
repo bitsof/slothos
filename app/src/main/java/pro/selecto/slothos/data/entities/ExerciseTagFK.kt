@@ -26,6 +26,6 @@ class ExerciseTagFK(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     val exercise_id: Int,
-    val muscle_id: Int,
+    val tag_id: Int,
 ) {
 }
