@@ -14,7 +14,7 @@ To compile and run the Slothos project, follow the steps below:
 
 1. Open Android Studio.
 2. Click on "Get from Version Control" or go to "File" -> "New" -> "Project from Version Control".
-3. In the URL field, enter the repository's clone URL: `https://github.com/organization/slothos.git`.
+3. In the URL field, enter the repository's clone URL: `https://github.com/bitsof/slothos.git`.
 4. Choose a directory for the project's local copy.
 5. Click on "Clone" to clone the repository.
 
