@@ -1,0 +1,50 @@
+[
+    {
+        "name": "medicine ball",
+        "description": ""
+    },
+    {
+        "name": "dumbbell",
+        "description": ""
+    },
+    {
+        "name": "body only",
+        "description": ""
+    },
+    {
+        "name": "bands",
+        "description": ""
+    },
+    {
+        "name": "kettlebells",
+        "description": ""
+    },
+    {
+        "name": "foam roll",
+        "description": ""
+    },
+    {
+        "name": "cable",
+        "description": ""
+    },
+    {
+        "name": "machine",
+        "description": ""
+    },
+    {
+        "name": "barbell",
+        "description": ""
+    },
+    {
+        "name": "exercise ball",
+        "description": ""
+    },
+    {
+        "name": "e-z curl bar",
+        "description": ""
+    },
+    {
+        "name": "other",
+        "description": ""
+    }
+]
