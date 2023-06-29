@@ -1,14 +1,14 @@
 [
     {
         "name": "static",
-        "description": ""
+        "description": "Also known as isometric exercises, contractions of a particular muscle in a specific position for an extended period of time."
     },
     {
         "name": "pull",
-        "description": ""
+        "description": "Exercises that involve pushing the weight away from your body, typically focusing on the chest, shoulders, and triceps."
     },
     {
         "name": "push",
-        "description": ""
+        "description": "Exercises that involve pulling the weight towards your body, typically focusing on the back, biceps, and forearms."
     }
 ]
