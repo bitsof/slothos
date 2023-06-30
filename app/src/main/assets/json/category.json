@@ -5,7 +5,7 @@
     },
     {
         "name": "strength",
-        "description": "Strength training focuses on increasing strength, power, and endurance. It typically involves resistance-based exercises such as using weights, bands, or your own body weight "
+        "description": "Strength training focuses on increasing strength, power, and endurance. It typically involves resistance-based exercises such as using weights, bands, or your own body weight."
     },
     {
         "name": "stretching",
@@ -13,7 +13,7 @@
     },
     {
         "name": "cardio",
-        "description": "Cardio, sometimes referred to as aerobic exercise, is a rhythmic activity that raises heart rate over a period of time. This is the best way to burn the most fat and calories."
+        "description": "Cardio, sometimes called aerobic exercise, is a rhythmic activity that raises heart rate over a set time. This is the best way to burn the most fat and calories."
     },
     {
         "name": "Olympic weightlifting",
@@ -21,7 +21,7 @@
     },
     {
         "name": "strongman",
-        "description": "A training style that involves picking up and holding a weight in a variety of exercises that differ in each workout. The variety can change from the amount of weight, reps, what you lift, and how you lift them."
+        "description": "A training style that involves picking up and holding a weight in various exercises that differ in each workout. The variety can change from the amount of weight, reps, what you lift, and how you lift them."
     },
     {
         "name": "plyometrics",
