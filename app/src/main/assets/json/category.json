@@ -1,7 +1,7 @@
 [
     {
         "name": "powerlifting",
-        "description": "A strength sport that involves three main lifts: Squat, Bench Press, and Deadlift. In a competition, one has three attempts at max weight when attempting each main lift."
+        "description": "A strength sport that involves three main lifts: Squat, Bench Press, and Deadlift. In a competition, one has three attempts at max weight when attempting each lift."
     },
     {
         "name": "strength",
