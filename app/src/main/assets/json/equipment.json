@@ -13,7 +13,7 @@
     },
     {
         "name": "bands",
-        "description": "Can be called exercise or resistance bands, they vary in tension and width. They are great for low impact and versatile workouts, recruiting the stabilizer muscles and improving bone density."
+        "description": "Can be called exercise or resistance bands; they vary in tension and width. They are great for low impact and versatile workouts, recruiting the stabilizer muscles and improving bone density."
     },
     {
         "name": "kettlebells",
@@ -21,15 +21,15 @@
     },
     {
         "name": "foam roll",
-        "description": "A cylindrical fitness tool made of foam that varies in density, texture, and size. They are used to relieve muscle tightness, soreness, inflammation, and increase your joint range of motion."
+        "description": "A cylindrical fitness tool made of foam that varies in density, texture, and size. They relieve muscle tightness, soreness, inflammation, and increase your joint range of motion."
     },
     {
         "name": "cable",
-        "description": "A large piece of gym equipment that has adjustable cable pulleys. Great for beginners to be less likely injured rather than using free weights or barbells, as well as exploring different ranges of motion."
+        "description": "A large piece of gym equipment with adjustable cable pulleys. Great for beginners to be less likely injured rather than using free weights or barbells, as well as exploring different ranges of motion."
     },
     {
         "name": "machine",
-        "description": "A large piece of gym equipment that has a fixed range of motion determined by the machine's design. They are more guided to help the user target specific muscle groups rather than overall stabilization. "
+        "description": "A large piece of gym equipment with a fixed range of motion determined by the machine's design. They are more guided to help the user target specific muscle groups rather than overall stabilization. "
     },
     {
         "name": "barbell",
