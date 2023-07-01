@@ -1,0 +1,33 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Define the Workout element -->
+    <xs:element name="workout">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="set" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Define the Set element -->
+    <xs:element name="set">
+        <xs:complexType>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element ref="set"/>
+                <xs:element ref="exercise"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Define the Exercise element -->
+    <xs:element name="exercise">
+        <xs:complexType>
+            <!-- Define the attributes of the exercise -->
+            <xs:attribute name="name_id" type="xs:string" use="required"/>
+            <xs:attribute name="reps" type="xs:int" use="optional"/>
+            <xs:attribute name="weight" type="xs:decimal" use="optional"/>
+            <xs:attribute name="effort" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
