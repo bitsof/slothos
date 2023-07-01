@@ -31,4 +31,6 @@ interface ExerciseRepository {
      * Update exercise in the data source
      */
     suspend fun updateExercise(exercise: Exercise)
+
+    suspend fun count(): Int
 }
