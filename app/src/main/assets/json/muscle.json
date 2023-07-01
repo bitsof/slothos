@@ -1,70 +1,70 @@
 [
     {
         "name": "abdominals",
-        "description": ""
+        "description": "Also known as abs, refers to a group of muscles from the front and side of the abdomen, comprised of the front abdomen or six-pack appearance and the sides, or the obliques. One of the more essential muscle groups, abs play a crucial role in core stability, posture, and movement."
     },
     {
         "name": "abductors",
-        "description": ""
+        "description": "Muscles that move a body part away from the midline of the body. To help remember, think to abduct or go away."
     },
     {
         "name": "adductors",
-        "description": ""
+        "description": "Muscles that bring a body part closer to the midline of your body. To help remember, think to add or draw inward."
     },
     {
         "name": "biceps",
-        "description": ""
+        "description": "A pair of muscles in the upper arm originating from the shoulder blade. They are responsible for flexing the elbow joint that brings the forearm to the upper arm."
     },
     {
         "name": "calves",
-        "description": ""
+        "description": "Located in the lower leg, these muscles are responsible for ankle rotation, particularly when pointing the foot downwards. They contribute to overall leg strength that is useful for actions like walking, running, and jumping."
     },
     {
         "name": "chest",
-        "description": ""
+        "description": "Also known as pectoral muscles or pecs, they are a group of muscles located in the chest region. They are responsible for bringing the arm across the body, inward rotation, and stabilizing the shoulder blades. "
     },
     {
         "name": "forearms",
-        "description": ""
+        "description": "The region between the elbow and the wrist they are responsible for extending or straightening the wrist and fingers, as well as improving grip strength, dexterity, and overall arm functionality."
     },
     {
         "name": "glutes",
-        "description": ""
+        "description": "A group of muscles in the buttocks that move the thighs backward and extend the hip joint. They also help stabilize the hip for walking or standing on one leg."
     },
     {
         "name": "hamstrings",
-        "description": ""
+        "description": "A group of muscles located on the back of the thigh. They are responsible for flexing the knee, hip extension, and overall stabilization."
     },
     {
         "name": "lats",
-        "description": ""
+        "description": "Short for latissimus dorsi, refers to the muscle group located from the lower back and extends upwards to the upper arm bone. They are crucial in shoulder extension, adduction, and medial arm rotation. These muscles help contribute to a well-rounded back and improve posture."
     },
     {
         "name": "lower back",
-        "description": ""
+        "description": "The lumbar region refers to the area on the back between the ribcage and pelvis. The lower back involves bending, twisting, lifting, and supporting the upper body. Many people have lower back issues, so be careful with these exercises to ensure the weight is appropriate and apply good form. "
     },
     {
         "name": "middle back",
-        "description": ""
+        "description": "The middle back refers to the region between the cervical spine (neck) and lumbar spine (lower back). The middle back provides support and stability to the upper body and improves posture and movement."
     },
     {
         "name": "neck",
-        "description": ""
+        "description": "The cervical spine is between the head and the middle back. It provides support and stability and improves nerve and vascular function."
     },
     {
         "name": "quadriceps",
-        "description": ""
+        "description": "Also known as quads, a group of muscles located at the front of the thigh. They are responsible for leg and knee extension and hip flexion and stabilization."
     },
     {
         "name": "shoulders",
-        "description": ""
+        "description": "Comprised of your upper arm bone, shoulder blade, and collarbone, they enable a wide range of motion in the arms for everyday movements and athletics. They help maintain spinal alignment and upper body stability. "
     },
     {
         "name": "traps",
-        "description": ""
+        "description": "Refers to the trapezius muscle; traps are located in the upper back and neck region. They assist with shoulder movement, neck support, good posture, and stability. "
     },
     {
         "name": "triceps",
-        "description": ""
+        "description": "Located at the back of the upper arm, their primary function is to extend the forearm at the elbow joint, allowing for pushing and lifting movements. "
     }
 ]

@@ -1,30 +1,30 @@
 [
     {
         "name": "powerlifting",
-        "description": ""
+        "description": "A strength sport that involves three main lifts: Squat, Bench Press, and Deadlift. In a competition, one has three attempts at max weight when attempting each lift."
     },
     {
         "name": "strength",
-        "description": ""
+        "description": "Strength training focuses on increasing strength, power, and endurance. It typically involves resistance-based exercises such as using weights, bands, or your own body weight."
     },
     {
         "name": "stretching",
-        "description": ""
+        "description": "Stretching is a physical exercise that focuses on a specific muscle or tendon to be expanded and flexed to improve elasticity and achieve comfortable muscle tone."
     },
     {
         "name": "cardio",
-        "description": ""
+        "description": "Cardio, sometimes called aerobic exercise, is a rhythmic activity that raises heart rate over a set time. This is the best way to burn the most fat and calories."
     },
     {
-        "name": "olympic weightlifting",
-        "description": ""
+        "name": "Olympic weightlifting",
+        "description": "A strength sport that involves lifting a weighted barbell from the ground to overhead."
     },
     {
         "name": "strongman",
-        "description": ""
+        "description": "A training style that involves picking up and holding a weight in various exercises that differ in each workout. The variety can change from the amount of weight, reps, what you lift, and how you lift them."
     },
     {
         "name": "plyometrics",
-        "description": ""
+        "description": "A form of exercise that uses speed and force of different movements to increase power."
     }
 ]
