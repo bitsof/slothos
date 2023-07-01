@@ -25,4 +25,7 @@ interface ExerciseDao {
 
     @Query("SELECT * from exercises ORDER BY name ASC")
     fun getAllExercises(): Flow<List<Exercise>>
+
+    @Query("SELECT COUNT(*) FROM exercises")
+    fun count(): Int
 }
