@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pro.selecto.slothos.data.dao.CategoryDao
 import pro.selecto.slothos.data.dao.EquipmentDao
 import pro.selecto.slothos.data.dao.ExerciseCategoryFKDao
@@ -36,6 +39,7 @@ import pro.selecto.slothos.data.entities.Level
 import pro.selecto.slothos.data.entities.Mechanic
 import pro.selecto.slothos.data.entities.Muscle
 import pro.selecto.slothos.data.entities.Tag
+import pro.selecto.slothos.utils.getData
 
 /**
  * Database class with a singleton Instance object.
@@ -90,7 +94,23 @@ abstract class WorkoutDatabase : RoomDatabase() {
                 Room.databaseBuilder(context, WorkoutDatabase::class.java, "workout_database")
                     .build()
                     .also { Instance = it }
+                    .also { it.populateInitialData() }
             }
         }
+    }
+
+    private fun populateInitialData(){
+
+        val exercises = getData() // Assuming this retrieves an exercise object
+
+        CoroutineScope(Dispatchers.IO).launch {
+            for (exercise in exercises)
+                Instance?.exerciseDao()?.insert(exercise) // Insert the exercise using the DAO's insert() method
+        }
+
+        println("Final exercise count " + Instance?.exerciseDao()?.count())
+        // get json data from website
+        // parse json data to list of exercises, fks, etc.
+        // insert each starting with individual objects and ending with fks
     }
 }
