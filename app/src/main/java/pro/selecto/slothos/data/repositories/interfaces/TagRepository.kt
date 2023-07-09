@@ -1,6 +1,7 @@
 package pro.selecto.slothos.data.repositories.interfaces
 
 import kotlinx.coroutines.flow.Flow
+import pro.selecto.slothos.data.entities.ExerciseTagFK
 import pro.selecto.slothos.data.entities.Tag
 
 /**
@@ -31,4 +32,14 @@ interface TagRepository {
      * Update tag in the data source
      */
     suspend fun updateTag(tag: Tag)
+
+    /**
+     * Insert a given foreign key relationship
+     */
+    suspend fun insertFK(fkPair: ExerciseTagFK)
+
+    /**
+     * Delete a given foreign key relationship
+     */
+    suspend fun deleteFK(fkPair: ExerciseTagFK)
 }

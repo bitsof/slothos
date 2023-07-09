@@ -1,6 +1,7 @@
 package pro.selecto.slothos.data.repositories.interfaces
 
 import kotlinx.coroutines.flow.Flow
+import pro.selecto.slothos.data.entities.ExerciseForceFK
 import pro.selecto.slothos.data.entities.Force
 
 /**
@@ -31,4 +32,14 @@ interface ForceRepository {
      * Update force in the data source
      */
     suspend fun updateForce(force: Force)
+
+    /**
+     * Insert a given foreign key relationship
+     */
+    suspend fun insertFK(fkPair: ExerciseForceFK)
+
+    /**
+     * Delete a given foreign key relationship
+     */
+    suspend fun deleteFK(fkPair: ExerciseForceFK)
 }
