@@ -3,24 +3,28 @@ package pro.selecto.slothos.data
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 internal class WorkoutDatabaseTest {
     private lateinit var context: Context
+    private lateinit var db: WorkoutDatabase
 
     @Before
     fun createDb() {
         context = ApplicationProvider.getApplicationContext()
+        db = WorkoutDatabase.getDatabase(context)
     }
 
-    @Test
-    fun testGetInstance() {
-        val database = WorkoutDatabase.getDatabase(context)
-        assertNotNull(database)
+    @After
+    @Throws(IOException::class)
+    fun closeDb() {
+        db.close()
     }
 
     @Test

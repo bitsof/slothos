@@ -15,4 +15,6 @@ class ImplExerciseRepository(private val exerciseDao: ExerciseDao) : ExerciseRep
     override suspend fun deleteExercise(exercise: Exercise) = exerciseDao.delete(exercise)
 
     override suspend fun updateExercise(exercise: Exercise) = exerciseDao.update(exercise)
+
+    override suspend fun count(): Int = exerciseDao.count()
 }

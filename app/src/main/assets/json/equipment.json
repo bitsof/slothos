@@ -1,0 +1,50 @@
+[
+    {
+        "name": "medicine ball",
+        "description": "A small, grippable heavy ball used for strength training and power exercises. They are best for explosive movements such as medicine ball slams, rotational throws, and weighted crunches."
+    },
+    {
+        "name": "dumbbell",
+        "description": "A type of free weight that consists of a short bar with a metal ball or disk at each end."
+    },
+    {
+        "name": "body only",
+        "description": "Exercises that require no equipment. Just use your body."
+    },
+    {
+        "name": "bands",
+        "description": "Can be called exercise or resistance bands; they vary in tension and width. They are great for low impact and versatile workouts, recruiting the stabilizer muscles and improving bone density."
+    },
+    {
+        "name": "kettlebells",
+        "description": "A type of free weight that is a cast-iron or cast-steel ball with a handle on up (resembles a cannonball with a handle)."
+    },
+    {
+        "name": "foam roll",
+        "description": "A cylindrical fitness tool made of foam that varies in density, texture, and size. They relieve muscle tightness, soreness, inflammation, and increase your joint range of motion."
+    },
+    {
+        "name": "cable",
+        "description": "A large piece of gym equipment with adjustable cable pulleys. Great for beginners to be less likely injured rather than using free weights or barbells, as well as exploring different ranges of motion."
+    },
+    {
+        "name": "machine",
+        "description": "A large piece of gym equipment with a fixed range of motion determined by the machine's design. They are more guided to help the user target specific muscle groups rather than overall stabilization. "
+    },
+    {
+        "name": "barbell",
+        "description": "Long, straight metal bars where weight can be added on either end. A standard barbell is 7 feet long and weighs 45 pounds. Sometimes barbells can have a fixed weight attached to them. "
+    },
+    {
+        "name": "exercise ball",
+        "description": "Large, light, and flexible balls used for stability, balance, and core training. Sometimes used as a replacement to a standard desk chair for core activation."
+    },
+    {
+        "name": "e-z curl bar",
+        "description": "A curved shaped barbell that reduces strain on the wrists and forearms. Typically used to target bicep muscles more effectively, weight can be added on each end or have a fixed weight."
+    },
+    {
+        "name": "other",
+        "description": "Another type of equipment used to better your workouts effectively and efficiently."
+    }
+]

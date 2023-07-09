@@ -1,0 +1,10 @@
+[
+    {
+        "name": "isolation",
+        "description": "Exercises that target specific muscles or muscle groups without much involvement from others. Useful for targeting and strengthening those specific muscles."
+    },
+    {
+        "name": "compound",
+        "description": "Exercises that engage multiple muscle groups and joints that are effective at building overall strength and functional movement."
+    }
+]
