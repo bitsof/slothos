@@ -1,6 +1,8 @@
 package pro.selecto.slothos.data.repositories.interfaces
 
 import kotlinx.coroutines.flow.Flow
+import pro.selecto.slothos.data.entities.ExercisePrimaryMuscleFK
+import pro.selecto.slothos.data.entities.ExerciseSecondaryMuscleFK
 import pro.selecto.slothos.data.entities.Muscle
 
 /**
@@ -31,4 +33,24 @@ interface MuscleRepository {
      * Update muscle in the data source
      */
     suspend fun updateMuscle(muscle: Muscle)
+
+    /**
+     * Insert a given foreign key relationship for primary muscle
+     */
+    suspend fun insertPrimaryFK(fkPair: ExercisePrimaryMuscleFK)
+
+    /**
+     * Delete a given foreign key relationship for primary muscle
+     */
+    suspend fun deletePrimaryFK(fkPair: ExercisePrimaryMuscleFK)
+
+    /**
+     * Insert a given foreign key relationship for secondary muscle
+     */
+    suspend fun insertFK(fkPair: ExerciseSecondaryMuscleFK)
+
+    /**
+     * Delete a given foreign key relationship for secondary muscle
+     */
+    suspend fun deleteFK(fkPair: ExerciseSecondaryMuscleFK)
 }

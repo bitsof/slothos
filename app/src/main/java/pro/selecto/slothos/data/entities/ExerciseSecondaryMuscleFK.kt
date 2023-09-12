@@ -3,6 +3,7 @@ package pro.selecto.slothos.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
@@ -22,6 +23,10 @@ import kotlinx.serialization.Serializable
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         )
+    ],
+    indices = [
+        Index("exercise_id"),
+        Index("muscle_id")
     ])
 @Serializable
 class ExerciseSecondaryMuscleFK(

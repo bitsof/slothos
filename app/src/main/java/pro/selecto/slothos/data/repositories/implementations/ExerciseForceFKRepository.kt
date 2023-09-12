@@ -3,8 +3,9 @@ package pro.selecto.slothos.data.repositories.implementations
 import pro.selecto.slothos.data.dao.ExerciseForceFKDao
 import pro.selecto.slothos.data.entities.ExerciseForceFK
 import pro.selecto.slothos.data.repositories.interfaces.GenericFKRepository
+import javax.inject.Inject
 
-class ExerciseForceFKRepository(private val exerciseForceDao: ExerciseForceFKDao):
+class ExerciseForceFKRepository @Inject constructor(private val exerciseForceDao: ExerciseForceFKDao):
     GenericFKRepository<ExerciseForceFK> {
     override suspend fun insertFK(fkPair: ExerciseForceFK) = exerciseForceDao.insert(fkPair)
 

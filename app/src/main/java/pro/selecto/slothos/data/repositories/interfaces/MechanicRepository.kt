@@ -1,6 +1,7 @@
 package pro.selecto.slothos.data.repositories.interfaces
 
 import kotlinx.coroutines.flow.Flow
+import pro.selecto.slothos.data.entities.ExerciseMechanicFK
 import pro.selecto.slothos.data.entities.Mechanic
 
 /**
@@ -31,4 +32,14 @@ interface MechanicRepository {
      * Update mechanic in the data source
      */
     suspend fun updateMechanic(mechanic: Mechanic)
+
+    /**
+     * Insert a given foreign key relationship
+     */
+    suspend fun insertFK(fkPair: ExerciseMechanicFK)
+
+    /**
+     * Delete a given foreign key relationship
+     */
+    suspend fun deleteFK(fkPair: ExerciseMechanicFK)
 }

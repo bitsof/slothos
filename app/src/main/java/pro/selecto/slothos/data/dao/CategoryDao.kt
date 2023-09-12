@@ -25,4 +25,12 @@ interface CategoryDao {
 
     @Query("SELECT * from categories ORDER BY name ASC")
     fun getAllCategories(): Flow<List<Category>>
+
+    @Query("""
+        SELECT categories.* FROM categories 
+        INNER JOIN exercise_category_fks
+        ON categories.id = exercise_category_fks.category_id 
+        WHERE exercise_category_fks.exercise_id = :id
+    """)
+    fun getAllCategoriesMatchingExerciseID(id: Int): Flow<List<Category>>
 }

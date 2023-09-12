@@ -1,6 +1,7 @@
 package pro.selecto.slothos.data.repositories.interfaces
 
 import kotlinx.coroutines.flow.Flow
+import pro.selecto.slothos.data.entities.ExerciseLevelFK
 import pro.selecto.slothos.data.entities.Level
 
 /**
@@ -31,4 +32,14 @@ interface LevelRepository {
      * Update level in the data source
      */
     suspend fun updateLevel(level: Level)
+
+    /**
+     * Insert a given foreign key relationship
+     */
+    suspend fun insertFK(fkPair: ExerciseLevelFK)
+
+    /**
+     * Delete a given foreign key relationship
+     */
+    suspend fun deleteFK(fkPair: ExerciseLevelFK)
 }

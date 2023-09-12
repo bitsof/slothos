@@ -4,8 +4,9 @@ import kotlinx.coroutines.flow.Flow
 import pro.selecto.slothos.data.dao.ExerciseDao
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.repositories.interfaces.ExerciseRepository
+import javax.inject.Inject
 
-class ImplExerciseRepository(private val exerciseDao: ExerciseDao) : ExerciseRepository {
+class ImplExerciseRepository @Inject constructor(private val exerciseDao: ExerciseDao) : ExerciseRepository {
     override fun getAllExercisesStream(): Flow<List<Exercise>> = exerciseDao.getAllExercises()
 
     override fun getExerciseStream(id: Int): Flow<Exercise?> = exerciseDao.getExercise(id)

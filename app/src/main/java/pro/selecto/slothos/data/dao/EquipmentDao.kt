@@ -25,4 +25,13 @@ interface EquipmentDao {
 
     @Query("SELECT * from equipment ORDER BY name ASC")
     fun getAllEquipment(): Flow<List<Equipment>>
+
+    @Query("""
+        SELECT equipment.* FROM equipment 
+        INNER JOIN exercise_equipment_fks
+        ON equipment.id = exercise_equipment_fks.equipment_id 
+        WHERE exercise_equipment_fks.exercise_id = :id
+    """)
+    fun getAllEquipmentMatchingExerciseID(id: Int): Flow<List<Equipment>>
+
 }
