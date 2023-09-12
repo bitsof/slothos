@@ -20,6 +20,7 @@ import pro.selecto.slothos.ui.exercise.ViewModelFactory
 enum class SlothosScreen(@StringRes val title: Int) {
     Home(title = R.string.app_name),
     ExerciseList(title = R.string.exercise_list),
+    ExerciseDetails(title = R.string.exercise_details)
 }
 
 @Composable
@@ -38,7 +39,13 @@ fun SlothosApp(
             )
         }
         composable(route = SlothosScreen.ExerciseList.name){
-            ExerciseListScreen()
+            ExerciseListScreen(viewModelFactory = viewModelFactory)
+        }
+        composable(ExerciseDetailsDestination.routeWithArgs,
+            arguments = listOf(navArgument(ExerciseDetailsDestination.exerciseIdArg) {
+                type = NavType.IntType
+            })) {
+            ExerciseDetailsScreen(viewModelFactory = viewModelFactory)
         }
     }
 }
