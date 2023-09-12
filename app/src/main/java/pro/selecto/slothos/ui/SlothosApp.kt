@@ -4,11 +4,18 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import pro.selecto.slothos.R
+import pro.selecto.slothos.ui.exercise.ExerciseDetailsDestination
+import pro.selecto.slothos.ui.exercise.ExerciseDetailsScreen
+import pro.selecto.slothos.ui.exercise.ExerciseListScreen
+import pro.selecto.slothos.ui.exercise.ViewModelFactory
 
 enum class SlothosScreen(@StringRes val title: Int) {
     Home(title = R.string.app_name),
@@ -17,7 +24,8 @@ enum class SlothosScreen(@StringRes val title: Int) {
 
 @Composable
 fun SlothosApp(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    viewModelFactory: ViewModelProvider.Factory
 ) {
     NavHost(
         navController = navController,
