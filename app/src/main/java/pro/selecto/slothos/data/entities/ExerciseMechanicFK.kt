@@ -32,7 +32,7 @@ import kotlinx.serialization.Serializable
 class ExerciseMechanicFK(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
-    val exercise_id: Int,
-    val mechanic_id: Int,
+    @ColumnInfo(name = "exercise_id") val exerciseId: Int,
+    @ColumnInfo(name = "mechanic_id") val mechanicId: Int,
 ) {
 }
