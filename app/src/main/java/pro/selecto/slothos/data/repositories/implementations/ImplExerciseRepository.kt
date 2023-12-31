@@ -3,19 +3,21 @@ package pro.selecto.slothos.data.repositories.implementations
 import kotlinx.coroutines.flow.Flow
 import pro.selecto.slothos.data.dao.ExerciseDao
 import pro.selecto.slothos.data.entities.Exercise
-import pro.selecto.slothos.data.repositories.interfaces.ExerciseRepository
+import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
 import javax.inject.Inject
 
-class ImplExerciseRepository @Inject constructor(private val exerciseDao: ExerciseDao) : ExerciseRepository {
-    override fun getAllExercisesStream(): Flow<List<Exercise>> = exerciseDao.getAllExercises()
+class ImplExerciseRepository @Inject constructor(private val exerciseDao: ExerciseDao) : BaseRepository<Exercise> {
+    override fun getAllEntitiesStream(): Flow<List<Exercise>> = exerciseDao.getAllExercises()
 
-    override fun getExerciseStream(id: Int): Flow<Exercise?> = exerciseDao.getExercise(id)
+    override fun getEntityById(id: Int): Flow<Exercise?> = exerciseDao.getExercise(id)
 
-    override suspend fun insertExercise(exercise: Exercise) = exerciseDao.insert(exercise)
+    override fun getEntityIdByName(name: String): Int? = exerciseDao.getExerciseId(name)
 
-    override suspend fun deleteExercise(exercise: Exercise) = exerciseDao.delete(exercise)
+    override suspend fun insert(entity: Exercise) = exerciseDao.insert(entity)
 
-    override suspend fun updateExercise(exercise: Exercise) = exerciseDao.update(exercise)
+    override suspend fun delete(entity: Exercise) = exerciseDao.delete(entity)
 
-    override suspend fun count(): Int = exerciseDao.count()
+    override suspend fun update(entity: Exercise) = exerciseDao.update(entity)
+
+    fun count(): Int = exerciseDao.count()
 }
