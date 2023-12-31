@@ -1,6 +1,6 @@
 package pro.selecto.slothos.data.repositories.interfaces
 
-interface GenericFKRepository<T> {
+interface BaseFKRepository<T> {
 
     /**
      * Insert a given foreign key relationship

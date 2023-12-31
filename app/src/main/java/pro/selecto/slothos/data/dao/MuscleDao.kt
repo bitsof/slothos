@@ -22,6 +22,8 @@ interface MuscleDao {
 
     @Query("SELECT * from muscles WHERE id = :id")
     fun getMuscle(id: Int): Flow<Muscle>
+    @Query("SELECT id from categories WHERE name = :name LIMIT 1")
+    fun getCategoryId(name: String): Int?
 
     @Query("SELECT * from muscles ORDER BY name ASC")
     fun getAllMuscles(): Flow<List<Muscle>>

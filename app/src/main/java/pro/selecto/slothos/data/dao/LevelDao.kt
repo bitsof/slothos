@@ -23,6 +23,9 @@ interface LevelDao {
     @Query("SELECT * from levels WHERE id = :id")
     fun getLevel(id: Int): Flow<Level>
 
+    @Query("SELECT id from levels WHERE name = :name LIMIT 1")
+    fun getLevelId(name: String): Int?
+
     @Query("SELECT * from levels ORDER BY name ASC")
     fun getAllLevels(): Flow<List<Level>>
 }

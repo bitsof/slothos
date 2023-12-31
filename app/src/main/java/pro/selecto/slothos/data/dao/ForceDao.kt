@@ -23,6 +23,9 @@ interface ForceDao {
     @Query("SELECT * from forces WHERE id = :id")
     fun getForce(id: Int): Flow<Force>
 
+    @Query("SELECT id from forces WHERE name = :name LIMIT 1")
+    fun getForceId(name: String): Int?
+
     @Query("SELECT * from forces ORDER BY name ASC")
     fun getAllForces(): Flow<List<Force>>
 }

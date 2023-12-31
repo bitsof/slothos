@@ -12,17 +12,19 @@ class ImplEquipmentRepository @Inject constructor(
     private val equipmentDao: EquipmentDao,
     private val exerciseEquipmentFKDao: ExerciseEquipmentFKDao
 ) : EquipmentRepository {
-    override fun getAllEquipmentStream(): Flow<List<Equipment>> = equipmentDao.getAllEquipment()
+    override fun getAllEntitiesStream(): Flow<List<Equipment>> = equipmentDao.getAllEquipment()
 
-    override fun getAllEquipmentMatchingIDStream(id: Int): Flow<List<Equipment>> = equipmentDao.getAllEquipmentMatchingExerciseID(id = id)
+    override fun getAllEntitiesMatchingIdStream(id: Int): Flow<List<Equipment>> = equipmentDao.getAllEquipmentMatchingExerciseID(id = id)
 
-    override fun getEquipmentStream(id: Int): Flow<Equipment?> = equipmentDao.getEquipment(id)
+    override fun getEntityById(id: Int): Flow<Equipment?> = equipmentDao.getEquipment(id)
 
-    override suspend fun insertEquipment(equipment: Equipment) = equipmentDao.insert(equipment)
+    override fun getEntityIdByName(name: String): Int? = equipmentDao.getEquipmentId(name)
 
-    override suspend fun deleteEquipment(equipment: Equipment) = equipmentDao.delete(equipment)
+    override suspend fun insert(entity: Equipment) = equipmentDao.insert(entity)
 
-    override suspend fun updateEquipment(equipment: Equipment) = equipmentDao.update(equipment)
+    override suspend fun delete(entity: Equipment) = equipmentDao.delete(entity)
+
+    override suspend fun update(entity: Equipment) = equipmentDao.update(entity)
 
     override suspend fun insertFK(fkPair: ExerciseEquipmentFK) = exerciseEquipmentFKDao.insert(fkPair)
 

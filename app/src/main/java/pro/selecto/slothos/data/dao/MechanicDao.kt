@@ -23,6 +23,9 @@ interface MechanicDao {
     @Query("SELECT * from mechanics WHERE id = :id")
     fun getMechanic(id: Int): Flow<Mechanic>
 
+    @Query("SELECT id from mechanics WHERE name = :name LIMIT 1")
+    fun getMechanicId(name: String): Int?
+
     @Query("SELECT * from mechanics ORDER BY name ASC")
     fun getAllMechanics(): Flow<List<Mechanic>>
 }

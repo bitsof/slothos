@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import dagger.Component
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pro.selecto.slothos.di.AppModule
 import pro.selecto.slothos.di.DaoModule
 import pro.selecto.slothos.di.RepositoryModule
@@ -17,6 +20,7 @@ import pro.selecto.slothos.ui.exercise.ExerciseListViewModel
 import pro.selecto.slothos.ui.exercise.ViewModelBuilderModule
 import pro.selecto.slothos.ui.exercise.ViewModelFactory
 import pro.selecto.slothos.ui.theme.SlothosTheme
+import pro.selecto.slothos.utils.DatabaseInitializer
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,7 +36,7 @@ interface AppComponent {
 }
 
 class MainActivity : ComponentActivity() {
-    val appComponent: AppComponent by lazy {
+    private val appComponent: AppComponent by lazy {
         DaggerAppComponent
             .builder()
             .appModule(AppModule(this))
@@ -42,15 +46,36 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    @Inject
+    lateinit var initializer: DatabaseInitializer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            if (!isDatabasePopulated()) {
+                setDatabasePopulated()
+                initializer.prepopulateDatabase()
+            }
+        }
         setContent {
             SlothosTheme {
                 // A surface container using the 'background' color from the theme
                 SlothosApp(viewModelFactory = viewModelFactory)
             }
         }
+    }
+
+    private fun isDatabasePopulated(): Boolean {
+        val sharedPreferences = getSharedPreferences("appPreferences", MODE_PRIVATE)
+        return sharedPreferences.getBoolean("databasePopulated", false)
+    }
+
+    private fun setDatabasePopulated() {
+        val sharedPreferences = getSharedPreferences("appPreferences", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("databasePopulated", true)
+        editor.apply()
     }
 }
 

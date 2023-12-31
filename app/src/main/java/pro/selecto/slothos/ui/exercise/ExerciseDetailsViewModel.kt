@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import pro.selecto.slothos.data.ExerciseDetails
 import pro.selecto.slothos.data.ExerciseDetailsService
-import pro.selecto.slothos.data.repositories.interfaces.ExerciseRepository
+import pro.selecto.slothos.data.entities.Exercise
+import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
 import pro.selecto.slothos.ui.DaggerAppComponent
 import javax.inject.Inject
 
@@ -22,7 +23,7 @@ class ExerciseDetailsViewModel(
     @Inject
     lateinit var exerciseDetailsService: ExerciseDetailsService
     @Inject
-    lateinit var exerciseRepository: ExerciseRepository
+    lateinit var exerciseRepository: BaseRepository<Exercise>
 
     init {
         DaggerAppComponent.builder().build().inject(this)
@@ -33,7 +34,7 @@ class ExerciseDetailsViewModel(
     @OptIn(kotlinx.coroutines.FlowPreview::class)
     // Use flow to access the Exercise and map it to ExerciseDetails
     val uiState: StateFlow<ExerciseDetailsUiState?> =
-        exerciseRepository.getExerciseStream(exerciseId)
+        exerciseRepository.getEntityById(exerciseId)
         .filterNotNull()
         .flatMapConcat { exercise ->
             exerciseDetailsService.getExerciseDetails(exercise)

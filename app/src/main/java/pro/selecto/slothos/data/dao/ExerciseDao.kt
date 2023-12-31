@@ -23,6 +23,9 @@ interface ExerciseDao {
     @Query("SELECT * from exercises WHERE id = :id")
     fun getExercise(id: Int): Flow<Exercise>
 
+    @Query("SELECT id from exercises WHERE name_id = :name LIMIT 1")
+    fun getExerciseId(name: String): Int?
+
     @Query("SELECT * from exercises ORDER BY name ASC")
     fun getAllExercises(): Flow<List<Exercise>>
 
