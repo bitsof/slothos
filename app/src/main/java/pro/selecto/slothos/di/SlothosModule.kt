@@ -27,14 +27,19 @@ import pro.selecto.slothos.data.dao.LevelDao
 import pro.selecto.slothos.data.dao.MechanicDao
 import pro.selecto.slothos.data.dao.MuscleDao
 import pro.selecto.slothos.data.dao.TagDao
+import pro.selecto.slothos.data.entities.Category
+import pro.selecto.slothos.data.entities.Equipment
+import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.repositories.implementations.ImplCategoryRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplEquipmentRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplExerciseRepository
+import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
 import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
 import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
-import pro.selecto.slothos.data.repositories.interfaces.ExerciseRepository
+import pro.selecto.slothos.data.repositories.interfaces.RelatedToExerciseRepository
 import pro.selecto.slothos.ui.MainActivity
-import pro.selecto.slothos.utils.getData
+import pro.selecto.slothos.utils.DatabaseInitializer
+import pro.selecto.slothos.utils.JsonHandler
 import javax.inject.Singleton
 
 @Module
@@ -59,20 +64,9 @@ object WorkoutModule {
             .addCallback(object: RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-                    CoroutineScope(Dispatchers.IO).launch {
-                        prepopulateDatabase(provideWorkoutDatabase(appContext))
-                    }
                 }
             })
             .build()
-    }
-
-    suspend fun prepopulateDatabase(db: WorkoutDatabase) {
-        val exercises = getData()
-        for (exercise in exercises) {
-            db.exerciseDao().insert(exercise)
-        }
-        println("Final exercise count " + db.exerciseDao().count())
     }
 }
 
@@ -172,7 +166,7 @@ object RepositoryModule {
     @Provides
     fun provideExerciseRepository(
         exerciseDao: ExerciseDao
-    ): ExerciseRepository {
+    ): BaseRepository<Exercise> {
         return ImplExerciseRepository(exerciseDao)
     }
 
@@ -186,11 +180,29 @@ object RepositoryModule {
 
     @Provides
     fun provideExerciseDetailsService(
-        exerciseRepository: ExerciseRepository,
+        exerciseRepository: BaseRepository<Exercise>,
         categoryRepository: CategoryRepository,
         equipmentRepository: EquipmentRepository,
     ): ExerciseDetailsService {
         return ExerciseDetailsService(exerciseRepository, categoryRepository, equipmentRepository)
+    }
+
+    @Provides
+    fun provideDatabaseInitializer(
+        exerciseRepository: BaseRepository<Exercise>,
+        categoryRepository: CategoryRepository,
+        equipmentRepository: EquipmentRepository,
+        jsonHandler: JsonHandler,
+        context: Context
+    ): DatabaseInitializer {
+        return DatabaseInitializer(exerciseRepository, categoryRepository, equipmentRepository, jsonHandler, context)
+    }
+
+    @Provides
+    fun provideJsonHandler(
+        context: Context
+    ): JsonHandler {
+        return JsonHandler(context)
     }
 
 }
