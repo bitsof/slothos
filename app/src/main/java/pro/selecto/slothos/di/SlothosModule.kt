@@ -38,7 +38,6 @@ import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
 import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
 import pro.selecto.slothos.data.repositories.interfaces.RelatedToExerciseRepository
 import pro.selecto.slothos.ui.MainActivity
-import pro.selecto.slothos.utils.DatabaseInitializer
 import pro.selecto.slothos.utils.JsonHandler
 import javax.inject.Singleton
 
@@ -185,17 +184,6 @@ object RepositoryModule {
         equipmentRepository: EquipmentRepository,
     ): ExerciseDetailsService {
         return ExerciseDetailsService(exerciseRepository, categoryRepository, equipmentRepository)
-    }
-
-    @Provides
-    fun provideDatabaseInitializer(
-        exerciseRepository: BaseRepository<Exercise>,
-        categoryRepository: CategoryRepository,
-        equipmentRepository: EquipmentRepository,
-        jsonHandler: JsonHandler,
-        context: Context
-    ): DatabaseInitializer {
-        return DatabaseInitializer(exerciseRepository, categoryRepository, equipmentRepository, jsonHandler, context)
     }
 
     @Provides
