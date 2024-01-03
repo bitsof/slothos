@@ -35,11 +35,20 @@ fun ExerciseListScreen(
 
     val uiState by viewModel.uiState.collectAsState(initial = ExerciseListUiState(emptyList()))
     val listSize = uiState?.exerciseDetailsList?.count()
+    if(listSize != null) {
+        ExerciseList(modifier, uiState?.exerciseDetailsList)
+    }
 
+
+}
+
+@Composable
+fun ExerciseList(modifier: Modifier, exerciseList: List<ExerciseDetails>?) {
     LazyColumn(modifier = modifier) {
-        if (listSize != null) {
-            items(listSize) { index ->
-                uiState?.exerciseDetailsList?.get(index)?.let { ExerciseItem(exerciseDetails = it) }
+
+        if (exerciseList?.count() != null) {
+            items(exerciseList.count()) { index ->
+                ExerciseItem(exerciseDetails = exerciseList[index])
             }
         }
     }
