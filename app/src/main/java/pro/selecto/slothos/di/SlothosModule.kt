@@ -2,13 +2,8 @@ package pro.selecto.slothos.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import pro.selecto.slothos.data.ExerciseDetailsService
 import pro.selecto.slothos.data.WorkoutDatabase
 import pro.selecto.slothos.data.dao.CategoryDao
@@ -27,8 +22,6 @@ import pro.selecto.slothos.data.dao.LevelDao
 import pro.selecto.slothos.data.dao.MechanicDao
 import pro.selecto.slothos.data.dao.MuscleDao
 import pro.selecto.slothos.data.dao.TagDao
-import pro.selecto.slothos.data.entities.Category
-import pro.selecto.slothos.data.entities.Equipment
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.repositories.implementations.ImplCategoryRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplEquipmentRepository
@@ -36,9 +29,7 @@ import pro.selecto.slothos.data.repositories.implementations.ImplExerciseReposit
 import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
 import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
 import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
-import pro.selecto.slothos.data.repositories.interfaces.RelatedToExerciseRepository
 import pro.selecto.slothos.ui.MainActivity
-import pro.selecto.slothos.utils.DatabaseInitializer
 import pro.selecto.slothos.utils.JsonHandler
 import javax.inject.Singleton
 
@@ -53,19 +44,16 @@ class AppModule(private val application: MainActivity) {
 @Module
 object WorkoutModule {
 
+    // This generates a database from the READ-ONLY assets folder
     @Provides
     @Singleton
     fun provideWorkoutDatabase(appContext: Context): WorkoutDatabase {
         return Room.databaseBuilder(
             appContext,
             WorkoutDatabase::class.java,
-            "workout_database"
+            "workout_database.db"
         )
-            .addCallback(object: RoomDatabase.Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                }
-            })
+            .createFromAsset("database/exercise_database.db")
             .build()
     }
 }
@@ -185,17 +173,6 @@ object RepositoryModule {
         equipmentRepository: EquipmentRepository,
     ): ExerciseDetailsService {
         return ExerciseDetailsService(exerciseRepository, categoryRepository, equipmentRepository)
-    }
-
-    @Provides
-    fun provideDatabaseInitializer(
-        exerciseRepository: BaseRepository<Exercise>,
-        categoryRepository: CategoryRepository,
-        equipmentRepository: EquipmentRepository,
-        jsonHandler: JsonHandler,
-        context: Context
-    ): DatabaseInitializer {
-        return DatabaseInitializer(exerciseRepository, categoryRepository, equipmentRepository, jsonHandler, context)
     }
 
     @Provides

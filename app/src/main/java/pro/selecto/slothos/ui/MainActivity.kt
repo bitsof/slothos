@@ -20,7 +20,6 @@ import pro.selecto.slothos.ui.exercise.ExerciseListViewModel
 import pro.selecto.slothos.ui.exercise.ViewModelBuilderModule
 import pro.selecto.slothos.ui.exercise.ViewModelFactory
 import pro.selecto.slothos.ui.theme.SlothosTheme
-import pro.selecto.slothos.utils.DatabaseInitializer
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -46,17 +45,10 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    lateinit var initializer: DatabaseInitializer
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         CoroutineScope(Dispatchers.IO).launch {
-            if (!isDatabasePopulated()) {
-                setDatabasePopulated()
-                initializer.prepopulateDatabase()
-            }
         }
         setContent {
             SlothosTheme {
@@ -64,18 +56,6 @@ class MainActivity : ComponentActivity() {
                 SlothosApp(viewModelFactory = viewModelFactory)
             }
         }
-    }
-
-    private fun isDatabasePopulated(): Boolean {
-        val sharedPreferences = getSharedPreferences("appPreferences", MODE_PRIVATE)
-        return sharedPreferences.getBoolean("databasePopulated", false)
-    }
-
-    private fun setDatabasePopulated() {
-        val sharedPreferences = getSharedPreferences("appPreferences", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("databasePopulated", true)
-        editor.apply()
     }
 }
 
