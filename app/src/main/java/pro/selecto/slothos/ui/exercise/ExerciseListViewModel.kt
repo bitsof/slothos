@@ -28,3 +28,10 @@ class ExerciseListViewModel @Inject constructor (
 data class ExerciseListUiState(
     val exerciseDetailsList: List<ExerciseDetails>
 )
+
+
+data class FilterOptions(
+    val category: String? = null,
+    val equipment: String? = null,
+    val exerciseInfo: String? = null
+)
