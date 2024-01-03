@@ -83,7 +83,12 @@ object ExerciseListProvider {
     private val equipment: Equipment = Equipment(name = "Name", description = "Description")
 
     fun getSampleExercises(): List<ExerciseDetails>{
-        return listOf(
+        val exerciseDetails = ExerciseDetails(
+            exercise = exercise1,
+            mutableListOf(category),
+            mutableListOf(equipment)
+        )
+        var list = mutableListOf<ExerciseDetails>(
             ExerciseDetails(
                 exercise = exercise1,
                 mutableListOf(category),
@@ -91,6 +96,10 @@ object ExerciseListProvider {
             ),
             ExerciseDetails(exercise = exercise2, mutableListOf(category), mutableListOf(equipment))
         )
+        for (i in 1..20) {
+            list.add(exerciseDetails)
+        }
+        return list
     }
 
 
@@ -99,6 +108,8 @@ object ExerciseListProvider {
 @Preview(showBackground = true)
 @Composable
 fun ExerciseListScreenPreview() {
-    val exerciseListProvider = ExerciseListProvider
-    ExerciseList(modifier = Modifier, exerciseList = ExerciseListProvider.getSampleExercises())
+    ExerciseList(modifier = Modifier
+        .width(360.dp) // Set maximum width
+        .height(640.dp),
+        exerciseList = ExerciseListProvider.getSampleExercises())
 }
