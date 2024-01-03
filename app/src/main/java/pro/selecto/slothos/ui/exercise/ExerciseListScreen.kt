@@ -11,11 +11,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
 import pro.selecto.slothos.data.ExerciseDetails
+import pro.selecto.slothos.data.entities.Category
+import pro.selecto.slothos.data.entities.Equipment
+import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object ExerciseListDestination : NavigationDestination {
@@ -58,8 +62,8 @@ fun ExerciseList(modifier: Modifier, exerciseList: List<ExerciseDetails>?) {
 fun ExerciseItem(exerciseDetails: ExerciseDetails) {
     Card(
             modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
+                .fillMaxWidth()
+                .padding(8.dp),
     ) {
         Column(
                 modifier = Modifier
@@ -70,4 +74,31 @@ fun ExerciseItem(exerciseDetails: ExerciseDetails) {
             Text(text = "Equipment: ${exerciseDetails.equipmentList.joinToString { it.name }}")
         }
     }
+}
+
+object ExerciseListProvider {
+    private val exercise1: Exercise = Exercise(nameId = "NameID", name = "Name", instructions = "Description")
+    private val exercise2: Exercise = Exercise(nameId = "Completely Different", name = "Completely Different", instructions = "Description")
+    private val category: Category = Category(name = "Name", description = "Description")
+    private val equipment: Equipment = Equipment(name = "Name", description = "Description")
+
+    fun getSampleExercises(): List<ExerciseDetails>{
+        return listOf(
+            ExerciseDetails(
+                exercise = exercise1,
+                mutableListOf(category),
+                mutableListOf(equipment)
+            ),
+            ExerciseDetails(exercise = exercise2, mutableListOf(category), mutableListOf(equipment))
+        )
+    }
+
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ExerciseListScreenPreview() {
+    val exerciseListProvider = ExerciseListProvider
+    ExerciseList(modifier = Modifier, exerciseList = ExerciseListProvider.getSampleExercises())
 }
