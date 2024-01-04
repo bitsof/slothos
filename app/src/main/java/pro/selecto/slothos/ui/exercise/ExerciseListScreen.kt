@@ -52,7 +52,7 @@ fun ExerciseListScreen(
 
     // Assuming viewModel provides filter options and categories
     val filterOptions by viewModel.filterOptions.collectAsState()
-    val categories = uiState?.categoryList
+    val categories = uiState?.categoryList?: emptyList<Category>()
 
     ExerciseList(
         modifier = modifier,
