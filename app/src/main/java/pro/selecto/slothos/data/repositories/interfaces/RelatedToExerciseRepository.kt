@@ -6,7 +6,7 @@ interface RelatedToExerciseRepository<T> : BaseRepository<T> {
     /**
      * Get all entities that match a given exercise id
      */
-    fun getAllEntitiesMatchingIdStream(id: Int): Flow<List<T>>
+    suspend fun getAllEntitiesMatchingIdStream(id: Int): Flow<List<T>>
 
 //    /**
 //     * Insert a given foreign key relationship
