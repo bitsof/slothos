@@ -6,7 +6,6 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.entities.ExerciseCategoryFK
