@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun HomeScreen(
     onButtonClicked: () -> Unit,
+    onButtonClicked2: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column() {
@@ -22,6 +23,11 @@ fun HomeScreen(
         )
         Button(
             onClick = onButtonClicked,
+        ) {
+
+        }
+        Button(
+            onClick = onButtonClicked2,
         ) {
 
         }

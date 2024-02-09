@@ -1,7 +1,6 @@
 package pro.selecto.slothos.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
@@ -15,12 +14,13 @@ import pro.selecto.slothos.R
 import pro.selecto.slothos.ui.exercise.ExerciseDetailsDestination
 import pro.selecto.slothos.ui.exercise.ExerciseDetailsScreen
 import pro.selecto.slothos.ui.exercise.ExerciseListScreen
-import pro.selecto.slothos.ui.exercise.ViewModelFactory
+import pro.selecto.slothos.ui.exercise.InsertExerciseScreen
 
 enum class SlothosScreen(@StringRes val title: Int) {
     Home(title = R.string.app_name),
     ExerciseList(title = R.string.exercise_list),
-    ExerciseDetails(title = R.string.exercise_details)
+    ExerciseDetails(title = R.string.exercise_details),
+    InsertExercise(title = R.string.insert_exercise)
 }
 
 @Composable
@@ -35,11 +35,15 @@ fun SlothosApp(
     ) {
         composable(route = SlothosScreen.Home.name) {
             HomeScreen(
-                onButtonClicked = { navController.navigate(SlothosScreen.ExerciseList.name) }
+                onButtonClicked = { navController.navigate(SlothosScreen.ExerciseList.name) },
+                onButtonClicked2 = { navController.navigate(SlothosScreen.InsertExercise.name) }
             )
         }
         composable(route = SlothosScreen.ExerciseList.name){
             ExerciseListScreen(viewModelFactory = viewModelFactory)
+        }
+        composable(route = SlothosScreen.InsertExercise.name){
+            InsertExerciseScreen(viewModelFactory = viewModelFactory)
         }
         composable(ExerciseDetailsDestination.routeWithArgs,
             arguments = listOf(navArgument(ExerciseDetailsDestination.exerciseIdArg) {
@@ -47,5 +51,6 @@ fun SlothosApp(
             })) {
             ExerciseDetailsScreen(viewModelFactory = viewModelFactory)
         }
+
     }
 }
