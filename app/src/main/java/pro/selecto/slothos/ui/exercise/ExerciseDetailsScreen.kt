@@ -28,13 +28,13 @@ fun ExerciseDetailsScreen(
     val viewModel: ExerciseDetailsViewModel = viewModel(
         factory = viewModelFactory
     )
-
+/*
     val uiState = viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
     ExerciseDetailsBody(
         exerciseDetailsUiState = uiState.value!!,
         modifier = Modifier,
-    )
+    )*/
 }
 
 @Composable
