@@ -48,6 +48,11 @@ abstract class ViewModelBuilderModule {
     @IntoMap
     @ViewModelKey(ExerciseListViewModel::class)
     abstract fun bindExerciseListViewModel(viewModel: ExerciseListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertExerciseViewModel::class)
+    abstract fun bindInsertExerciseViewModel(viewModel: InsertExerciseViewModel): ViewModel
 }
 
 @Target(

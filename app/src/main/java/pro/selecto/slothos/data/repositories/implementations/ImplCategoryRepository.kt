@@ -5,22 +5,20 @@ import pro.selecto.slothos.data.dao.CategoryDao
 import pro.selecto.slothos.data.dao.ExerciseCategoryFKDao
 import pro.selecto.slothos.data.entities.Category
 import pro.selecto.slothos.data.entities.ExerciseCategoryFK
-import pro.selecto.slothos.data.repositories.interfaces.BaseFKRepository
 import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
-import pro.selecto.slothos.data.repositories.interfaces.RelatedToExerciseRepository
 import javax.inject.Inject
 
 class ImplCategoryRepository @Inject constructor(
     private val categoryDao: CategoryDao,
     private val exerciseCategoryFKDao: ExerciseCategoryFKDao
 ) : CategoryRepository {
-    override fun getAllEntitiesStream(): Flow<List<Category>> = categoryDao.getAllCategories()
+    override suspend fun getAllEntitiesStream(): Flow<List<Category>> = categoryDao.getAllCategories()
 
-    override fun getAllEntitiesMatchingIdStream(id: Int): Flow<List<Category>> = categoryDao.getAllCategoriesMatchingExerciseID(id = id)
+    override suspend fun getAllEntitiesMatchingIdStream(id: Int): Flow<List<Category>> = categoryDao.getAllCategoriesMatchingExerciseID(id = id)
 
-    override fun getEntityById(id: Int): Flow<Category?> = categoryDao.getCategory(id)
+    override suspend fun getEntityById(id: Int): Flow<Category?> = categoryDao.getCategory(id)
 
-    override fun getEntityIdByName(name: String): Int? = categoryDao.getCategoryId(name)
+    override suspend fun getEntityIdByName(name: String): Int? = categoryDao.getCategoryId(name)
 
     override suspend fun insert(entity: Category) = categoryDao.insert(entity)
 

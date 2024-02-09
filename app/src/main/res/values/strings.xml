@@ -2,4 +2,5 @@
     <string name="app_name">Slothos</string>
     <string name="exercise_list">Exercise List</string>
     <string name="exercise_details">Exercise Details</string>
+    <string name="insert_exercise">Insert Exercise</string>
 </resources>

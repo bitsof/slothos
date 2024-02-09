@@ -17,6 +17,7 @@ import pro.selecto.slothos.di.WorkoutModule
 import pro.selecto.slothos.data.repositories.implementations.ImplCategoryRepository
 import pro.selecto.slothos.ui.exercise.ExerciseDetailsViewModel
 import pro.selecto.slothos.ui.exercise.ExerciseListViewModel
+import pro.selecto.slothos.ui.exercise.InsertExerciseViewModel
 import pro.selecto.slothos.ui.exercise.ViewModelBuilderModule
 import pro.selecto.slothos.ui.exercise.ViewModelFactory
 import pro.selecto.slothos.ui.theme.SlothosTheme
@@ -29,6 +30,7 @@ interface AppComponent {
     fun inject(app: MainActivity)
     fun inject(exerciseDetailsViewModel: ExerciseDetailsViewModel)
     fun inject(exerciseListViewModel: ExerciseListViewModel)
+    fun inject(insertExerciseViewModel: InsertExerciseViewModel)
     fun repository(): ImplCategoryRepository
     fun viewModelsFactory(): ViewModelFactory
 

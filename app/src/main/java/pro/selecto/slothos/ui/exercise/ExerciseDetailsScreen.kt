@@ -1,16 +1,12 @@
 package pro.selecto.slothos.ui.exercise
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
-import pro.selecto.slothos.data.ExerciseDetails
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object ExerciseDetailsDestination : NavigationDestination {
@@ -28,13 +24,13 @@ fun ExerciseDetailsScreen(
     val viewModel: ExerciseDetailsViewModel = viewModel(
         factory = viewModelFactory
     )
-
+/*
     val uiState = viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
     ExerciseDetailsBody(
         exerciseDetailsUiState = uiState.value!!,
         modifier = Modifier,
-    )
+    )*/
 }
 
 @Composable
