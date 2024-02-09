@@ -12,13 +12,13 @@ class ImplEquipmentRepository @Inject constructor(
     private val equipmentDao: EquipmentDao,
     private val exerciseEquipmentFKDao: ExerciseEquipmentFKDao
 ) : EquipmentRepository {
-    override fun getAllEntitiesStream(): Flow<List<Equipment>> = equipmentDao.getAllEquipment()
+    override suspend fun getAllEntitiesStream(): Flow<List<Equipment>> = equipmentDao.getAllEquipment()
 
-    override fun getAllEntitiesMatchingIdStream(id: Int): Flow<List<Equipment>> = equipmentDao.getAllEquipmentMatchingExerciseID(id = id)
+    override suspend fun getAllEntitiesMatchingIdStream(id: Int): Flow<List<Equipment>> = equipmentDao.getAllEquipmentMatchingExerciseID(id = id)
 
-    override fun getEntityById(id: Int): Flow<Equipment?> = equipmentDao.getEquipment(id)
+    override suspend fun getEntityById(id: Int): Flow<Equipment?> = equipmentDao.getEquipment(id)
 
-    override fun getEntityIdByName(name: String): Int? = equipmentDao.getEquipmentId(name)
+    override suspend fun getEntityIdByName(name: String): Int? = equipmentDao.getEquipmentId(name)
 
     override suspend fun insert(entity: Equipment) = equipmentDao.insert(entity)
 

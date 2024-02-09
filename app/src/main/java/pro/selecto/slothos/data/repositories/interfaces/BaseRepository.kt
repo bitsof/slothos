@@ -23,16 +23,16 @@ interface BaseRepository<T> {
     /**
      * Retrieve a entity from the given data source that matches with the [id].
      */
-    fun getEntityById(id: Int): Flow<T?>
+    suspend fun getEntityById(id: Int): Flow<T?>
 
     /**
      * Retrieve a entity id number from the given data source that matches with [name].
      */
-    fun getEntityIdByName(name: String): Int?
+    suspend fun getEntityIdByName(name: String): Int?
 
     /**
      * Retrieve all the entities from the the given data source.
      */
-    fun getAllEntitiesStream(): Flow<List<T>>
+    suspend fun getAllEntitiesStream(): Flow<List<T>>
 
 }
