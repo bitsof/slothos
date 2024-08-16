@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.Dispatchers
 import pro.selecto.slothos.data.ExerciseDetailsService
 import pro.selecto.slothos.data.WorkoutDatabase
 import pro.selecto.slothos.data.dao.CategoryDao
@@ -172,7 +173,7 @@ object RepositoryModule {
         categoryRepository: CategoryRepository,
         equipmentRepository: EquipmentRepository,
     ): ExerciseDetailsService {
-        return ExerciseDetailsService(exerciseRepository, categoryRepository, equipmentRepository)
+        return ExerciseDetailsService(Dispatchers.Default, exerciseRepository, categoryRepository, equipmentRepository)
     }
 
     @Provides
