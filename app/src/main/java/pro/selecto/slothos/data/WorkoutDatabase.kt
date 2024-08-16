@@ -17,7 +17,11 @@ import pro.selecto.slothos.data.dao.ForceDao
 import pro.selecto.slothos.data.dao.LevelDao
 import pro.selecto.slothos.data.dao.MechanicDao
 import pro.selecto.slothos.data.dao.MuscleDao
+import pro.selecto.slothos.data.dao.RepetitionDao
+import pro.selecto.slothos.data.dao.RepetitionMeasurementDao
+import pro.selecto.slothos.data.dao.SetDao
 import pro.selecto.slothos.data.dao.TagDao
+import pro.selecto.slothos.data.dao.WorkoutDao
 import pro.selecto.slothos.data.entities.Category
 import pro.selecto.slothos.data.entities.Equipment
 import pro.selecto.slothos.data.entities.Exercise
@@ -33,7 +37,11 @@ import pro.selecto.slothos.data.entities.Force
 import pro.selecto.slothos.data.entities.Level
 import pro.selecto.slothos.data.entities.Mechanic
 import pro.selecto.slothos.data.entities.Muscle
+import pro.selecto.slothos.data.entities.Repetition
+import pro.selecto.slothos.data.entities.RepetitionMeasurement
+import pro.selecto.slothos.data.entities.Set
 import pro.selecto.slothos.data.entities.Tag
+import pro.selecto.slothos.data.entities.Workout
 
 /**
  * Database class with a singleton Instance object.
@@ -55,8 +63,13 @@ import pro.selecto.slothos.data.entities.Tag
         ExerciseMechanicFK::class,
         ExercisePrimaryMuscleFK::class,
         ExerciseSecondaryMuscleFK::class,
-        ExerciseTagFK::class],
-    version = 1,
+        ExerciseTagFK::class,
+        Repetition::class,
+        RepetitionMeasurement::class,
+        Set::class,
+        Workout::class,
+               ],
+    version = 2,
     exportSchema = true
 )
 abstract class WorkoutDatabase : RoomDatabase() {
@@ -77,5 +90,13 @@ abstract class WorkoutDatabase : RoomDatabase() {
     abstract fun exercisePrimaryMuscleFKDao(): ExercisePrimaryMuscleFKDao
     abstract fun exerciseSecondaryMuscleFKDao(): ExerciseSecondaryMuscleFKDao
     abstract fun exerciseTagFKDao(): ExerciseTagFKDao
+
+    abstract fun repetitionDao(): RepetitionDao
+
+    abstract fun repetitionMeasurementDao(): RepetitionMeasurementDao
+
+    abstract fun setDao(): SetDao
+
+    abstract fun workoutDao(): WorkoutDao
 
 }
