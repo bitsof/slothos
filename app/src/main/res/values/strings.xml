@@ -4,4 +4,7 @@
     <string name="exercise_details">Exercise Details</string>
     <string name="insert_exercise">Insert Exercise</string>
     <string name="insert_workout">Insert Workout</string>
+    <string name="display_workout">Display Workout</string>
+    <string name="add_set">Add Set</string>
+    <string name="workout_list">Workout List</string>
 </resources>
