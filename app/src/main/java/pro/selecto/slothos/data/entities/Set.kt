@@ -28,11 +28,12 @@ class Set (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "order") val order: Int = 0,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "notes") val description: String,
-    @ColumnInfo(name = "date") val date: Long,
-    @ColumnInfo(name = "workout_id") val workoutId: Int?,
-    @ColumnInfo(name = "set_id") val setId: Int?,
+    @ColumnInfo(name = "name") val name: String = "",
+    @ColumnInfo(name = "notes") val description: String = "",
+    @ColumnInfo(name = "date") val date: Long = 0,
+    @ColumnInfo(name = "workout_id") val workoutId: Int? = 0,
+    @ColumnInfo(name = "set_id") val setId: Int? = 0,
+    @ColumnInfo(name = "exercise_id") val exerciseId: Int = 0,
 ) {
 
 }

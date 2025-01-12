@@ -27,10 +27,7 @@ import kotlinx.serialization.Serializable
 class Repetition (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "order") val order: Int,
-    @ColumnInfo(name = "planned_work") val plannedWork: Float,
-    @ColumnInfo(name = "done_work") val doneWork: Float,
-    @ColumnInfo(name = "set_id") val setId: Int,
-    @ColumnInfo(name = "exercise_id") val exerciseId: Int,
+    @ColumnInfo(name = "value") val order: Float = 0F,
+    @ColumnInfo(name = "set_id") val setId: Int = 0,
 ) {
 }
