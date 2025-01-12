@@ -5,13 +5,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
-@Entity(tableName = "workouts")
+@Entity(tableName = "measurements")
 @Serializable
-class Workout (
+class Measurement (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "name") val name: String ="",
-    @ColumnInfo(name = "notes") val description: String = "",
-    @ColumnInfo(name = "date") val date: Long = 0,
+    @ColumnInfo(name = "name") val name: String = "",
+    @ColumnInfo(name = "description") val description: String = "",
 ) {
 }

@@ -5,6 +5,6 @@ import pro.selecto.slothos.data.entities.Equipment
 import pro.selecto.slothos.data.entities.ExerciseCategoryFK
 import pro.selecto.slothos.data.entities.ExerciseEquipmentFK
 
-interface CategoryRepository : RelatedToExerciseRepository<Category>, BaseFKRepository<ExerciseCategoryFK>
+interface CategoryRepository : RelatedToRepository<Category>, BaseFKRepository<ExerciseCategoryFK>
 
-interface EquipmentRepository : RelatedToExerciseRepository<Equipment>, BaseFKRepository<ExerciseEquipmentFK>
+interface EquipmentRepository : RelatedToRepository<Equipment>, BaseFKRepository<ExerciseEquipmentFK>

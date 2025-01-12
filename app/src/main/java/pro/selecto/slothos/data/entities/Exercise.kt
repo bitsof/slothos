@@ -13,9 +13,9 @@ import kotlinx.serialization.Serializable
 data class Exercise (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "name_id") val nameId: String,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "instructions") val instructions: String,
+    @ColumnInfo(name = "name_id") val nameId: String = "",
+    @ColumnInfo(name = "name") val name: String = "",
+    @ColumnInfo(name = "instructions") val instructions: String = "",
     ) {
 
 }
