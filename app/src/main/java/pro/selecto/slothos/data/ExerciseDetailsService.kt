@@ -30,9 +30,15 @@ class ExerciseDetailsService @Inject constructor(
     ) {
 
     // returns exercise details class for a given exercise id
-    suspend fun getExerciseDetails(exercise: Exercise) : Flow<ExerciseDetails> =
-        categoryRepository.getAllEntitiesMatchingIdStream(exercise.id)
-            .combine(equipmentRepository.getAllEntitiesMatchingIdStream(exercise.id)) { categories, equipment ->
+    suspend fun getExerciseDetails(exerciseId: Int) : Flow<ExerciseDetails> =
+        categoryRepository.getAllEntitiesMatchingIdStream(exerciseId)
+            .combine(equipmentRepository.getAllEntitiesMatchingIdStream(exerciseId)) { categories, equipment ->
+                categories to equipment
+            }
+            .combine(exerciseRepository.getEntityById(exerciseId)) { (categories, equipment), exercise ->
+                if (exercise == null) {
+                    throw IllegalArgumentException("Measurement with id $exerciseId not found")
+                }
                 ExerciseDetails(
                     exercise = exercise,
                     categoryList = categories,
@@ -45,7 +51,7 @@ class ExerciseDetailsService @Inject constructor(
     suspend fun getAllExerciseDetails() : Flow<List<ExerciseDetails>> =
         exerciseRepository.getAllEntitiesStream().flatMapConcat { exercises ->
             val exerciseDetailsFlows = exercises.map { exercise ->
-                getExerciseDetails(exercise)
+                getExerciseDetails(exercise.id)
             }
             combine(exerciseDetailsFlows) { it.toList() }
         }
