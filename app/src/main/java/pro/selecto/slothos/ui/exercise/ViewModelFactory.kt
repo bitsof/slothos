@@ -1,19 +1,30 @@
 package pro.selecto.slothos.ui.exercise
 
+import androidx.lifecycle.AbstractSavedStateViewModelFactory
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
+import pro.selecto.slothos.ui.workout.DisplayWorkoutViewModel
+import pro.selecto.slothos.ui.workout.InsertWorkoutViewModel
+import pro.selecto.slothos.ui.workout.WorkoutListViewModel
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.reflect.KClass
 
+interface AssistedSavedStateViewModelFactory<T: ViewModel> {
+    fun create(savedStateHandle: SavedStateHandle): T
+}
+
 // Refer to https://github.com/android/architecture-samples/blob/dev-dagger/app/src/main/java/com/example/android/architecture/blueprints/todoapp/di/ViewModelFactory.kt
 class ViewModelFactory @Inject constructor(
-    private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
-) : ViewModelProvider.Factory {
+    private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>,
+    private val assistedFactories: @JvmSuppressWildcards Map<Class<out ViewModel>, AssistedSavedStateViewModelFactory<out ViewModel>>,
+) : AbstractSavedStateViewModelFactory() {
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         var creator: Provider<out ViewModel>? = creators[modelClass]
         if (creator == null) {
@@ -33,6 +44,39 @@ class ViewModelFactory @Inject constructor(
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
+    }
+
+    override fun <T : ViewModel> create(
+        key: String,
+        modelClass: Class<T>,
+        handle: SavedStateHandle
+    ): T {
+        var assistedFactory = findAssistedFactory(modelClass)
+        if (assistedFactory != null) {
+            @Suppress("UNCHECKED_CAST")
+            return assistedFactory.create(handle) as T
+        }
+        val creator = findCreator(modelClass)
+            ?: throw IllegalArgumentException("Unknown model class: $modelClass")
+
+        try {
+            @Suppress("UNCHECKED_CAST")
+            return creator.get() as T
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+    }
+
+    private fun <T : ViewModel> findAssistedFactory(modelClass: Class<T>): AssistedSavedStateViewModelFactory<out ViewModel>? {
+        return assistedFactories[modelClass] ?: assistedFactories.entries.firstOrNull {
+            modelClass.isAssignableFrom(it.key)
+        }?.value
+    }
+
+    private fun <T: ViewModel> findCreator(modelClass: Class<T>): Provider<out ViewModel>? {
+        return creators[modelClass] ?: creators.entries.firstOrNull {
+            modelClass.isAssignableFrom(it.key)
+        }?.value
     }
 }
 
