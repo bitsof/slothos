@@ -10,9 +10,8 @@ import kotlinx.serialization.Serializable
 class Workout (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "notes") val description: String,
-    @ColumnInfo(name = "date") val date: Long,
+    @ColumnInfo(name = "name") val name: String ="",
+    @ColumnInfo(name = "notes") val description: String = "",
+    @ColumnInfo(name = "date") val date: Long = 0,
 ) {
-
 }
