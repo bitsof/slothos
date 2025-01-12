@@ -3,38 +3,43 @@ package pro.selecto.slothos.ui.exercise
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import pro.selecto.slothos.data.ExerciseDetails
 import pro.selecto.slothos.data.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
-import pro.selecto.slothos.ui.DaggerAppComponent
-import javax.inject.Inject
 
-class ExerciseDetailsViewModel(
-    private val savedStateHandle: SavedStateHandle,
+class ExerciseDetailsViewModel @AssistedInject constructor(
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val exerciseDetailsService: ExerciseDetailsService,
+    private val exerciseRepository: BaseRepository<Exercise>,
 ) : ViewModel() {
-    private val exerciseId: Int =
-        checkNotNull(savedStateHandle[ExerciseDetailsDestination.exerciseIdArg])
+    @AssistedFactory
+    interface Factory : AssistedSavedStateViewModelFactory<ExerciseDetailsViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): ExerciseDetailsViewModel
+    }
 
-    @Inject
-    lateinit var exerciseDetailsService: ExerciseDetailsService
+    val exerciseId: Int = savedStateHandle["exerciseId"] ?: throw IllegalArgumentException("Exercise ID is missing")
 
-    @Inject
-    lateinit var exerciseRepository: BaseRepository<Exercise>
-
+    private val _uiState = MutableStateFlow<ExerciseDetailsUiState?>(null)
+    val uiState: StateFlow<ExerciseDetailsUiState?> = _uiState.asStateFlow()
     init {
-        DaggerAppComponent.builder().build().inject(this)
+        viewModelScope.launch {
+            loadExerciseDetails(exerciseId = exerciseId)
+        }
+    }
+
+    private suspend fun loadExerciseDetails(exerciseId: Int) {
+        exerciseDetailsService.getExerciseDetails(exerciseId).collect { exerciseDetails ->
+            _uiState.value = ExerciseDetailsUiState(exerciseDetails)
+
+        }
     }
 
     // opts into API that is in a preview state that may change
