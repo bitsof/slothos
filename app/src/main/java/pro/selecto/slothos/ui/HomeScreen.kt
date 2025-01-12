@@ -11,6 +11,9 @@ import androidx.compose.ui.Modifier
 fun HomeScreen(
     onButtonClicked: () -> Unit,
     onButtonClicked2: () -> Unit,
+    onButtonClicked3: () -> Unit,
+    onButtonClicked4: () -> Unit,
+    onButtonClicked5: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column() {
@@ -21,12 +24,30 @@ fun HomeScreen(
         Button(
             onClick = onButtonClicked,
         ) {
-
+            Text("Exercise List")
         }
         Button(
             onClick = onButtonClicked2,
         ) {
+            Text("Insert Exercise")
+        }
 
+        Button(
+            onClick = onButtonClicked3,
+        ) {
+            Text("Insert Workout")
+        }
+
+        Button(
+            onClick = onButtonClicked4,
+        ) {
+            Text("Display Workout")
+        }
+
+        Button(
+            onClick = onButtonClicked5,
+        ) {
+            Text("Workout Lis")
         }
     }
 }
