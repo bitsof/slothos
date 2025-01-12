@@ -1,5 +1,3 @@
-package pro.selecto.slothos.data.entities
-
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -12,13 +10,6 @@ import kotlinx.serialization.Serializable
             entity = Set::class,
             parentColumns = ["id"],
             childColumns = ["set_id"],
-            onUpdate = ForeignKey.CASCADE,
-            onDelete = ForeignKey.CASCADE
-        ),
-        ForeignKey(
-            entity = Exercise::class,
-            parentColumns = ["id"],
-            childColumns = ["exercise_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         )
