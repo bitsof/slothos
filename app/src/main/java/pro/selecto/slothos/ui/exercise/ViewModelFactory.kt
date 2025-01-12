@@ -97,6 +97,26 @@ abstract class ViewModelBuilderModule {
     @IntoMap
     @ViewModelKey(InsertExerciseViewModel::class)
     abstract fun bindInsertExerciseViewModel(viewModel: InsertExerciseViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ExerciseDetailsViewModel::class)
+    abstract fun bindExerciseDetailsViewModel(factory: ExerciseDetailsViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertWorkoutViewModel::class)
+    abstract fun bindInsertWorkoutViewModel(viewModel: InsertWorkoutViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DisplayWorkoutViewModel::class)
+    abstract fun bindDisplayWorkoutViewModel(viewModel: DisplayWorkoutViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WorkoutListViewModel::class)
+    abstract fun bindWorkoutListViewModel(viewModel: WorkoutListViewModel): ViewModel
 }
 
 @Target(

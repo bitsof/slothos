@@ -6,7 +6,10 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import pro.selecto.slothos.data.ExerciseDetailsService
+import pro.selecto.slothos.data.SetDetailsService
+import pro.selecto.slothos.data.WorkDetailsService
 import pro.selecto.slothos.data.WorkoutDatabase
+import pro.selecto.slothos.data.WorkoutDetailsService
 import pro.selecto.slothos.data.dao.CategoryDao
 import pro.selecto.slothos.data.dao.EquipmentDao
 import pro.selecto.slothos.data.dao.ExerciseCategoryFKDao
@@ -20,16 +23,28 @@ import pro.selecto.slothos.data.dao.ExerciseSecondaryMuscleFKDao
 import pro.selecto.slothos.data.dao.ExerciseTagFKDao
 import pro.selecto.slothos.data.dao.ForceDao
 import pro.selecto.slothos.data.dao.LevelDao
+import pro.selecto.slothos.data.dao.MeasurementDao
 import pro.selecto.slothos.data.dao.MechanicDao
 import pro.selecto.slothos.data.dao.MuscleDao
+import pro.selecto.slothos.data.dao.SetDao
 import pro.selecto.slothos.data.dao.TagDao
+import pro.selecto.slothos.data.dao.WorkDao
+import pro.selecto.slothos.data.dao.WorkoutDao
 import pro.selecto.slothos.data.entities.Exercise
+import pro.selecto.slothos.data.entities.Measurement
+import pro.selecto.slothos.data.entities.Workout
 import pro.selecto.slothos.data.repositories.implementations.ImplCategoryRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplEquipmentRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplExerciseRepository
+import pro.selecto.slothos.data.repositories.implementations.ImplMeasurementRepository
+import pro.selecto.slothos.data.repositories.implementations.ImplSetRepository
+import pro.selecto.slothos.data.repositories.implementations.ImplWorkRepository
+import pro.selecto.slothos.data.repositories.implementations.ImplWorkoutRepository
 import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
 import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
 import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
+import pro.selecto.slothos.data.repositories.interfaces.SetRepository
+import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
 import pro.selecto.slothos.ui.MainActivity
 import pro.selecto.slothos.utils.JsonHandler
 import javax.inject.Singleton
@@ -54,7 +69,7 @@ object WorkoutModule {
             WorkoutDatabase::class.java,
             "workout_database.db"
         )
-            .createFromAsset("database/exercise_database.db")
+            .fallbackToDestructiveMigration()//.createFromAsset("database/exercise_database.db")
             .build()
     }
 }
@@ -140,6 +155,26 @@ object DaoModule {
         return workoutDatabase.exerciseTagFKDao()
     }
 
+    @Provides
+    fun provideWorkDao(workoutDatabase: WorkoutDatabase): WorkDao {
+        return workoutDatabase.workDao()
+    }
+
+    @Provides
+    fun provideWorkoutDao(workoutDatabase: WorkoutDatabase): WorkoutDao {
+        return workoutDatabase.workoutDao()
+    }
+
+    @Provides
+    fun provideMeasurementDao(workoutDatabase: WorkoutDatabase): MeasurementDao {
+        return workoutDatabase.measurementDao()
+    }
+
+    @Provides
+    fun provideSetDao(workoutDatabase: WorkoutDatabase): SetDao {
+        return workoutDatabase.setDao()
+    }
+
 }
 
 @Module
@@ -168,12 +203,65 @@ object RepositoryModule {
     }
 
     @Provides
+    fun provideWorkRepository(
+        workDao: WorkDao
+    ): WorkRepository {
+        return ImplWorkRepository(workDao)
+    }
+
+    @Provides
+    fun provideSetRepository(
+        setDao: SetDao
+    ): SetRepository {
+        return ImplSetRepository(setDao)
+    }
+
+    @Provides
+    fun provideWorkoutRepository(
+        workoutDao: WorkoutDao
+    ):  BaseRepository<Workout> {
+        return ImplWorkoutRepository(workoutDao)
+    }
+
+    @Provides
+    fun provideMeasurementRepository(
+        measurementDao: MeasurementDao
+    ):  BaseRepository<Measurement> {
+        return ImplMeasurementRepository(measurementDao)
+    }
+
+    @Provides
     fun provideExerciseDetailsService(
         exerciseRepository: BaseRepository<Exercise>,
         categoryRepository: CategoryRepository,
         equipmentRepository: EquipmentRepository,
     ): ExerciseDetailsService {
         return ExerciseDetailsService(Dispatchers.Default, exerciseRepository, categoryRepository, equipmentRepository)
+    }
+
+    @Provides
+    fun provideWorkDetailsService(
+        workRepository: WorkRepository,
+        measurementRepository: BaseRepository<Measurement>,
+    ): WorkDetailsService {
+        return WorkDetailsService(Dispatchers.Default, workRepository, measurementRepository)
+    }
+
+    @Provides
+    fun provideSetDetailsService(
+        setRepository: SetRepository,
+        workDetailsService: WorkDetailsService,
+        exerciseDetailsService: ExerciseDetailsService
+    ): SetDetailsService {
+        return SetDetailsService(Dispatchers.Default, setRepository, workDetailsService, exerciseDetailsService)
+    }
+
+    @Provides
+    fun provideWorkoutDetailService(
+        setDetailsService: SetDetailsService,
+        workoutRepository: BaseRepository<Workout>
+    ): WorkoutDetailsService {
+        return WorkoutDetailsService(Dispatchers.Default, workoutRepository, setDetailsService)
     }
 
     @Provides
