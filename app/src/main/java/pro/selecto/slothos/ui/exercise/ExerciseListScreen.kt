@@ -30,8 +30,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
 import pro.selecto.slothos.data.ExerciseDetails
 import pro.selecto.slothos.data.entities.Category
-import pro.selecto.slothos.data.entities.Equipment
-import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object ExerciseListDestination : NavigationDestination {
@@ -42,7 +40,8 @@ object ExerciseListDestination : NavigationDestination {
 @Composable
 fun ExerciseListScreen(
     modifier: Modifier = Modifier,
-    viewModelFactory: ViewModelProvider.Factory
+    viewModelFactory: ViewModelProvider.Factory,
+    onExerciseClick: (ExerciseDetails) -> Unit,
 ) {
     val viewModel: ExerciseListViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
@@ -58,7 +57,8 @@ fun ExerciseListScreen(
         modifier = modifier,
         exerciseList = uiState?.exerciseDetailsList,
         categories = categories,
-        filterOptions = filterOptions
+        onExerciseClick = onExerciseClick,
+        filterOptions = filterOptions,
     ) { newFilterOptions ->
         viewModel.updateFilterOptions(newFilterOptions)
     }
@@ -72,7 +72,8 @@ fun ExerciseList(
     exerciseList: List<ExerciseDetails>?,
     categories: List<Category>?,
     filterOptions: FilterOptions,
-    onFilterChange: (FilterOptions) -> Unit
+    onExerciseClick: (ExerciseDetails) -> Unit,
+    onFilterChange: (FilterOptions) -> Unit,
 ) {
     var showFilterMenu by remember { mutableStateOf(false) }
 
@@ -100,7 +101,7 @@ fun ExerciseList(
             exerciseList?.let { list ->
                 items(list.count()) { index ->
                     val exerciseDetails = list[index]
-                    ExerciseItem(exerciseDetails = exerciseDetails)
+                    ExerciseItem(exerciseDetails = exerciseDetails, onExerciseClick = onExerciseClick)
                 }
             }
         }
@@ -152,11 +153,14 @@ fun FilterMenu(
 
 
 @Composable
-fun ExerciseItem(exerciseDetails: ExerciseDetails) {
+fun ExerciseItem(
+    exerciseDetails: ExerciseDetails,
+    onExerciseClick: (ExerciseDetails) -> Unit) {
     Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(8.dp)
+                .clickable { onExerciseClick(exerciseDetails) },
     ) {
         Column(
                 modifier = Modifier
