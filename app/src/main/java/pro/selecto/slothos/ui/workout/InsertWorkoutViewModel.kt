@@ -1,42 +1,30 @@
 package pro.selecto.slothos.ui.workout
 
-import androidx.compose.runtime.mutableStateListOf
+import android.util.Log
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.ExerciseDetails
-import pro.selecto.slothos.data.ExerciseDetailsService
+import pro.selecto.slothos.data.SetDetails
+import pro.selecto.slothos.data.SetDetailsService
+import pro.selecto.slothos.data.WorkDetailsService
 import pro.selecto.slothos.data.WorkoutDetails
-import pro.selecto.slothos.data.entities.Category
-import pro.selecto.slothos.data.entities.Equipment
-import pro.selecto.slothos.data.entities.Exercise
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
+import pro.selecto.slothos.data.WorkoutDetailsService
+import pro.selecto.slothos.data.entities.Workout
 import javax.inject.Inject
 
 class InsertWorkoutViewModel @Inject constructor(
-//    private val workoutDetailsService: WorkoutDetailsService,
-//    private val exerciseDetailsService: ExerciseDetailsService,
-//    private val exerciseRepository: BaseRepository<Exercise>,
-//    private val categoryRepository: CategoryRepository,
-//    private val equipmentRepository: EquipmentRepository,
-//    private val forceRepository: ForceRepository,
-//    private val levelRepository: LevelRepository,
-//    private val mechanicRepository: MechanicRepository,
-//    private val primaryMuscleRepository: PrimaryMuscleRepository,
-//    private val secondaryMuscleRepository: SecondaryMuscleRepository,
-//    private val tagRepository: TagRepository
+    private val workoutDetailsService: WorkoutDetailsService,
+    private val setDetailsService: SetDetailsService,
+    private val workDetailsService: WorkDetailsService,
 ) : ViewModel() {
     // LiveData or State for text fields
     var workoutName = mutableStateOf("")
     val workoutNotes = mutableStateOf("")
-    var workoutDate = mutableStateOf("") // for date time
-
-    // LiveData or State for drop-down menus
-    // add way to store set data
-
-    // List all exercises
-
+    val workoutDescription = mutableStateOf("")
+    var workoutDate = mutableLongStateOf(System.currentTimeMillis()) // for date time
+    var sets = mutableStateOf<List<SetDetails>>(listOf())
 
     init {
 
@@ -45,33 +33,38 @@ class InsertWorkoutViewModel @Inject constructor(
 
     // Call this function when the user confirms the form
     fun insertWorkout() {
-        val workoutDetails = WorkoutDetails(
-            //
-        )
         viewModelScope.launch {
+            val workoutDetails = WorkoutDetails(
+                workout= Workout(
+                    name = workoutName.value,
+                    description = workoutDescription.value,
+                    date = workoutDate.value,
+                ),
+                setDetailsList = sets.value,
+            )
+            Log.v("Logged stuff", "Insert workout");
             workoutDetailsService.insertWorkout(workoutDetails)
-            // Handle success or error
         }
     }
 
+    fun addSet(setDetails: SetDetails) {
+        sets.value += setDetails
+    }
+
+    fun removeSet(setDetails: SetDetails) {
+        sets.value -= setDetails
+    }
+
     fun updateWorkoutName(it: String) {
-        // add code to ensure name ends up unique
         workoutName.value = it
     }
 
     fun updateWorkoutNotes(it: String) {
-        // add code to ensure name ends up unique
         workoutNotes.value = it
     }
 
-//    fun updateWorkoutDate(it: //date time format) {
-//        // add code to ensure name ends up unique
-//        workoutNotes.value = it
-//    }
-
-    // add set to list
-
-    // add set to other set list
-
+    fun updateWorkoutDescription(it: String) {
+        workoutDescription.value = it
+    }
 
 }
