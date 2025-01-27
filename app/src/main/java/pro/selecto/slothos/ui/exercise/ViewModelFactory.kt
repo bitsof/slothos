@@ -8,7 +8,10 @@ import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
+import pro.selecto.slothos.ui.workout.AddSetViewModel
+import pro.selecto.slothos.ui.workout.AddWorkViewModel
 import pro.selecto.slothos.ui.workout.DisplayWorkoutViewModel
+import pro.selecto.slothos.ui.workout.InsertMeasurementViewModel
 import pro.selecto.slothos.ui.workout.InsertWorkoutViewModel
 import pro.selecto.slothos.ui.workout.WorkoutListViewModel
 import javax.inject.Inject
@@ -100,6 +103,11 @@ abstract class ViewModelBuilderModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(InsertMeasurementViewModel::class)
+    abstract fun bindInsertMeasurementViewModel(viewModel: InsertMeasurementViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(ExerciseDetailsViewModel::class)
     abstract fun bindExerciseDetailsViewModel(factory: ExerciseDetailsViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
@@ -117,6 +125,16 @@ abstract class ViewModelBuilderModule {
     @IntoMap
     @ViewModelKey(WorkoutListViewModel::class)
     abstract fun bindWorkoutListViewModel(viewModel: WorkoutListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddSetViewModel::class)
+    abstract fun binAddSetViewModel(viewModel: AddSetViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddWorkViewModel::class)
+    abstract fun bindAddWorkViewModel(viewModel: AddWorkViewModel): ViewModel
 }
 
 @Target(
