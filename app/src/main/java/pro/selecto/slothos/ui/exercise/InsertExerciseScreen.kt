@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import pro.selecto.slothos.R
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
@@ -37,7 +38,8 @@ object InsertExerciseDestination : NavigationDestination {
 @Composable
 fun InsertExerciseScreen(
     modifier: Modifier = Modifier,
-    viewModelFactory: ViewModelProvider.Factory
+    viewModelFactory: ViewModelProvider.Factory,
+    navController: NavHostController,
 ) {
     val viewModel: InsertExerciseViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
@@ -46,12 +48,12 @@ fun InsertExerciseScreen(
     val exerciseInstructions by viewModel.exerciseInstructions
     val selectedCategories = viewModel.selectedCategories
     val selectedEquipment = viewModel.selectedEquipment
-    Text(
-        text = "Add Exercise Screen",
-        style = MaterialTheme.typography.headlineSmall
-    )
 
     Column(modifier = modifier.padding(16.dp)) {
+        Text(
+            text = "Add Exercise Screen",
+            style = MaterialTheme.typography.headlineSmall
+        )
         TextField(
             value = exerciseName,
             onValueChange = { viewModel.updateExerciseName(it) },
@@ -77,9 +79,14 @@ fun InsertExerciseScreen(
             onSelectionChanged = { equipment -> viewModel.onEquipmentSelected(equipment) },
             label = "Select Equipment"
         )
-    }
-    Button(onClick = { viewModel.insertExercise() }) {
-
+        Button(
+            onClick = {
+                viewModel.insertExercise()
+                navController.popBackStack()
+            }
+        ) {
+            Text(text = "Add Exercise")
+        }
     }
 
 
