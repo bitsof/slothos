@@ -1,11 +1,13 @@
 package pro.selecto.slothos.data.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import kotlinx.serialization.Serializable
+import kotlinx.parcelize.Parcelize
+import pro.selecto.slothos.data.StandardMeasurementType
 
 @Entity(tableName = "work",
     foreignKeys = [
@@ -28,14 +30,16 @@ import kotlinx.serialization.Serializable
         Index("set_id"),
         Index("measurement_id"),
     ])
-@Serializable
+@Parcelize
 class Work(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "value") val name: Float = 0F,
-    @ColumnInfo(name = "description") val description: String = "",
+    @ColumnInfo(name = "order") val order: Int = 0,
+    @ColumnInfo(name = "value") val value: Float = 0F,
+    @ColumnInfo(name = "name") val name: String = "",
+    @ColumnInfo(name = "measurement_type") val measurementType: StandardMeasurementType = StandardMeasurementType.POUNDS,
     @ColumnInfo(name = "measurement_id") val measurementId: Int,
     @ColumnInfo(name = "set_id") val setId: Int,
-) {
+) : Parcelable {
 
 }

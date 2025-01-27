@@ -14,6 +14,7 @@ import pro.selecto.slothos.R
 import pro.selecto.slothos.ui.exercise.ExerciseDetailsScreen
 import pro.selecto.slothos.ui.exercise.ExerciseListScreen
 import pro.selecto.slothos.ui.exercise.InsertExerciseScreen
+import pro.selecto.slothos.ui.workout.AddWorkScreen
 import pro.selecto.slothos.ui.workout.DisplayWorkoutScreen
 import pro.selecto.slothos.ui.workout.InsertWorkoutScreen
 import pro.selecto.slothos.ui.workout.WorkoutListScreen
@@ -27,6 +28,7 @@ enum class SlothosScreen(@StringRes val title: Int) {
     DisplayWorkout(title = R.string.display_workout),
     AddSet(title = R.string.add_set),
     WorkoutList(title = R.string.workout_list)
+    AddWork(title = R.string.add_work)
 }
 
 @Composable
@@ -65,9 +67,18 @@ fun SlothosApp(
                 navigateToAddSetScreen = { navController.navigate(SlothosScreen.AddSet.name)}
             )
         }
-        
-        composable(route = SlothosScreen.DisplayWorkout.name){
-            DisplayWorkoutScreen(viewModelFactory = viewModelFactory)
+
+        composable(route = SlothosScreen.AddWork.name) {
+            AddWorkScreen(
+                navController = navController,
+                viewModelFactory = viewModelFactory,
+                onWorkAdded = { workDetails ->
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("newWorkDetails", workDetails)
+                    navController.popBackStack()
+                }
+            )
         }
         composable(route = SlothosScreen.WorkoutList.name){
             WorkoutListScreen(viewModelFactory = viewModelFactory)

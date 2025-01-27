@@ -1,11 +1,12 @@
 package pro.selecto.slothos.data
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
-import pro.selecto.slothos.data.entities.Measurement
 import pro.selecto.slothos.data.entities.Work
 
-@Serializable
+@Parcelize
 data class WorkDetails(
     var work: Work,
-    var measurement: Measurement,
-)
+    //var measurement: StandardMeasurementType,
+) : Parcelable
