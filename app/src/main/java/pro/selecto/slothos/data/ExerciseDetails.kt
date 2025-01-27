@@ -8,9 +8,9 @@ import pro.selecto.slothos.data.entities.Exercise
 
 @Parcelize
 data class ExerciseDetails(
-    val exercise: Exercise,
-    val categoryList: List<Category>,
-    val equipmentList: List<Equipment>,
+    val exercise: Exercise = Exercise(),
+    val categoryList: List<Category> = listOf(),
+    val equipmentList: List<Equipment> = listOf(),
 //    private val forceList: List<Force>,
 //    private val level: Level,
 //    private val mechanic: Mechanic,
