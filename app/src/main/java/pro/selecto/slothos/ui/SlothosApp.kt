@@ -90,6 +90,11 @@ fun SlothosApp(
             InsertWorkoutScreen(
                 viewModelFactory = viewModelFactory,
                 navigateToAddSetScreen = { navController.navigate(SlothosScreen.AddSet.name)}
+                navigateToAddSetScreen = { navController.navigate(SlothosScreen.AddSet.name)},
+                navController = navController,
+            )
+        }
+        
                 navigateToSelectExerciseScreen = { navController.navigate(SlothosScreen.ExerciseList.name + "?mode=select") },
             )
         }

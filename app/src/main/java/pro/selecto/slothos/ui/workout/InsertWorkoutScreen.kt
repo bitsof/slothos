@@ -1,12 +1,10 @@
 package pro.selecto.slothos.ui.workout
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -15,12 +13,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import pro.selecto.slothos.R
 import pro.selecto.slothos.data.SetDetails
 import pro.selecto.slothos.ui.navigation.NavigationDestination
@@ -33,6 +34,7 @@ object InsertWorkoutDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InsertWorkoutScreen(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
     navigateToAddSetScreen: () -> Unit
@@ -40,15 +42,21 @@ fun InsertWorkoutScreen(
     val viewModel: InsertWorkoutViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
 
-    val workoutName by viewModel.workoutName
-    val workoutNotes by viewModel.workoutNotes
-    val workoutDescription by viewModel.workoutDescription
-    val sets by viewModel.sets
+    val uiState by viewModel.uiState.collectAsState()
 
-    Text(
-        text = "Add Workout Screen",
-        style = MaterialTheme.typography.headlineSmall
-    )
+    LaunchedEffect(Unit) {
+        navController.currentBackStackEntry
+            ?.savedStateHandle
+            ?.getStateFlow<SetDetails?>("newSetDetails", null)
+            ?.collect { setDetails ->
+                if ( setDetails != null) {
+                    viewModel.addSet(setDetails)
+                    navController.currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.remove<SetDetails>("newSetDetails")
+                }
+            }
+    }
     
     Column(modifier = modifier.padding(16.dp)) {
         Text(
@@ -119,7 +127,7 @@ fun SetItem(setDetails: SetDetails) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
-        onClick = { /* Navigate to edit set screen if needed */ }
+        onClick = { /* Navigate to edit set screen eventually */ }
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
             Text(text = "Set: ${setDetails.set.name}")

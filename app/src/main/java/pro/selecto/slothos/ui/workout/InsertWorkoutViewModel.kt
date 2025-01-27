@@ -2,10 +2,16 @@ package pro.selecto.slothos.ui.workout
 
 import android.os.Parcelable
 import android.util.Log
-import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import pro.selecto.slothos.data.SetDetails
@@ -14,24 +20,28 @@ import pro.selecto.slothos.data.WorkDetailsService
 import pro.selecto.slothos.data.WorkoutDetails
 import pro.selecto.slothos.data.WorkoutDetailsService
 import pro.selecto.slothos.data.entities.Workout
-import javax.inject.Inject
+import pro.selecto.slothos.ui.exercise.AssistedSavedStateViewModelFactory
 
-class InsertWorkoutViewModel @Inject constructor(
+class InsertWorkoutViewModel @AssistedInject constructor(
     private val workoutDetailsService: WorkoutDetailsService,
     private val setDetailsService: SetDetailsService,
     private val workDetailsService: WorkDetailsService,
+    @Assisted private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    // LiveData or State for text fields
-    var workoutName = mutableStateOf("")
-    val workoutNotes = mutableStateOf("")
-    val workoutDescription = mutableStateOf("")
-    var workoutDate = mutableLongStateOf(System.currentTimeMillis()) // for date time
-    var sets = mutableStateOf<List<SetDetails>>(listOf())
+    @AssistedFactory
+    interface Factory : AssistedSavedStateViewModelFactory<InsertWorkoutViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): InsertWorkoutViewModel
+    }
+
     private val _uiState = MutableStateFlow<InsertWorkoutUiState>(savedStateHandle.get<InsertWorkoutUiState>("uiState") ?: InsertWorkoutUiState())
     val uiState: StateFlow<InsertWorkoutUiState> = _uiState.asStateFlow()
 
     init {
-
+        viewModelScope.launch {
+            _uiState.collect { state ->
+                savedStateHandle["uiState"] = state
+            }
+        }
     }
 
 
