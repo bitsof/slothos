@@ -1,11 +1,13 @@
 package pro.selecto.slothos.ui.workout
 
+import android.os.Parcelable
 import android.util.Log
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 import pro.selecto.slothos.data.SetDetails
 import pro.selecto.slothos.data.SetDetailsService
 import pro.selecto.slothos.data.WorkDetailsService
@@ -25,6 +27,8 @@ class InsertWorkoutViewModel @Inject constructor(
     val workoutDescription = mutableStateOf("")
     var workoutDate = mutableLongStateOf(System.currentTimeMillis()) // for date time
     var sets = mutableStateOf<List<SetDetails>>(listOf())
+    private val _uiState = MutableStateFlow<InsertWorkoutUiState>(savedStateHandle.get<InsertWorkoutUiState>("uiState") ?: InsertWorkoutUiState())
+    val uiState: StateFlow<InsertWorkoutUiState> = _uiState.asStateFlow()
 
     init {
 
@@ -36,11 +40,11 @@ class InsertWorkoutViewModel @Inject constructor(
         viewModelScope.launch {
             val workoutDetails = WorkoutDetails(
                 workout= Workout(
-                    name = workoutName.value,
-                    description = workoutDescription.value,
-                    date = workoutDate.value,
+                    name = _uiState.value.workoutName,
+                    description = _uiState.value.workoutDescription,
+                    date = _uiState.value.workoutDate,
                 ),
-                setDetailsList = sets.value,
+                setDetailsList = _uiState.value.sets,
             )
             Log.v("Logged stuff", "Insert workout");
             workoutDetailsService.insertWorkout(workoutDetails)
@@ -48,23 +52,44 @@ class InsertWorkoutViewModel @Inject constructor(
     }
 
     fun addSet(setDetails: SetDetails) {
-        sets.value += setDetails
+        _uiState.update { currentState ->
+            currentState.copy(sets = currentState.sets + setDetails)
+        }
     }
 
     fun removeSet(setDetails: SetDetails) {
-        sets.value -= setDetails
+        fun removeSet(setDetails: SetDetails) {
+            _uiState.update { currentState ->
+                currentState.copy(sets = currentState.sets - setDetails)
+            }
+        }
     }
 
-    fun updateWorkoutName(it: String) {
-        workoutName.value = it
+    fun updateWorkoutName(newName: String) {
+        _uiState.update { currentState ->
+            currentState.copy(workoutName = newName)
+        }
     }
 
-    fun updateWorkoutNotes(it: String) {
-        workoutNotes.value = it
+    fun updateWorkoutNotes(newNotes: String) {
+        _uiState.update { currentState ->
+            currentState.copy(workoutNotes = newNotes)
+        }
     }
 
-    fun updateWorkoutDescription(it: String) {
-        workoutDescription.value = it
+    fun updateWorkoutDescription(newDescription: String) {
+        _uiState.update { currentState ->
+            currentState.copy(workoutDescription = newDescription)
+        }
     }
 
 }
+
+@Parcelize
+data class InsertWorkoutUiState(
+    var workoutName: String = "",
+    var workoutNotes: String = "",
+    var workoutDescription: String = "",
+    var workoutDate: Long = System.currentTimeMillis(),
+    var sets: List<SetDetails> = listOf(),
+) : Parcelable

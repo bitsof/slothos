@@ -58,19 +58,19 @@ fun InsertWorkoutScreen(
         )
 
         TextField(
-            value = workoutName,
+            value = uiState.workoutName,
             onValueChange = { viewModel.updateWorkoutName(it) },
             label = { Text("Workout Name") },
             modifier = Modifier.fillMaxWidth()
         )
         TextField(
-            value = workoutNotes,
+            value = uiState.workoutNotes,
             onValueChange = { viewModel.updateWorkoutNotes(it) },
             label = { Text("Workout Notes") },
             modifier = Modifier.fillMaxWidth()
         )
         TextField(
-            value = workoutDescription,
+            value = uiState.workoutDescription,
             onValueChange = { viewModel.updateWorkoutDescription(it) },
             label = { Text("Workout Description") },
             modifier = Modifier.fillMaxWidth()
@@ -86,7 +86,7 @@ fun InsertWorkoutScreen(
 
         Column {
             LazyColumn(modifier = modifier) {
-                sets.let { list ->
+                uiState.sets.let { list ->
                     items(list.count()) { index ->
                         val setDetails = list[index]
                         SetItem(setDetails = setDetails)
