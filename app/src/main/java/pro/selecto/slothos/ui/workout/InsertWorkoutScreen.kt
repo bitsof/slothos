@@ -101,21 +101,19 @@ fun InsertWorkoutScreen(
                     }
                 }
             }
-            Button(onClick = { }) {
+            Button(onClick = navigateToAddSetScreen) {
                 Text("Add Set")
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row {
-            Button(onClick = navigateToAddSetScreen) {
-                Text("Add Set")
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-            Button(onClick = { viewModel.insertWorkout() }) {
-                Text("Save Workout")
-            }
+        Button(
+            onClick = {
+                viewModel.insertWorkout()
+                navController.popBackStack()
+            }) {
+            Text("Save Workout")
         }
     }
 }
