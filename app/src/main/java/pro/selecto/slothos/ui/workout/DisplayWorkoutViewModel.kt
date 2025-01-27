@@ -46,5 +46,5 @@ class DisplayWorkoutViewModel @AssistedInject constructor(
 }
 
 data class WorkoutDisplayUiState(
-    val workoutDetails: WorkoutDetails
+    val workoutDetails: WorkoutDetails = WorkoutDetails()
 )
