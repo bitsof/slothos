@@ -51,7 +51,7 @@ class ViewModelFactory @Inject constructor(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        var assistedFactory = findAssistedFactory(modelClass)
+        val assistedFactory = findAssistedFactory(modelClass)
         if (assistedFactory != null) {
             @Suppress("UNCHECKED_CAST")
             return assistedFactory.create(handle) as T
@@ -111,7 +111,7 @@ abstract class ViewModelBuilderModule {
     @Binds
     @IntoMap
     @ViewModelKey(DisplayWorkoutViewModel::class)
-    abstract fun bindDisplayWorkoutViewModel(viewModel: DisplayWorkoutViewModel): ViewModel
+    abstract fun bindDisplayWorkoutViewModel(factory: DisplayWorkoutViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
     @Binds
     @IntoMap
