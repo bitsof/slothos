@@ -25,7 +25,7 @@ class ExerciseDetailsViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): ExerciseDetailsViewModel
     }
 
-    val exerciseId: Int = savedStateHandle["exerciseId"] ?: throw IllegalArgumentException("Exercise ID is missing")
+    val exerciseId: Int = savedStateHandle["exerciseId"] ?: throw IllegalArgumentException("Exercise Id is missing")
 
     private val _uiState = MutableStateFlow<ExerciseDetailsUiState?>(null)
     val uiState: StateFlow<ExerciseDetailsUiState?> = _uiState.asStateFlow()
