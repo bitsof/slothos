@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import pro.selecto.slothos.R
 import pro.selecto.slothos.ui.exercise.ExerciseDetailsScreen
+import pro.selecto.slothos.ui.exercise.ExerciseListMode
 import pro.selecto.slothos.ui.exercise.ExerciseListScreen
 import pro.selecto.slothos.ui.exercise.InsertExerciseScreen
 import pro.selecto.slothos.ui.workout.AddWorkScreen
@@ -50,12 +51,36 @@ fun SlothosApp(
                 onButtonClicked5 = { navController.navigate(SlothosScreen.WorkoutList.name)},
                 )
         }
-        composable(route = SlothosScreen.ExerciseList.name){
+        composable(route = SlothosScreen.ExerciseList.name + "?mode={mode}"){ backStackEntry ->
+            val mode = backStackEntry.arguments?.getString("mode")
             ExerciseListScreen(
                 viewModelFactory = viewModelFactory,
                 onExerciseClick = { exerciseDetails ->
-                    navController.navigate("${SlothosScreen.ExerciseDetails}/${exerciseDetails.exercise.id}")
+                    when (mode) {
+                        "view" -> {
+                            navController.navigate("${SlothosScreen.ExerciseDetails}/${exerciseDetails.exercise.id}")
+                        }
+                        "select" -> {
+                            navController.previousBackStackEntry
+                                ?.savedStateHandle
+                                ?.set("selectedExercise", exerciseDetails)
+                            navController.popBackStack()
+                        }
+                    }
                                   },
+                mode = when(mode) {
+                    "view" -> {
+                        ExerciseListMode.VIEW
+                    }
+                    "select" -> {
+                        ExerciseListMode.SELECT
+                    }
+                    else -> {
+                        /* TODO possible error handling */
+                        ExerciseListMode.VIEW
+                    }
+                }
+
             )
         }
         composable(route = SlothosScreen.InsertExercise.name){
@@ -65,6 +90,7 @@ fun SlothosApp(
             InsertWorkoutScreen(
                 viewModelFactory = viewModelFactory,
                 navigateToAddSetScreen = { navController.navigate(SlothosScreen.AddSet.name)}
+                navigateToSelectExerciseScreen = { navController.navigate(SlothosScreen.ExerciseList.name + "?mode=select") },
             )
         }
 
