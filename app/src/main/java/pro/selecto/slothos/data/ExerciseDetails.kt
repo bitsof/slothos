@@ -1,11 +1,12 @@
 package pro.selecto.slothos.data
 
-import kotlinx.serialization.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import pro.selecto.slothos.data.entities.Category
 import pro.selecto.slothos.data.entities.Equipment
 import pro.selecto.slothos.data.entities.Exercise
 
-@Serializable
+@Parcelize
 data class ExerciseDetails(
     val exercise: Exercise,
     val categoryList: List<Category>,
@@ -15,5 +16,5 @@ data class ExerciseDetails(
 //    private val mechanic: Mechanic,
 //    private val tagList: List<Tag>,
 
-) {
+) : Parcelable {
 }
