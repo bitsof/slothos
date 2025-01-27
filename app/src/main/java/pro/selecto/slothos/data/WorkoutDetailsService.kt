@@ -36,7 +36,7 @@ class WorkoutDetailsService @Inject constructor(
                 }
             }
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun getAllWorkoutDetails() : Flow<List<WorkoutDetails>> =
         workoutRepository.getAllEntitiesStream().flatMapConcat { workouts ->
             if (workouts.isEmpty()) {
