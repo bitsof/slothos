@@ -4,7 +4,6 @@ import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
@@ -36,7 +35,7 @@ class WorkoutDetailsService @Inject constructor(
                 }
             }
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun getAllWorkoutDetails() : Flow<List<WorkoutDetails>> =
         workoutRepository.getAllEntitiesStream().flatMapConcat { workouts ->
             if (workouts.isEmpty()) {

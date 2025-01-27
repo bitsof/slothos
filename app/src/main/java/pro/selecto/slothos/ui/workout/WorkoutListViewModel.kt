@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pro.selecto.slothos.data.WorkoutDetails
 import pro.selecto.slothos.data.WorkoutDetailsService
@@ -15,10 +16,8 @@ import javax.inject.Inject
 class WorkoutListViewModel @Inject constructor(
     workoutDetailsService: WorkoutDetailsService,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow<WorkoutListUiState?>(null)
-    val uiState: StateFlow<WorkoutListUiState?> = _uiState.asStateFlow()
-
-    //filter options
+    private val _uiState = MutableStateFlow<WorkoutListUiState>(WorkoutListUiState())
+    val uiState: StateFlow<WorkoutListUiState> = _uiState.asStateFlow()
 
     init {
         Log.d("WorkoutListViewModel", "Started init")
@@ -29,11 +28,14 @@ class WorkoutListViewModel @Inject constructor(
                 .collect { workoutDetailsList ->
                     Log.d("WorkoutListViewModel", "Fetched workout details: $workoutDetailsList")
                     _uiState.value = WorkoutListUiState(workoutDetailsList = workoutDetailsList)
+                    _uiState.update { currentState ->
+                        currentState.copy(workoutDetailsList = workoutDetailsList)
+                    }
                 }
         }
     }
 }
 
 data class WorkoutListUiState(
-    val workoutDetailsList: List<WorkoutDetails>
+    val workoutDetailsList: List<WorkoutDetails> = listOf(),
 )

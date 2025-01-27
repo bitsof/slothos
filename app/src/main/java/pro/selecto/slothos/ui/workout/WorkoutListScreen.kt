@@ -1,5 +1,6 @@
 package pro.selecto.slothos.ui.workout
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,8 @@ object WorkoutListScreen : NavigationDestination {
 fun WorkoutListScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
-    ) {
+    onWorkoutClick: (WorkoutDetails) -> Unit,
+) {
     val viewModel: WorkoutListViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
 
@@ -36,7 +38,8 @@ fun WorkoutListScreen(
 
     WorkoutList(
         modifier = modifier,
-        workoutList = uiState?.workoutDetailsList,
+        workoutList = uiState.workoutDetailsList,
+        onWorkoutClick = onWorkoutClick,
     )
 
 }
@@ -45,6 +48,7 @@ fun WorkoutListScreen(
 fun WorkoutList(
     modifier: Modifier,
     workoutList: List<WorkoutDetails>?,
+    onWorkoutClick: (WorkoutDetails) -> Unit,
 ) {
     Column {
         Text(
@@ -55,7 +59,10 @@ fun WorkoutList(
         LazyColumn(modifier = modifier) {
             workoutList?.let { list ->
                 items(list.count()) { index ->
-                    WorkoutItem(workoutDetails = list[index])
+                    WorkoutItem(
+                        workoutDetails = list[index],
+                        onWorkoutClick = onWorkoutClick,
+                    )
                 }
             }
         }
@@ -63,9 +70,13 @@ fun WorkoutList(
 }
 
 @Composable
-fun WorkoutItem(workoutDetails: WorkoutDetails) {
+fun WorkoutItem(
+    workoutDetails: WorkoutDetails,
+    onWorkoutClick: (WorkoutDetails) -> Unit,
+) {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(8.dp),
+        modifier = Modifier.fillMaxWidth().padding(8.dp)
+            .clickable { onWorkoutClick(workoutDetails) },
     ) {
         Column(
             modifier = Modifier.padding(8.dp)

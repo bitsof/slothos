@@ -8,7 +8,10 @@ import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
+import pro.selecto.slothos.ui.workout.AddSetViewModel
+import pro.selecto.slothos.ui.workout.AddWorkViewModel
 import pro.selecto.slothos.ui.workout.DisplayWorkoutViewModel
+import pro.selecto.slothos.ui.workout.InsertMeasurementViewModel
 import pro.selecto.slothos.ui.workout.InsertWorkoutViewModel
 import pro.selecto.slothos.ui.workout.WorkoutListViewModel
 import javax.inject.Inject
@@ -51,7 +54,7 @@ class ViewModelFactory @Inject constructor(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        var assistedFactory = findAssistedFactory(modelClass)
+        val assistedFactory = findAssistedFactory(modelClass)
         if (assistedFactory != null) {
             @Suppress("UNCHECKED_CAST")
             return assistedFactory.create(handle) as T
@@ -100,23 +103,38 @@ abstract class ViewModelBuilderModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(InsertMeasurementViewModel::class)
+    abstract fun bindInsertMeasurementViewModel(viewModel: InsertMeasurementViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(ExerciseDetailsViewModel::class)
     abstract fun bindExerciseDetailsViewModel(factory: ExerciseDetailsViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
     @Binds
     @IntoMap
     @ViewModelKey(InsertWorkoutViewModel::class)
-    abstract fun bindInsertWorkoutViewModel(viewModel: InsertWorkoutViewModel): ViewModel
+    abstract fun bindInsertWorkoutViewModel(factory: InsertWorkoutViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
     @Binds
     @IntoMap
     @ViewModelKey(DisplayWorkoutViewModel::class)
-    abstract fun bindDisplayWorkoutViewModel(viewModel: DisplayWorkoutViewModel): ViewModel
+    abstract fun bindDisplayWorkoutViewModel(factory: DisplayWorkoutViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
     @Binds
     @IntoMap
     @ViewModelKey(WorkoutListViewModel::class)
     abstract fun bindWorkoutListViewModel(viewModel: WorkoutListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddSetViewModel::class)
+    abstract fun binAddSetViewModel(viewModel: AddSetViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddWorkViewModel::class)
+    abstract fun bindAddWorkViewModel(viewModel: AddWorkViewModel): ViewModel
 }
 
 @Target(

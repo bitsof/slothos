@@ -1,33 +1,47 @@
 package pro.selecto.slothos.ui.workout
 
+import android.os.Parcelable
 import android.util.Log
-import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 import pro.selecto.slothos.data.SetDetails
 import pro.selecto.slothos.data.SetDetailsService
 import pro.selecto.slothos.data.WorkDetailsService
 import pro.selecto.slothos.data.WorkoutDetails
 import pro.selecto.slothos.data.WorkoutDetailsService
 import pro.selecto.slothos.data.entities.Workout
-import javax.inject.Inject
+import pro.selecto.slothos.ui.exercise.AssistedSavedStateViewModelFactory
 
-class InsertWorkoutViewModel @Inject constructor(
+class InsertWorkoutViewModel @AssistedInject constructor(
     private val workoutDetailsService: WorkoutDetailsService,
     private val setDetailsService: SetDetailsService,
     private val workDetailsService: WorkDetailsService,
+    @Assisted private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    // LiveData or State for text fields
-    var workoutName = mutableStateOf("")
-    val workoutNotes = mutableStateOf("")
-    val workoutDescription = mutableStateOf("")
-    var workoutDate = mutableLongStateOf(System.currentTimeMillis()) // for date time
-    var sets = mutableStateOf<List<SetDetails>>(listOf())
+    @AssistedFactory
+    interface Factory : AssistedSavedStateViewModelFactory<InsertWorkoutViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): InsertWorkoutViewModel
+    }
+
+    private val _uiState = MutableStateFlow<InsertWorkoutUiState>(savedStateHandle.get<InsertWorkoutUiState>("uiState") ?: InsertWorkoutUiState())
+    val uiState: StateFlow<InsertWorkoutUiState> = _uiState.asStateFlow()
 
     init {
-
+        viewModelScope.launch {
+            _uiState.collect { state ->
+                savedStateHandle["uiState"] = state
+            }
+        }
     }
 
 
@@ -36,11 +50,11 @@ class InsertWorkoutViewModel @Inject constructor(
         viewModelScope.launch {
             val workoutDetails = WorkoutDetails(
                 workout= Workout(
-                    name = workoutName.value,
-                    description = workoutDescription.value,
-                    date = workoutDate.value,
+                    name = _uiState.value.workoutName,
+                    description = _uiState.value.workoutDescription,
+                    date = _uiState.value.workoutDate,
                 ),
-                setDetailsList = sets.value,
+                setDetailsList = _uiState.value.sets,
             )
             Log.v("Logged stuff", "Insert workout");
             workoutDetailsService.insertWorkout(workoutDetails)
@@ -48,23 +62,44 @@ class InsertWorkoutViewModel @Inject constructor(
     }
 
     fun addSet(setDetails: SetDetails) {
-        sets.value += setDetails
+        _uiState.update { currentState ->
+            currentState.copy(sets = currentState.sets + setDetails)
+        }
     }
 
     fun removeSet(setDetails: SetDetails) {
-        sets.value -= setDetails
+        fun removeSet(setDetails: SetDetails) {
+            _uiState.update { currentState ->
+                currentState.copy(sets = currentState.sets - setDetails)
+            }
+        }
     }
 
-    fun updateWorkoutName(it: String) {
-        workoutName.value = it
+    fun updateWorkoutName(newName: String) {
+        _uiState.update { currentState ->
+            currentState.copy(workoutName = newName)
+        }
     }
 
-    fun updateWorkoutNotes(it: String) {
-        workoutNotes.value = it
+    fun updateWorkoutNotes(newNotes: String) {
+        _uiState.update { currentState ->
+            currentState.copy(workoutNotes = newNotes)
+        }
     }
 
-    fun updateWorkoutDescription(it: String) {
-        workoutDescription.value = it
+    fun updateWorkoutDescription(newDescription: String) {
+        _uiState.update { currentState ->
+            currentState.copy(workoutDescription = newDescription)
+        }
     }
 
 }
+
+@Parcelize
+data class InsertWorkoutUiState(
+    var workoutName: String = "",
+    var workoutNotes: String = "",
+    var workoutDescription: String = "",
+    var workoutDate: Long = System.currentTimeMillis(),
+    var sets: List<SetDetails> = listOf(),
+) : Parcelable

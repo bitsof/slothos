@@ -69,7 +69,7 @@ import pro.selecto.slothos.data.entities.Workout
         Workout::class,
         Work::class,
                ],
-    version = 1,
+    version = 4,
     exportSchema = true
 )
 abstract class WorkoutDatabase : RoomDatabase() {

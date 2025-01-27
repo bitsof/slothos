@@ -42,6 +42,7 @@ fun ExerciseListScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
     onExerciseClick: (ExerciseDetails) -> Unit,
+    mode: ExerciseListMode = ExerciseListMode.VIEW,
 ) {
     val viewModel: ExerciseListViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
@@ -55,15 +56,15 @@ fun ExerciseListScreen(
 
     ExerciseList(
         modifier = modifier,
+        mode = mode,
         exerciseList = uiState?.exerciseDetailsList,
         categories = categories,
         onExerciseClick = onExerciseClick,
         filterOptions = filterOptions,
-    ) { newFilterOptions ->
-        viewModel.updateFilterOptions(newFilterOptions)
-    }
-
-
+        onFilterChange = { newFilterOptions ->
+            viewModel.updateFilterOptions(newFilterOptions)
+                         },
+    )
 }
 
 @Composable
@@ -74,10 +75,14 @@ fun ExerciseList(
     filterOptions: FilterOptions,
     onExerciseClick: (ExerciseDetails) -> Unit,
     onFilterChange: (FilterOptions) -> Unit,
+    mode: ExerciseListMode = ExerciseListMode.VIEW,
 ) {
     var showFilterMenu by remember { mutableStateOf(false) }
 
-    Column {
+    Column(modifier = modifier.padding(16.dp)) {
+        if(mode == ExerciseListMode.SELECT) {
+            Text("Select Mode")
+        }
         Text(
             text = "Exercises",
             style = MaterialTheme.typography.headlineSmall
@@ -101,7 +106,10 @@ fun ExerciseList(
             exerciseList?.let { list ->
                 items(list.count()) { index ->
                     val exerciseDetails = list[index]
-                    ExerciseItem(exerciseDetails = exerciseDetails, onExerciseClick = onExerciseClick)
+                    ExerciseItem(
+                        exerciseDetails = exerciseDetails,
+                        onExerciseClick = onExerciseClick,
+                    )
                 }
             }
         }
@@ -155,7 +163,8 @@ fun FilterMenu(
 @Composable
 fun ExerciseItem(
     exerciseDetails: ExerciseDetails,
-    onExerciseClick: (ExerciseDetails) -> Unit) {
+    onExerciseClick: (ExerciseDetails) -> Unit,
+) {
     Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -231,4 +240,9 @@ fun CategorySelectionDialog(
 //    }
 
 
+}
+
+enum class ExerciseListMode {
+    VIEW,
+    SELECT,
 }

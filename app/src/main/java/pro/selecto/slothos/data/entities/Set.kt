@@ -1,10 +1,11 @@
 package pro.selecto.slothos.data.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import kotlinx.serialization.Serializable
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "sets",
     foreignKeys = [
@@ -20,10 +21,10 @@ import kotlinx.serialization.Serializable
             parentColumns = ["id"],
             childColumns = ["set_id"],
             onUpdate = ForeignKey.CASCADE,
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.CASCADE,
         )
     ],)
-@Serializable
+@Parcelize
 class Set (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
@@ -31,9 +32,9 @@ class Set (
     @ColumnInfo(name = "name") val name: String = "",
     @ColumnInfo(name = "notes") val description: String = "",
     @ColumnInfo(name = "date") val date: Long = 0,
-    @ColumnInfo(name = "workout_id") val workoutId: Int? = 0,
-    @ColumnInfo(name = "set_id") val setId: Int? = 0,
+    @ColumnInfo(name = "workout_id") var workoutId: Int? = null,
+    @ColumnInfo(name = "set_id") val setId: Int? = null,
     @ColumnInfo(name = "exercise_id") val exerciseId: Int = 0,
-) {
+) : Parcelable {
 
 }
