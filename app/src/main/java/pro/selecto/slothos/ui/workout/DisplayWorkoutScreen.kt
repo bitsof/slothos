@@ -26,25 +26,23 @@ object DisplayWorkoutDestination : NavigationDestination {
 fun DisplayWorkoutScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
+    workoutId: Int,
 ) {
     val viewModel: DisplayWorkoutViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
 
     val uiState by viewModel.uiState.collectAsState()
-
-    uiState?.let { state ->
-        Column {
-            TextField(
-                value = state.workoutDetails.workout.name,
-                onValueChange = { },
-                label = { Text("Workout Name") }
-            )
-
-            // List of Sets
-            LazyColumn {
-                items(state.workoutDetails.setDetailsList) { setDetails ->
-                    Text(text = setDetails.set.name)
-                }
+    
+    Column {
+        TextField(
+            value = uiState.workoutDetails.workout.name,
+            onValueChange = { },
+            label = { Text("Workout Name") }
+        )
+        
+        LazyColumn {
+            items(uiState.workoutDetails.setDetailsList) { setDetails ->
+                SetItem(setDetails = setDetails)
             }
         }
     }
