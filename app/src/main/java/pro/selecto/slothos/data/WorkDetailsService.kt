@@ -34,7 +34,6 @@ class WorkDetailsService @Inject constructor(
                     }
                     WorkDetails(
                         work = work,
-                        measurement = measurement
                     )
                 }
             }
