@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Equipment
 @Dao
 interface EquipmentDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(equipment: Equipment)
+    suspend fun insert(equipment: Equipment): Long
 
     @Update
     suspend fun update(equipment: Equipment)

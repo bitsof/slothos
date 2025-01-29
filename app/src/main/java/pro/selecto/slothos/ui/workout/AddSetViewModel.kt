@@ -54,7 +54,7 @@ class AddSetViewModel @Inject constructor(
         val set = Set(
             exerciseId = _uiState.value.selectedExerciseDetails.exercise.id,
             name = _uiState.value.name,
-
+            notes = _uiState.value.notes,
         )
         return SetDetails (
             set = set,

@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Category
 @Dao
 interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(category: Category)
+    suspend fun insert(category: Category): Long
 
     @Update
     suspend fun update(category: Category)

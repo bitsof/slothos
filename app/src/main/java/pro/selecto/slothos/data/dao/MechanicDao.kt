@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Mechanic
 @Dao
 interface MechanicDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(mechanic: Mechanic)
+    suspend fun insert(mechanic: Mechanic): Long
 
     @Update
     suspend fun update(mechanic: Mechanic)

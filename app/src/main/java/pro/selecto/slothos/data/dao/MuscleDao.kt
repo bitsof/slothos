@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Muscle
 @Dao
 interface MuscleDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(muscle: Muscle)
+    suspend fun insert(muscle: Muscle): Long
 
     @Update
     suspend fun update(muscle: Muscle)

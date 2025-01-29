@@ -38,7 +38,6 @@ class AddWorkViewModel @Inject constructor(
     fun createWork(): Work {
         val work = Work(
             value = _uiState.value.value,
-            measurementId = 0,
             setId = -1,
         )
         return work

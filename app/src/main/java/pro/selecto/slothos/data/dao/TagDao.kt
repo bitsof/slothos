@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Tag
 @Dao
 interface TagDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(tag: Tag)
+    suspend fun insert(tag: Tag): Long
 
     @Update
     suspend fun update(tag: Tag)

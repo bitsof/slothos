@@ -7,7 +7,7 @@ interface BaseRepository<T> {
     /**
      * Insert entity in the data source
      */
-    suspend fun insert(entity: T)
+    suspend fun insert(entity: T): Long
 
     /**
      * Update entity in the data source
