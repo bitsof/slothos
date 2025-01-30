@@ -113,6 +113,12 @@ fun AddSetScreen(
             Text("Add Work")
         }
 
+        WorkDetailsList(
+            modifier = Modifier,
+            workList = uiState.workDetailsList,
+            onWorkClick = { },
+        )
+
         Button(
             onClick = {
                 val newSetDetails = viewModel.createSetDetails()
@@ -126,7 +132,7 @@ fun AddSetScreen(
 }
 
 @Composable
-fun WorkList(
+fun WorkDetailsList(
     modifier: Modifier,
     workList: List<WorkDetails>?,
     onWorkClick: (WorkDetails) -> Unit,
@@ -136,7 +142,7 @@ fun WorkList(
             workList?.let { list ->
                 items(list.count()) { index ->
                     val workDetails = list[index]
-                    WorkItem(
+                    WorkDetailsItem(
                         workDetails = workDetails,
                         onWorkClick = onWorkClick,
                     )
@@ -147,7 +153,7 @@ fun WorkList(
 }
 
 @Composable
-fun WorkItem(
+fun WorkDetailsItem(
     workDetails: WorkDetails,
     onWorkClick: (WorkDetails) -> Unit, /* Currently unused */
 ) {
