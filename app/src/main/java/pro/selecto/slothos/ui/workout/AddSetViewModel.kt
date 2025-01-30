@@ -64,10 +64,10 @@ class AddSetViewModel @Inject constructor(
         )
     }
 
-    fun addWork(workDetails: WorkDetails) {
+    fun addWorkDetails(workDetails: WorkDetails) {
         _uiState.update { currentState ->
             currentState.copy(
-                workDetailsList = currentState.workDetailsList + workDetails
+                workDetailsList = currentState.workDetailsList.plus(workDetails)
             )
         }
     }

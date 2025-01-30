@@ -59,13 +59,13 @@ fun AddSetScreen(
     LaunchedEffect(Unit) {
         navController.currentBackStackEntry
             ?.savedStateHandle
-            ?.getStateFlow<WorkDetails?>("addedWork", null)
+            ?.getStateFlow<WorkDetails?>("newWorkDetails", null)
             ?.collect { workDetails ->
                 if (workDetails != null) {
-                    viewModel.addWork(workDetails)
+                    viewModel.addWorkDetails(workDetails)
                     navController.currentBackStackEntry
                         ?.savedStateHandle
-                        ?.remove<WorkDetails>("addedWork")
+                        ?.remove<WorkDetails>("newWorkDetails")
                 }
             }
     }
