@@ -56,8 +56,9 @@ class WorkoutDetailsService @Inject constructor(
 
 
     suspend fun insertWorkout(workoutDetails: WorkoutDetails) = withContext(dispatcher) {
-        workoutRepository.insert(workoutDetails.workout)
+        val workoutId = workoutRepository.insert(workoutDetails.workout)
         for (setDetails in workoutDetails.setDetailsList) {
+            setDetails.set.workoutId = workoutId.toInt()
             setDetailsService.insertSet(setDetails)
         }
     }
