@@ -12,13 +12,6 @@ import pro.selecto.slothos.data.StandardMeasurementType
 @Entity(tableName = "work",
     foreignKeys = [
         ForeignKey(
-            entity = Measurement::class,
-            parentColumns = ["id"],
-            childColumns = ["measurement_id"],
-            onUpdate = ForeignKey.CASCADE,
-            onDelete = ForeignKey.CASCADE
-        ),
-        ForeignKey(
             entity = Set::class,
             parentColumns = ["id"],
             childColumns = ["set_id"],
@@ -28,7 +21,6 @@ import pro.selecto.slothos.data.StandardMeasurementType
     ],
     indices = [
         Index("set_id"),
-        Index("measurement_id"),
     ])
 @Parcelize
 class Work(
@@ -38,8 +30,7 @@ class Work(
     @ColumnInfo(name = "value") val value: Float = 0F,
     @ColumnInfo(name = "name") val name: String = "",
     @ColumnInfo(name = "measurement_type") val measurementType: StandardMeasurementType = StandardMeasurementType.POUNDS,
-    @ColumnInfo(name = "measurement_id") val measurementId: Int,
-    @ColumnInfo(name = "set_id") val setId: Int,
+    @ColumnInfo(name = "set_id") var setId: Int = 0,
 ) : Parcelable {
 
 }
