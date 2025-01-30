@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Measurement
 @Dao
 interface MeasurementDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(measurement: Measurement)
+    suspend fun insert(measurement: Measurement): Long
 
     @Update
     suspend fun update(measurement: Measurement)

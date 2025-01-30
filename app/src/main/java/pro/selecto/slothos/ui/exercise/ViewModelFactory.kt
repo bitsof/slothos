@@ -11,7 +11,6 @@ import dagger.multibindings.IntoMap
 import pro.selecto.slothos.ui.workout.AddSetViewModel
 import pro.selecto.slothos.ui.workout.AddWorkViewModel
 import pro.selecto.slothos.ui.workout.DisplayWorkoutViewModel
-import pro.selecto.slothos.ui.workout.InsertMeasurementViewModel
 import pro.selecto.slothos.ui.workout.InsertWorkoutViewModel
 import pro.selecto.slothos.ui.workout.WorkoutListViewModel
 import javax.inject.Inject
@@ -100,11 +99,6 @@ abstract class ViewModelBuilderModule {
     @IntoMap
     @ViewModelKey(InsertExerciseViewModel::class)
     abstract fun bindInsertExerciseViewModel(viewModel: InsertExerciseViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(InsertMeasurementViewModel::class)
-    abstract fun bindInsertMeasurementViewModel(viewModel: InsertMeasurementViewModel): ViewModel
 
     @Binds
     @IntoMap

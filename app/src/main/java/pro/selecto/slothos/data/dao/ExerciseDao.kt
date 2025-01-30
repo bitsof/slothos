@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Exercise
 @Dao
 interface ExerciseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(exercise: Exercise)
+    suspend fun insert(exercise: Exercise): Long
 
     @Update
     suspend fun update(exercise: Exercise)

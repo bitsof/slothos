@@ -5,7 +5,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,12 +33,18 @@ fun DisplayWorkoutScreen(
     val uiState by viewModel.uiState.collectAsState()
     
     Column {
-        TextField(
-            value = uiState.workoutDetails.workout.name,
-            onValueChange = { },
-            label = { Text("Workout Name") }
+        Text(
+            text = uiState.workoutDetails.workout.name,
         )
-        
+        Text(
+            text = uiState.workoutDetails.workout.description,
+        )
+        Text(
+            text = uiState.workoutDetails.workout.date.toString(),
+        )
+        Text(
+            text = uiState.workoutDetails.workout.id.toString(),
+        )
         LazyColumn {
             items(uiState.workoutDetails.setDetailsList) { setDetails ->
                 SetItem(setDetails = setDetails)

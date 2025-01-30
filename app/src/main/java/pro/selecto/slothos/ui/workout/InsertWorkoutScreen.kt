@@ -129,7 +129,7 @@ fun SetItem(setDetails: SetDetails) {
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
             Text(text = "Set: ${setDetails.set.name}")
-            Text(text = "Notes: ${setDetails.set.description}")
+            Text(text = "Notes: ${setDetails.set.notes}")
         }
     }
 }

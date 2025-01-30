@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Level
 @Dao
 interface LevelDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(level: Level)
+    suspend fun insert(level: Level): Long
 
     @Update
     suspend fun update(level: Level)

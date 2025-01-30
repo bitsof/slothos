@@ -10,7 +10,7 @@ import pro.selecto.slothos.data.entities.ExerciseCategoryFK
 @Dao
 interface ExerciseCategoryFKDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(exerciseCategoryFK: ExerciseCategoryFK)
+    suspend fun insert(exerciseCategoryFK: ExerciseCategoryFK): Long
 
     @Update
     suspend fun update(exerciseCategoryFK: ExerciseCategoryFK)

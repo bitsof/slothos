@@ -12,7 +12,7 @@ import pro.selecto.slothos.data.entities.Set
 @Dao
 interface SetDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(set: Set)
+    suspend fun insert(set: Set): Long
 
     @Update
     suspend fun update(set: Set)
