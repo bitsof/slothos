@@ -24,18 +24,19 @@ class WorkDetailsService @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun getWorkDetails(workId: Int): Flow<WorkDetails> =
         workRepository.getEntityById(workId)
-            .flatMapLatest { work ->
             .map { work ->
+                Log.d("WorkDetailsService", "Getting Work Details")
                 if(work == null) {
                     throw IllegalArgumentException("Work with ID $workId not found")
                 }
                 WorkDetails(work = work)
             }
 
-    @OptIn(FlowPreview::class)
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     suspend fun getWorkDetailsListForSet(id: Int): Flow<List<WorkDetails>> =
         workRepository.getAllWorkMatchingSetId(id).flatMapConcat { works ->
             if (works.isEmpty()) {
+                Log.d("WorkDetailsService", "No works found for set ID: $id")
                 flowOf(emptyList<WorkDetails>()) // Ensure flow emits even if there are no works
             }
             val workDetailsFlows = works.map { work ->
