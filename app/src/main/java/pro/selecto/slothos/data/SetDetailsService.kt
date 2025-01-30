@@ -63,7 +63,7 @@ class SetDetailsService @Inject constructor(
     suspend fun getSetDetailsListForWorkout(id: Int): Flow<List<SetDetails>> =
         setRepository.getAllEntitiesMatchingWorkoutId(id).flatMapConcat { sets ->
             if (sets.isEmpty()) {
-                flowOf(emptyList()) // Emit an empty list if there are no sets
+                flowOf(emptyList<SetDetails>()) // Emit an empty list if there are no sets
             } else {
                 val setDetailsFlows = sets.map { set ->
                     getSetDetails(set.id) // Get details for each set
@@ -74,11 +74,13 @@ class SetDetailsService @Inject constructor(
 
     suspend fun insertSet(setDetails: SetDetails) {
         withContext(dispatcher) {
-            setRepository.insert(setDetails.set)
+            val setId = setRepository.insert(setDetails.set)
             for (workDetails in setDetails.workDetailsList) {
+                workDetails.work.setId = setId.toInt()
                 workDetailsService.insertWork(workDetails)
             }
             for (subsetDetails: SetDetails in setDetails.setDetailsList) {
+                subsetDetails.set.setId = setId.toInt()
                 insertSet(subsetDetails)
             }
         }
