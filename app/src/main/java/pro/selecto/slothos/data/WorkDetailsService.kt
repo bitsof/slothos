@@ -7,7 +7,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Measurement
@@ -25,22 +25,19 @@ class WorkDetailsService @Inject constructor(
     suspend fun getWorkDetails(workId: Int): Flow<WorkDetails> =
         workRepository.getEntityById(workId)
             .flatMapLatest { work ->
+            .map { work ->
                 if(work == null) {
                     throw IllegalArgumentException("Work with ID $workId not found")
                 }
-                measurementRepository.getEntityById(work.measurementId).map { measurement ->
-                    if (measurement == null) {
-                        throw IllegalArgumentException("Measurement with id ${work.measurementId} not found")
-                    }
-                    WorkDetails(
-                        work = work,
-                    )
-                }
+                WorkDetails(work = work)
             }
 
     @OptIn(FlowPreview::class)
     suspend fun getWorkDetailsListForSet(id: Int): Flow<List<WorkDetails>> =
         workRepository.getAllWorkMatchingSetId(id).flatMapConcat { works ->
+            if (works.isEmpty()) {
+                flowOf(emptyList<WorkDetails>()) // Ensure flow emits even if there are no works
+            }
             val workDetailsFlows = works.map { work ->
                 getWorkDetails(work.id)
             }
