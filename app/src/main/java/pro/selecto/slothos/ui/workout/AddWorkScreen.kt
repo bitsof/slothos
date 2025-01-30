@@ -34,7 +34,7 @@ import pro.selecto.slothos.data.entities.Work
 @Composable
 fun AddWorkScreen(
     navController: NavHostController,
-    onWorkAdded: (Work) -> Unit,
+    onWorkAdded: (WorkDetails) -> Unit,
     viewModelFactory: ViewModelProvider.Factory,
 ) {
     val viewModel: AddWorkViewModel = viewModel(factory = viewModelFactory)
@@ -96,8 +96,8 @@ fun AddWorkScreen(
         }
         Button(
             onClick = {
-                val newWork = viewModel.createWork()
-                onWorkAdded(newWork)
+                val newWorkDetails = viewModel.createWorkDetails()
+                onWorkAdded(newWorkDetails)
             },
             modifier = Modifier,
         ) {

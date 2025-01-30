@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import pro.selecto.slothos.data.StandardMeasurementType
+import pro.selecto.slothos.data.WorkDetails
 import pro.selecto.slothos.data.entities.Work
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
 import javax.inject.Inject
@@ -35,12 +36,14 @@ class AddWorkViewModel @Inject constructor(
         }
     }
 
-    fun createWork(): Work {
+    fun createWorkDetails(): WorkDetails {
         val work = Work(
             value = _uiState.value.value,
             setId = -1,
+            name = _uiState.value.description,
+            measurementType = _uiState.value.selectedMeasurement,
         )
-        return work
+        return WorkDetails(work = work)
     }
 }
 
