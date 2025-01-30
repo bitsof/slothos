@@ -27,7 +27,6 @@ class WorkoutListViewModel @Inject constructor(
                 .filterNotNull()
                 .collect { workoutDetailsList ->
                     Log.d("WorkoutListViewModel", "Fetched workout details: $workoutDetailsList")
-                    _uiState.value = WorkoutListUiState(workoutDetailsList = workoutDetailsList)
                     _uiState.update { currentState ->
                         currentState.copy(workoutDetailsList = workoutDetailsList)
                     }
