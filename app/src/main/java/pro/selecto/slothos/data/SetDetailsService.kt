@@ -48,6 +48,15 @@ class SetDetailsService @Inject constructor(
                 getSetDetails(set.id)
             }
             combine(setDetailsFlows) {it.toList()}
+            if (sets.isEmpty()){
+                flowOf(emptyList<SetDetails>())
+            }
+            else {
+                val setDetailsFlows = sets.map { set ->
+                    getSetDetails(set.id)
+                }
+                combine(setDetailsFlows) { it.toList() }
+            }
         }
 
     @OptIn(ExperimentalCoroutinesApi::class)
