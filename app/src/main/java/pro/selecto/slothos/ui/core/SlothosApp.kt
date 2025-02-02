@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui
+package pro.selecto.slothos.ui.core
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable

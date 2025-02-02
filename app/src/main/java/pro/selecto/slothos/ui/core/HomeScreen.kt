@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui
+package pro.selecto.slothos.ui.core
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

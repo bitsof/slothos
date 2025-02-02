@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui
+package pro.selecto.slothos.ui.core
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,6 +15,7 @@ import pro.selecto.slothos.di.DaoModule
 import pro.selecto.slothos.di.RepositoryModule
 import pro.selecto.slothos.di.WorkoutModule
 import pro.selecto.slothos.data.repositories.implementations.ImplCategoryRepository
+import pro.selecto.slothos.ui.DaggerAppComponent
 import pro.selecto.slothos.ui.exercise.ExerciseDetailsViewModel
 import pro.selecto.slothos.ui.exercise.ExerciseListViewModel
 import pro.selecto.slothos.ui.exercise.InsertExerciseViewModel
@@ -38,8 +39,7 @@ interface AppComponent {
 
 class MainActivity : ComponentActivity() {
     private val appComponent: AppComponent by lazy {
-        DaggerAppComponent
-            .builder()
+        DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .build()
     }

@@ -45,7 +45,7 @@ import pro.selecto.slothos.data.repositories.base.CategoryRepository
 import pro.selecto.slothos.data.repositories.base.EquipmentRepository
 import pro.selecto.slothos.data.repositories.interfaces.SetRepository
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
-import pro.selecto.slothos.ui.MainActivity
+import pro.selecto.slothos.ui.core.MainActivity
 import pro.selecto.slothos.utils.JsonHandler
 import javax.inject.Singleton
 
