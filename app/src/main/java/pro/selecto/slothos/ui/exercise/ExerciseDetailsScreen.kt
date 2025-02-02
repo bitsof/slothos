@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
-import pro.selecto.slothos.data.ExerciseDetails
+import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object ExerciseDetailsDestination : NavigationDestination {

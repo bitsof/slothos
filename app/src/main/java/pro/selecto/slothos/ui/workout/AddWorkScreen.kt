@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import pro.selecto.slothos.data.WorkDetails
+import pro.selecto.slothos.data.model.WorkDetails
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

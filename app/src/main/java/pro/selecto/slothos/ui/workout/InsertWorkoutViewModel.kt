@@ -14,11 +14,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
-import pro.selecto.slothos.data.SetDetails
-import pro.selecto.slothos.data.SetDetailsService
-import pro.selecto.slothos.data.WorkDetailsService
-import pro.selecto.slothos.data.WorkoutDetails
-import pro.selecto.slothos.data.WorkoutDetailsService
+import pro.selecto.slothos.data.model.SetDetails
+import pro.selecto.slothos.data.services.SetDetailsService
+import pro.selecto.slothos.data.services.WorkDetailsService
+import pro.selecto.slothos.data.model.WorkoutDetails
+import pro.selecto.slothos.data.services.WorkoutDetailsService
 import pro.selecto.slothos.data.entities.Workout
 import pro.selecto.slothos.ui.exercise.AssistedSavedStateViewModelFactory
 

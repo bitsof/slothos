@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.WorkoutDetails
-import pro.selecto.slothos.data.WorkoutDetailsService
+import pro.selecto.slothos.data.model.WorkoutDetails
+import pro.selecto.slothos.data.services.WorkoutDetailsService
 import javax.inject.Inject
 
 class WorkoutListViewModel @Inject constructor(

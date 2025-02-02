@@ -7,7 +7,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import pro.selecto.slothos.data.StandardMeasurementType
+import pro.selecto.slothos.data.model.StandardMeasurementType
 
 @Entity(tableName = "work",
     foreignKeys = [

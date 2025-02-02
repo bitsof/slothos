@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
-import pro.selecto.slothos.data.WorkoutDetails
+import pro.selecto.slothos.data.model.WorkoutDetails
 import pro.selecto.slothos.ui.exercise.ListMode
 import pro.selecto.slothos.ui.exercise.ListScreen
 import pro.selecto.slothos.ui.navigation.NavigationDestination

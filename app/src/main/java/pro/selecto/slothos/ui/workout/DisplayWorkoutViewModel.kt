@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.SetDetailsService
-import pro.selecto.slothos.data.WorkDetailsService
-import pro.selecto.slothos.data.WorkoutDetails
-import pro.selecto.slothos.data.WorkoutDetailsService
+import pro.selecto.slothos.data.services.SetDetailsService
+import pro.selecto.slothos.data.services.WorkDetailsService
+import pro.selecto.slothos.data.model.WorkoutDetails
+import pro.selecto.slothos.data.services.WorkoutDetailsService
 import pro.selecto.slothos.ui.exercise.AssistedSavedStateViewModelFactory
 
 class DisplayWorkoutViewModel @AssistedInject constructor(

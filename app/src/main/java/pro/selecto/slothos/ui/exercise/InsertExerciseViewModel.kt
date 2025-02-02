@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.ExerciseDetails
-import pro.selecto.slothos.data.ExerciseDetailsService
+import pro.selecto.slothos.data.model.ExerciseDetails
+import pro.selecto.slothos.data.services.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Category
 import pro.selecto.slothos.data.entities.Equipment
 import pro.selecto.slothos.data.entities.Exercise

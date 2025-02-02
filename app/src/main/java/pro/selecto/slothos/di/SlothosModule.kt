@@ -5,11 +5,11 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
-import pro.selecto.slothos.data.ExerciseDetailsService
-import pro.selecto.slothos.data.SetDetailsService
-import pro.selecto.slothos.data.WorkDetailsService
+import pro.selecto.slothos.data.services.ExerciseDetailsService
+import pro.selecto.slothos.data.services.SetDetailsService
+import pro.selecto.slothos.data.services.WorkDetailsService
 import pro.selecto.slothos.data.WorkoutDatabase
-import pro.selecto.slothos.data.WorkoutDetailsService
+import pro.selecto.slothos.data.services.WorkoutDetailsService
 import pro.selecto.slothos.data.dao.CategoryDao
 import pro.selecto.slothos.data.dao.EquipmentDao
 import pro.selecto.slothos.data.dao.fkdao.ExerciseCategoryFKDao

@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data
+package pro.selecto.slothos.data.services
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -10,6 +10,7 @@ import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.entities.fk_entities.ExerciseCategoryFK
 import pro.selecto.slothos.data.entities.fk_entities.ExerciseEquipmentFK
+import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.data.repositories.base.BaseRepository
 import pro.selecto.slothos.data.repositories.base.CategoryRepository
 import pro.selecto.slothos.data.repositories.base.EquipmentRepository

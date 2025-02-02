@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.ExerciseDetails
-import pro.selecto.slothos.data.ExerciseDetailsService
+import pro.selecto.slothos.data.model.ExerciseDetails
+import pro.selecto.slothos.data.services.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.repositories.base.BaseRepository
 

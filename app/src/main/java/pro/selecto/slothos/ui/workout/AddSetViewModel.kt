@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.ExerciseDetails
-import pro.selecto.slothos.data.ExerciseDetailsService
-import pro.selecto.slothos.data.SetDetails
-import pro.selecto.slothos.data.WorkDetails
+import pro.selecto.slothos.data.model.ExerciseDetails
+import pro.selecto.slothos.data.services.ExerciseDetailsService
+import pro.selecto.slothos.data.model.SetDetails
+import pro.selecto.slothos.data.model.WorkDetails
 import pro.selecto.slothos.data.entities.Set
 import javax.inject.Inject
 

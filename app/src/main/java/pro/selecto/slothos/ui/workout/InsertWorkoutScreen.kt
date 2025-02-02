@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import pro.selecto.slothos.R
-import pro.selecto.slothos.data.SetDetails
+import pro.selecto.slothos.data.model.SetDetails
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object InsertWorkoutDestination : NavigationDestination {

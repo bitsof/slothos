@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data
+package pro.selecto.slothos.data.model
 
 import java.math.BigDecimal
 

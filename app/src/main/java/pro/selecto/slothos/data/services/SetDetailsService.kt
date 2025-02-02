@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data
+package pro.selecto.slothos.data.services
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
+import pro.selecto.slothos.data.model.SetDetails
 import pro.selecto.slothos.data.repositories.interfaces.SetRepository
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data
+package pro.selecto.slothos.data.model
 
 import java.math.BigDecimal
 
@@ -7,7 +7,7 @@ enum class StandardMeasurementType(
     override val symbol: String,
     override val conversionToBase: BigDecimal,
     override val defaultPrecision: Int,
-):MeasurementBase {
+): MeasurementBase {
     // Distance
     METERS(MeasurementCategory.DISTANCE, "m", BigDecimal("1"), 2),
     KILOMETERS(MeasurementCategory.DISTANCE, "km", BigDecimal("1000"), 3),

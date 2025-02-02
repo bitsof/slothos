@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.ExerciseDetails
-import pro.selecto.slothos.data.ExerciseDetailsService
+import pro.selecto.slothos.data.model.ExerciseDetails
+import pro.selecto.slothos.data.services.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Category
 import pro.selecto.slothos.data.entities.Equipment
 import pro.selecto.slothos.data.repositories.base.CategoryRepository

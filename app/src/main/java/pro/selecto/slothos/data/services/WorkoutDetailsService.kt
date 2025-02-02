@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data
+package pro.selecto.slothos.data.services
 
 import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Workout
+import pro.selecto.slothos.data.model.WorkoutDetails
 import pro.selecto.slothos.data.repositories.base.BaseRepository
 import javax.inject.Inject
 

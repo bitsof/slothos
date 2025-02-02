@@ -5,8 +5,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import pro.selecto.slothos.data.StandardMeasurementType
-import pro.selecto.slothos.data.WorkDetails
+import pro.selecto.slothos.data.model.StandardMeasurementType
+import pro.selecto.slothos.data.model.WorkDetails
 import pro.selecto.slothos.data.entities.Work
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
 import javax.inject.Inject

@@ -1,8 +1,7 @@
-package pro.selecto.slothos.data
+package pro.selecto.slothos.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 import pro.selecto.slothos.data.entities.Work
 
 @Parcelize
