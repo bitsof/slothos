@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import pro.selecto.slothos.data.ExerciseDetails
 import pro.selecto.slothos.data.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Exercise
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
 
 class ExerciseDetailsViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,

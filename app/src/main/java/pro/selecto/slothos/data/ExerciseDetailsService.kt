@@ -10,9 +10,9 @@ import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.entities.ExerciseCategoryFK
 import pro.selecto.slothos.data.entities.ExerciseEquipmentFK
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
-import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
-import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
+import pro.selecto.slothos.data.repositories.base.CategoryRepository
+import pro.selecto.slothos.data.repositories.base.EquipmentRepository
 import javax.inject.Inject
 
 class ExerciseDetailsService @Inject constructor(

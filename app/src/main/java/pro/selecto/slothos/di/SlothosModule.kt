@@ -40,9 +40,9 @@ import pro.selecto.slothos.data.repositories.implementations.ImplMeasurementRepo
 import pro.selecto.slothos.data.repositories.implementations.ImplSetRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplWorkRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplWorkoutRepository
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
-import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
-import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
+import pro.selecto.slothos.data.repositories.base.CategoryRepository
+import pro.selecto.slothos.data.repositories.base.EquipmentRepository
 import pro.selecto.slothos.data.repositories.interfaces.SetRepository
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
 import pro.selecto.slothos.ui.MainActivity
@@ -219,14 +219,14 @@ object RepositoryModule {
     @Provides
     fun provideWorkoutRepository(
         workoutDao: WorkoutDao
-    ):  BaseRepository<Workout> {
+    ): BaseRepository<Workout> {
         return ImplWorkoutRepository(workoutDao)
     }
 
     @Provides
     fun provideMeasurementRepository(
         measurementDao: MeasurementDao
-    ):  BaseRepository<Measurement> {
+    ): BaseRepository<Measurement> {
         return ImplMeasurementRepository(measurementDao)
     }
 

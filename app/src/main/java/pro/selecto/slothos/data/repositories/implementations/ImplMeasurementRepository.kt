@@ -3,10 +3,11 @@ package pro.selecto.slothos.data.repositories.implementations
 import kotlinx.coroutines.flow.Flow
 import pro.selecto.slothos.data.dao.MeasurementDao
 import pro.selecto.slothos.data.entities.Measurement
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
 import javax.inject.Inject
 
-class ImplMeasurementRepository @Inject constructor(private val measurementDao: MeasurementDao) : BaseRepository<Measurement> {
+class ImplMeasurementRepository @Inject constructor(private val measurementDao: MeasurementDao) :
+    BaseRepository<Measurement> {
     override suspend fun getAllEntitiesStream(): Flow<List<Measurement>> = measurementDao.getAllMeasurements()
 
     override suspend fun getEntityById(id: Int): Flow<Measurement?> = measurementDao.getMeasurement(id)

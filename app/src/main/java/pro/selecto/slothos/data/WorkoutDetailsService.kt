@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Workout
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
 import javax.inject.Inject
 
 class WorkoutDetailsService @Inject constructor(

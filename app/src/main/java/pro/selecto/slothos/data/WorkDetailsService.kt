@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Measurement
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
 import javax.inject.Inject
 

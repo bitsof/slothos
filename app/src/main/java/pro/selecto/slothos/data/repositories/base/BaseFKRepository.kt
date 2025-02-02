@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data.repositories.interfaces
+package pro.selecto.slothos.data.repositories.base
 
 interface BaseFKRepository<T> {
 

@@ -11,9 +11,9 @@ import pro.selecto.slothos.data.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Category
 import pro.selecto.slothos.data.entities.Equipment
 import pro.selecto.slothos.data.entities.Exercise
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
-import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
-import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
+import pro.selecto.slothos.data.repositories.base.CategoryRepository
+import pro.selecto.slothos.data.repositories.base.EquipmentRepository
 import javax.inject.Inject
 
 class InsertExerciseViewModel @Inject constructor(
