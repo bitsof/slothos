@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.workout
+package pro.selecto.slothos.ui.features.workout.list
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

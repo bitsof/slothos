@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.workout
+package pro.selecto.slothos.ui.features.set.insert
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

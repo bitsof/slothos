@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.workout
+package pro.selecto.slothos.ui.features.work.insert
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

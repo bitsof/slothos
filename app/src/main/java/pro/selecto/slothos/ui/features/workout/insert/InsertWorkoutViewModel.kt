@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.workout
+package pro.selecto.slothos.ui.features.workout.insert
 
 import android.os.Parcelable
 import android.util.Log
@@ -20,7 +20,7 @@ import pro.selecto.slothos.data.services.WorkDetailsService
 import pro.selecto.slothos.data.model.WorkoutDetails
 import pro.selecto.slothos.data.services.WorkoutDetailsService
 import pro.selecto.slothos.data.entities.Workout
-import pro.selecto.slothos.ui.exercise.AssistedSavedStateViewModelFactory
+import pro.selecto.slothos.ui.features.AssistedSavedStateViewModelFactory
 
 class InsertWorkoutViewModel @AssistedInject constructor(
     private val workoutDetailsService: WorkoutDetailsService,

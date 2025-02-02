@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.workout
+package pro.selecto.slothos.ui.features.workout.list
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
 import pro.selecto.slothos.data.model.WorkoutDetails
 import pro.selecto.slothos.ui.components.workout.WorkoutList
-import pro.selecto.slothos.ui.exercise.ListMode
+import pro.selecto.slothos.ui.features.exercise.list.ListMode
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object WorkoutListScreen : NavigationDestination {

@@ -16,11 +16,11 @@ import pro.selecto.slothos.di.RepositoryModule
 import pro.selecto.slothos.di.WorkoutModule
 import pro.selecto.slothos.data.repositories.implementations.ImplCategoryRepository
 import pro.selecto.slothos.ui.DaggerAppComponent
-import pro.selecto.slothos.ui.exercise.ExerciseDetailsViewModel
-import pro.selecto.slothos.ui.exercise.ExerciseListViewModel
-import pro.selecto.slothos.ui.exercise.InsertExerciseViewModel
-import pro.selecto.slothos.ui.exercise.ViewModelBuilderModule
-import pro.selecto.slothos.ui.exercise.ViewModelFactory
+import pro.selecto.slothos.ui.features.exercise.details.ExerciseDetailsViewModel
+import pro.selecto.slothos.ui.features.exercise.list.ExerciseListViewModel
+import pro.selecto.slothos.ui.features.exercise.insert.InsertExerciseViewModel
+import pro.selecto.slothos.ui.features.ViewModelBuilderModule
+import pro.selecto.slothos.ui.features.ViewModelFactory
 import pro.selecto.slothos.ui.theme.SlothosTheme
 import javax.inject.Inject
 import javax.inject.Singleton

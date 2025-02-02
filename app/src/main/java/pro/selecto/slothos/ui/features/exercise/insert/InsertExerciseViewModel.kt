@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.exercise
+package pro.selecto.slothos.ui.features.exercise.insert
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf

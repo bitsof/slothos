@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.exercise
+package pro.selecto.slothos.ui.features.exercise.insert
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

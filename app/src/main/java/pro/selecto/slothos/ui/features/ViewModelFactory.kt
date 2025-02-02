@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.exercise
+package pro.selecto.slothos.ui.features
 
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
@@ -8,11 +8,14 @@ import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import pro.selecto.slothos.ui.workout.AddSetViewModel
-import pro.selecto.slothos.ui.workout.AddWorkViewModel
-import pro.selecto.slothos.ui.workout.DisplayWorkoutViewModel
-import pro.selecto.slothos.ui.workout.InsertWorkoutViewModel
-import pro.selecto.slothos.ui.workout.WorkoutListViewModel
+import pro.selecto.slothos.ui.features.exercise.details.ExerciseDetailsViewModel
+import pro.selecto.slothos.ui.features.exercise.insert.InsertExerciseViewModel
+import pro.selecto.slothos.ui.features.exercise.list.ExerciseListViewModel
+import pro.selecto.slothos.ui.features.workout.details.DisplayWorkoutViewModel
+import pro.selecto.slothos.ui.features.workout.insert.InsertWorkoutViewModel
+import pro.selecto.slothos.ui.features.set.insert.AddSetViewModel
+import pro.selecto.slothos.ui.features.work.insert.AddWorkViewModel
+import pro.selecto.slothos.ui.features.workout.list.WorkoutListViewModel
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.reflect.KClass

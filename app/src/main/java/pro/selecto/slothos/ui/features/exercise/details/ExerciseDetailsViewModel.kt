@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.exercise
+package pro.selecto.slothos.ui.features.exercise.details
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -14,6 +14,7 @@ import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.data.services.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Exercise
 import pro.selecto.slothos.data.repositories.base.BaseRepository
+import pro.selecto.slothos.ui.features.AssistedSavedStateViewModelFactory
 
 class ExerciseDetailsViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,

@@ -8,7 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import pro.selecto.slothos.ui.exercise.ListMode
+import pro.selecto.slothos.ui.features.exercise.list.ListMode
 
 @Composable
 fun ListScreen(

@@ -11,15 +11,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import pro.selecto.slothos.R
-import pro.selecto.slothos.ui.exercise.ExerciseDetailsScreen
-import pro.selecto.slothos.ui.exercise.ExerciseListScreen
-import pro.selecto.slothos.ui.exercise.InsertExerciseScreen
-import pro.selecto.slothos.ui.exercise.ListMode
-import pro.selecto.slothos.ui.workout.AddSetScreen
-import pro.selecto.slothos.ui.workout.AddWorkScreen
-import pro.selecto.slothos.ui.workout.DisplayWorkoutScreen
-import pro.selecto.slothos.ui.workout.InsertWorkoutScreen
-import pro.selecto.slothos.ui.workout.WorkoutListScreen
+import pro.selecto.slothos.ui.features.exercise.details.ExerciseDetailsScreen
+import pro.selecto.slothos.ui.features.exercise.list.ExerciseListScreen
+import pro.selecto.slothos.ui.features.exercise.insert.InsertExerciseScreen
+import pro.selecto.slothos.ui.features.exercise.list.ListMode
+import pro.selecto.slothos.ui.features.set.insert.AddSetScreen
+import pro.selecto.slothos.ui.features.work.insert.AddWorkScreen
+import pro.selecto.slothos.ui.features.workout.details.DisplayWorkoutScreen
+import pro.selecto.slothos.ui.features.workout.insert.InsertWorkoutScreen
+import pro.selecto.slothos.ui.features.workout.list.WorkoutListScreen
 
 enum class SlothosScreen(@StringRes val title: Int) {
     Home(title = R.string.app_name),

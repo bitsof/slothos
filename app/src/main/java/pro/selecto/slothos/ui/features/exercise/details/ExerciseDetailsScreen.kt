@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.exercise
+package pro.selecto.slothos.ui.features.exercise.details
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
