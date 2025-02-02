@@ -2,7 +2,7 @@ package pro.selecto.slothos.data.repositories.implementations
 
 import kotlinx.coroutines.flow.Flow
 import pro.selecto.slothos.data.dao.CategoryDao
-import pro.selecto.slothos.data.dao.ExerciseCategoryFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseCategoryFKDao
 import pro.selecto.slothos.data.entities.Category
 import pro.selecto.slothos.data.entities.ExerciseCategoryFK
 import pro.selecto.slothos.data.repositories.base.CategoryRepository

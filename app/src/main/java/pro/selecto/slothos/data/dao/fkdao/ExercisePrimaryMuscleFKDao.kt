@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data.dao
+package pro.selecto.slothos.data.dao.fkdao
 
 import androidx.room.Dao
 import androidx.room.Delete
