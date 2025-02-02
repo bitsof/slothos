@@ -30,6 +30,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
 import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.data.entities.Category
+import pro.selecto.slothos.ui.common.lists.ListScreen
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object ExerciseListDestination : NavigationDestination {

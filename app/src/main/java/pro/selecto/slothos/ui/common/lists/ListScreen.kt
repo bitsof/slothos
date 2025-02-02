@@ -1,4 +1,4 @@
-package pro.selecto.slothos.ui.exercise
+package pro.selecto.slothos.ui.common.lists
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
@@ -8,13 +8,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import pro.selecto.slothos.ui.exercise.ListMode
 
 @Composable
 fun ListScreen(
     modifier: Modifier = Modifier,
     mode: ListMode,
     onAddClick: () -> Unit,
-    showAddButton: (ListMode) -> Boolean = { it == ListMode.VIEW},
+    showAddButton: (ListMode) -> Boolean = { it == ListMode.VIEW },
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
