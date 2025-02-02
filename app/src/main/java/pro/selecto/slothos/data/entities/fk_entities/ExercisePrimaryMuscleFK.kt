@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data.entities
+package pro.selecto.slothos.data.entities.fk_entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,8 +6,10 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
+import pro.selecto.slothos.data.entities.Exercise
+import pro.selecto.slothos.data.entities.Muscle
 
-@Entity(tableName = "exercise_equipment_fks",
+@Entity(tableName = "exercise_primary_muscle_fks",
     foreignKeys = [
         ForeignKey(
             entity = Exercise::class,
@@ -17,22 +19,22 @@ import kotlinx.serialization.Serializable
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
-            entity = Equipment::class,
+            entity = Muscle::class,
             parentColumns = ["id"],
-            childColumns = ["equipment_id"],
+            childColumns = ["muscle_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         )
     ],
     indices = [
         Index("exercise_id"),
-        Index("equipment_id")
+        Index("muscle_id")
     ])
 @Serializable
-class ExerciseEquipmentFK(
+class ExercisePrimaryMuscleFK(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "exercise_id") val exerciseId: Int,
-    @ColumnInfo(name = "equipment_id") val equipmentId: Int,
+    @ColumnInfo(name = "muscle_id") val muscleId: Int,
 ) {
 }

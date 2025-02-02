@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Update
-import pro.selecto.slothos.data.entities.ExercisePrimaryMuscleFK
+import pro.selecto.slothos.data.entities.fk_entities.ExercisePrimaryMuscleFK
 
 @Dao
 interface ExercisePrimaryMuscleFKDao {

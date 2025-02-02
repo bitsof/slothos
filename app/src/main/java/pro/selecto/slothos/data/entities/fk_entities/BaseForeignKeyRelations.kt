@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data.entities
+package pro.selecto.slothos.data.entities.fk_entities
 
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey

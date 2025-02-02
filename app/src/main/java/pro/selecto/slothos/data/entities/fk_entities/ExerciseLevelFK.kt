@@ -1,4 +1,4 @@
-package pro.selecto.slothos.data.entities
+package pro.selecto.slothos.data.entities.fk_entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,6 +6,8 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
+import pro.selecto.slothos.data.entities.Exercise
+import pro.selecto.slothos.data.entities.Level
 
 @Entity(tableName = "exercise_level_fks",
     foreignKeys = [

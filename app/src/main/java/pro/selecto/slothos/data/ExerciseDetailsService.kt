@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.withContext
 import pro.selecto.slothos.data.entities.Exercise
-import pro.selecto.slothos.data.entities.ExerciseCategoryFK
-import pro.selecto.slothos.data.entities.ExerciseEquipmentFK
+import pro.selecto.slothos.data.entities.fk_entities.ExerciseCategoryFK
+import pro.selecto.slothos.data.entities.fk_entities.ExerciseEquipmentFK
 import pro.selecto.slothos.data.repositories.base.BaseRepository
 import pro.selecto.slothos.data.repositories.base.CategoryRepository
 import pro.selecto.slothos.data.repositories.base.EquipmentRepository

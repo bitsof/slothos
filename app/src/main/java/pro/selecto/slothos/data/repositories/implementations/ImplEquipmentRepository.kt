@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import pro.selecto.slothos.data.dao.EquipmentDao
 import pro.selecto.slothos.data.dao.fkdao.ExerciseEquipmentFKDao
 import pro.selecto.slothos.data.entities.Equipment
-import pro.selecto.slothos.data.entities.ExerciseEquipmentFK
+import pro.selecto.slothos.data.entities.fk_entities.ExerciseEquipmentFK
 import pro.selecto.slothos.data.repositories.base.EquipmentRepository
 import javax.inject.Inject
 
