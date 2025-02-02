@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
 import pro.selecto.slothos.data.WorkoutDetails
+import pro.selecto.slothos.ui.exercise.ListMode
+import pro.selecto.slothos.ui.exercise.ListScreen
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
 object WorkoutListScreen : NavigationDestination {
@@ -30,6 +32,8 @@ fun WorkoutListScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
     onWorkoutClick: (WorkoutDetails) -> Unit,
+    onAddClick: () -> Unit,
+    mode: ListMode = ListMode.VIEW,
 ) {
     val viewModel: WorkoutListViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
@@ -40,6 +44,8 @@ fun WorkoutListScreen(
         modifier = modifier,
         workoutList = uiState.workoutDetailsList,
         onWorkoutClick = onWorkoutClick,
+        onAddClick = onAddClick,
+        mode = mode,
     )
 
 }
@@ -49,6 +55,8 @@ fun WorkoutList(
     modifier: Modifier,
     workoutList: List<WorkoutDetails>?,
     onWorkoutClick: (WorkoutDetails) -> Unit,
+    onAddClick: () -> Unit, // Consider making this return WorkoutDetails in situation from Select to Insert
+    mode: ListMode = ListMode.VIEW,
 ) {
     Column {
         Text(
@@ -56,13 +64,22 @@ fun WorkoutList(
             style = MaterialTheme.typography.headlineSmall
         )
 
-        LazyColumn(modifier = modifier) {
-            workoutList?.let { list ->
-                items(list.count()) { index ->
-                    WorkoutItem(
-                        workoutDetails = list[index],
-                        onWorkoutClick = onWorkoutClick,
-                    )
+        ListScreen(
+            modifier = Modifier,
+            mode = mode,
+            onAddClick = onAddClick,
+        )
+        { padding ->
+            LazyColumn(
+                modifier = modifier.padding(padding),
+            ) {
+                workoutList?.let { list ->
+                    items(list.count()) { index ->
+                        WorkoutItem(
+                            workoutDetails = list[index],
+                            onWorkoutClick = onWorkoutClick,
+                        )
+                    }
                 }
             }
         }

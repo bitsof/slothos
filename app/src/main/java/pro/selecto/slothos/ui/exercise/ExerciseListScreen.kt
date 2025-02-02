@@ -42,7 +42,7 @@ fun ExerciseListScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
     onExerciseClick: (ExerciseDetails) -> Unit,
-    mode: ExerciseListMode = ExerciseListMode.VIEW,
+    onAddClick: () -> Unit,
     mode: ListMode = ListMode.VIEW,
 ) {
     val viewModel: ExerciseListViewModel = viewModel(factory = viewModelFactory)
@@ -61,6 +61,7 @@ fun ExerciseListScreen(
         exerciseList = uiState?.exerciseDetailsList,
         categories = categories,
         onExerciseClick = onExerciseClick,
+        onAddClick = onAddClick,
         filterOptions = filterOptions,
         onFilterChange = { newFilterOptions ->
             viewModel.updateFilterOptions(newFilterOptions)
@@ -75,6 +76,7 @@ fun ExerciseList(
     categories: List<Category>?,
     filterOptions: FilterOptions,
     onExerciseClick: (ExerciseDetails) -> Unit,
+    onAddClick: () -> Unit, // Consider making this return ExerciseDetails in situation with Select to Insert
     onFilterChange: (FilterOptions) -> Unit,
     mode: ListMode = ListMode.VIEW,
 ) {
@@ -102,15 +104,22 @@ fun ExerciseList(
                 }
             )
         }
-
-        LazyColumn(modifier = modifier) {
-            exerciseList?.let { list ->
-                items(list.count()) { index ->
-                    val exerciseDetails = list[index]
-                    ExerciseItem(
-                        exerciseDetails = exerciseDetails,
-                        onExerciseClick = onExerciseClick,
-                    )
+        ListScreen(
+            modifier = Modifier,
+            mode = mode,
+            onAddClick = onAddClick,
+        ) { padding ->
+            LazyColumn(
+                modifier = modifier.padding(padding),
+            ) {
+                exerciseList?.let { list ->
+                    items(list.count()) { index ->
+                        val exerciseDetails = list[index]
+                        ExerciseItem(
+                            exerciseDetails = exerciseDetails,
+                            onExerciseClick = onExerciseClick,
+                        )
+                    }
                 }
             }
         }
@@ -207,6 +216,7 @@ fun CategorySelectionDialog(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(text = category.name)
+                        }
                     }
                 }
             }

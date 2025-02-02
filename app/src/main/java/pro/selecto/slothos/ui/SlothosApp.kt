@@ -45,7 +45,7 @@ fun SlothosApp(
     ) {
         composable(route = SlothosScreen.Home.name) {
             HomeScreen(
-                onButtonClicked = { navController.navigate(SlothosScreen.ExerciseList.name) },
+                onButtonClicked = { navController.navigate(SlothosScreen.ExerciseList.name + "?mode=view") },
                 onButtonClicked2 = { navController.navigate(SlothosScreen.InsertExercise.name) },
                 onButtonClicked3 = { navController.navigate(SlothosScreen.InsertWorkout.name)},
                 onButtonClicked5 = { navController.navigate(SlothosScreen.WorkoutList.name)},
@@ -66,18 +66,22 @@ fun SlothosApp(
                                 ?.set("selectedExercise", exerciseDetails)
                             navController.popBackStack()
                         }
+                        else -> {
+                            navController.navigate("${SlothosScreen.ExerciseDetails}/${exerciseDetails.exercise.id}")
+                        }
                     }
                                   },
+                onAddClick = { navController.navigate(SlothosScreen.InsertExercise.name) },
                 mode = when(mode) {
                     "view" -> {
-                        ExerciseListMode.VIEW
+                        ListMode.VIEW
                     }
                     "select" -> {
-                        ExerciseListMode.SELECT
+                        ListMode.SELECT
                     }
                     else -> {
                         /* TODO possible error handling */
-                        ExerciseListMode.VIEW
+                        ListMode.VIEW
                     }
                 }
 
@@ -144,6 +148,8 @@ fun SlothosApp(
                 onWorkoutClick = { workoutDetails ->
                     navController.navigate("${SlothosScreen.DisplayWorkout}/${workoutDetails.workout.id}")
                 },
+                onAddClick = { navController.navigate(SlothosScreen.InsertWorkout.name)},
+                mode = ListMode.VIEW,
             )
         }
         composable(
