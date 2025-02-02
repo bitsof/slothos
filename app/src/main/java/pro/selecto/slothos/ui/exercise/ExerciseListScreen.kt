@@ -43,6 +43,7 @@ fun ExerciseListScreen(
     viewModelFactory: ViewModelProvider.Factory,
     onExerciseClick: (ExerciseDetails) -> Unit,
     mode: ExerciseListMode = ExerciseListMode.VIEW,
+    mode: ListMode = ListMode.VIEW,
 ) {
     val viewModel: ExerciseListViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
@@ -75,12 +76,12 @@ fun ExerciseList(
     filterOptions: FilterOptions,
     onExerciseClick: (ExerciseDetails) -> Unit,
     onFilterChange: (FilterOptions) -> Unit,
-    mode: ExerciseListMode = ExerciseListMode.VIEW,
+    mode: ListMode = ListMode.VIEW,
 ) {
     var showFilterMenu by remember { mutableStateOf(false) }
 
     Column(modifier = modifier.padding(16.dp)) {
-        if(mode == ExerciseListMode.SELECT) {
+        if(mode == ListMode.SELECT) {
             Text("Select Mode")
         }
         Text(
@@ -240,9 +241,7 @@ fun CategorySelectionDialog(
 //    }
 
 
-}
-
-enum class ExerciseListMode {
+enum class ListMode {
     VIEW,
     SELECT,
 }

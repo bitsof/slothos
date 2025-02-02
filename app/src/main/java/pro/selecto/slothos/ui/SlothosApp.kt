@@ -12,9 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import pro.selecto.slothos.R
 import pro.selecto.slothos.ui.exercise.ExerciseDetailsScreen
-import pro.selecto.slothos.ui.exercise.ExerciseListMode
 import pro.selecto.slothos.ui.exercise.ExerciseListScreen
 import pro.selecto.slothos.ui.exercise.InsertExerciseScreen
+import pro.selecto.slothos.ui.exercise.ListMode
 import pro.selecto.slothos.ui.workout.AddSetScreen
 import pro.selecto.slothos.ui.workout.AddWorkScreen
 import pro.selecto.slothos.ui.workout.DisplayWorkoutScreen
