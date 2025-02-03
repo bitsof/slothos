@@ -5,22 +5,22 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
-import pro.selecto.slothos.data.ExerciseDetailsService
-import pro.selecto.slothos.data.SetDetailsService
-import pro.selecto.slothos.data.WorkDetailsService
+import pro.selecto.slothos.data.services.ExerciseDetailsService
+import pro.selecto.slothos.data.services.SetDetailsService
+import pro.selecto.slothos.data.services.WorkDetailsService
 import pro.selecto.slothos.data.WorkoutDatabase
-import pro.selecto.slothos.data.WorkoutDetailsService
+import pro.selecto.slothos.data.services.WorkoutDetailsService
 import pro.selecto.slothos.data.dao.CategoryDao
 import pro.selecto.slothos.data.dao.EquipmentDao
-import pro.selecto.slothos.data.dao.ExerciseCategoryFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseCategoryFKDao
 import pro.selecto.slothos.data.dao.ExerciseDao
-import pro.selecto.slothos.data.dao.ExerciseEquipmentFKDao
-import pro.selecto.slothos.data.dao.ExerciseForceFKDao
-import pro.selecto.slothos.data.dao.ExerciseLevelFKDao
-import pro.selecto.slothos.data.dao.ExerciseMechanicFKDao
-import pro.selecto.slothos.data.dao.ExercisePrimaryMuscleFKDao
-import pro.selecto.slothos.data.dao.ExerciseSecondaryMuscleFKDao
-import pro.selecto.slothos.data.dao.ExerciseTagFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseEquipmentFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseForceFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseLevelFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseMechanicFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExercisePrimaryMuscleFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseSecondaryMuscleFKDao
+import pro.selecto.slothos.data.dao.fkdao.ExerciseTagFKDao
 import pro.selecto.slothos.data.dao.ForceDao
 import pro.selecto.slothos.data.dao.LevelDao
 import pro.selecto.slothos.data.dao.MeasurementDao
@@ -40,12 +40,12 @@ import pro.selecto.slothos.data.repositories.implementations.ImplMeasurementRepo
 import pro.selecto.slothos.data.repositories.implementations.ImplSetRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplWorkRepository
 import pro.selecto.slothos.data.repositories.implementations.ImplWorkoutRepository
-import pro.selecto.slothos.data.repositories.interfaces.BaseRepository
-import pro.selecto.slothos.data.repositories.interfaces.CategoryRepository
-import pro.selecto.slothos.data.repositories.interfaces.EquipmentRepository
+import pro.selecto.slothos.data.repositories.base.BaseRepository
+import pro.selecto.slothos.data.repositories.base.CategoryRepository
+import pro.selecto.slothos.data.repositories.base.EquipmentRepository
 import pro.selecto.slothos.data.repositories.interfaces.SetRepository
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
-import pro.selecto.slothos.ui.MainActivity
+import pro.selecto.slothos.ui.core.MainActivity
 import pro.selecto.slothos.utils.JsonHandler
 import javax.inject.Singleton
 
@@ -219,14 +219,14 @@ object RepositoryModule {
     @Provides
     fun provideWorkoutRepository(
         workoutDao: WorkoutDao
-    ):  BaseRepository<Workout> {
+    ): BaseRepository<Workout> {
         return ImplWorkoutRepository(workoutDao)
     }
 
     @Provides
     fun provideMeasurementRepository(
         measurementDao: MeasurementDao
-    ):  BaseRepository<Measurement> {
+    ): BaseRepository<Measurement> {
         return ImplMeasurementRepository(measurementDao)
     }
 
