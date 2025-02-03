@@ -59,7 +59,7 @@ fun ExerciseListScreen(
     ExerciseList(
         modifier = modifier,
         mode = mode,
-        exerciseList = uiState?.exerciseDetailsList,
+        exerciseDetailsList = uiState?.exerciseDetailsList,
         categories = categories,
         onExerciseClick = onExerciseClick,
         onAddClick = onAddClick,
@@ -73,7 +73,7 @@ fun ExerciseListScreen(
 @Composable
 fun ExerciseList(
     modifier: Modifier,
-    exerciseList: List<ExerciseDetails>?,
+    exerciseDetailsList: List<ExerciseDetails>?,
     categories: List<Category>?,
     filterOptions: FilterOptions,
     onExerciseClick: (ExerciseDetails) -> Unit,
@@ -116,6 +116,7 @@ fun ExerciseList(
                 exerciseList?.let { list ->
                     items(list.count()) { index ->
                         val exerciseDetails = list[index]
+                exerciseDetailsList?.let { list ->
                         ExerciseItem(
                             exerciseDetails = exerciseDetails,
                             onExerciseClick = onExerciseClick,
