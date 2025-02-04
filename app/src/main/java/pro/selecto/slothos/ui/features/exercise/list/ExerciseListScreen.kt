@@ -28,8 +28,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
-import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.data.entities.Category
+import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.ui.common.lists.ListScreen
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
@@ -59,7 +59,7 @@ fun ExerciseListScreen(
     ExerciseList(
         modifier = modifier,
         mode = mode,
-        exerciseList = uiState?.exerciseDetailsList,
+        exerciseDetailsList = uiState?.exerciseDetailsList,
         categories = categories,
         onExerciseClick = onExerciseClick,
         onAddClick = onAddClick,
@@ -73,7 +73,7 @@ fun ExerciseListScreen(
 @Composable
 fun ExerciseList(
     modifier: Modifier,
-    exerciseList: List<ExerciseDetails>?,
+    exerciseDetailsList: List<ExerciseDetails>?,
     categories: List<Category>?,
     filterOptions: FilterOptions,
     onExerciseClick: (ExerciseDetails) -> Unit,
@@ -113,11 +113,15 @@ fun ExerciseList(
             LazyColumn(
                 modifier = modifier.padding(padding),
             ) {
-                exerciseList?.let { list ->
-                    items(list.count()) { index ->
-                        val exerciseDetails = list[index]
+                exerciseDetailsList?.let { exerciseList ->
+                    items(
+                        items = exerciseList,
+                        key = { exercise ->
+                            exercise.exercise.id
+                        }
+                    ) { exercise ->
                         ExerciseItem(
-                            exerciseDetails = exerciseDetails,
+                            exerciseDetails = exercise,
                             onExerciseClick = onExerciseClick,
                         )
                     }
