@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import pro.selecto.slothos.data.entities.Work
 import pro.selecto.slothos.data.model.StandardMeasurementType
 import pro.selecto.slothos.data.model.WorkDetails
-import pro.selecto.slothos.data.entities.Work
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
 import javax.inject.Inject
 
@@ -30,9 +30,28 @@ class AddWorkViewModel @Inject constructor(
         }
     }
 
-    fun updateMeasurement(measurement: StandardMeasurementType) {
+    fun updateMeasurement(newMeasurement: StandardMeasurementType) {
         _uiState.update { currentState ->
-            currentState.copy(selectedMeasurement = measurement)
+            val currentMeasruement = currentState.selectedMeasurement
+
+            when {
+                // When changing category type (e.g. time to RPE), resets to 0
+                newMeasurement.categoryType != currentMeasruement.categoryType -> {
+                    currentState.copy(
+                        value = 0.0,
+                        selectedMeasurement = newMeasurement,
+                    )
+                }
+                // When they are the same category (lbs to kgs, or mm to inches), convert them
+                else -> {
+                    val convertedValue = currentState.value / currentMeasruement.conversionToBase * newMeasurement.conversionToBase
+
+                    currentState.copy(
+                        value = convertedValue,
+                        selectedMeasurement = newMeasurement,
+                    )
+                }
+            }
         }
     }
 
