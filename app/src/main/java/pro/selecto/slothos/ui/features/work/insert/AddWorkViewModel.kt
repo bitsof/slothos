@@ -18,7 +18,7 @@ class AddWorkViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<AddWorkUiState>(AddWorkUiState())
     val uiState: StateFlow<AddWorkUiState> = _uiState.asStateFlow()
 
-    fun updateValue(value: Float) {
+    fun updateValue(value: Double) {
         _uiState.update { currentState ->
             currentState.copy(value = value)
         }
@@ -47,7 +47,7 @@ class AddWorkViewModel @Inject constructor(
 }
 
 data class AddWorkUiState(
-    val value: Float = 0F,
+    val value: Double = 0.0,
     val description: String = "",
     val selectedMeasurement: StandardMeasurementType = StandardMeasurementType.POUNDS,
 )

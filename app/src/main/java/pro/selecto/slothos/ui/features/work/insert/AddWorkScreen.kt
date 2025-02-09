@@ -57,8 +57,8 @@ fun AddWorkScreen(
             onValueChange = { newValue: String ->
                 val filteredValue = newValue.filter { it.isDigit() || it == '.' }
                 if (filteredValue.count { it == '.' } <= 1) {
-                    filteredValue.toFloatOrNull()?.let { floatValue ->
-                        viewModel.updateValue(floatValue)
+                    filteredValue.toDoubleOrNull()?.let { doubleValue ->
+                        viewModel.updateValue(doubleValue)
                     }
                 }
             },
