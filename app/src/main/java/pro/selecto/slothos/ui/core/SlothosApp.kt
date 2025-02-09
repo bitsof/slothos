@@ -5,15 +5,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
+import kotlinx.serialization.Serializable
 import pro.selecto.slothos.R
 import pro.selecto.slothos.ui.features.exercise.details.ExerciseDetailsScreen
-import pro.selecto.slothos.ui.features.exercise.list.ExerciseListScreen
 import pro.selecto.slothos.ui.features.exercise.insert.InsertExerciseScreen
+import pro.selecto.slothos.ui.features.exercise.list.ExerciseListScreen
 import pro.selecto.slothos.ui.features.exercise.list.ListMode
 import pro.selecto.slothos.ui.features.set.insert.AddSetScreen
 import pro.selecto.slothos.ui.features.work.insert.AddWorkScreen
@@ -45,20 +45,20 @@ fun SlothosApp(
     ) {
         composable(route = SlothosScreen.Home.name) {
             HomeScreen(
-                onButtonClicked = { navController.navigate(SlothosScreen.ExerciseList.name + "?mode=view") },
-                onButtonClicked2 = { navController.navigate(SlothosScreen.InsertExercise.name) },
-                onButtonClicked3 = { navController.navigate(SlothosScreen.InsertWorkout.name)},
-                onButtonClicked5 = { navController.navigate(SlothosScreen.WorkoutList.name)},
+                onButtonClicked = { navController.navigate(ExerciseListDestination()) },
+                onButtonClicked2 = { navController.navigate(InsertExercise()) },
+                onButtonClicked3 = { navController.navigate(InsertWorkout())},
+                onButtonClicked5 = { navController.navigate(WorkoutList)},
                 )
         }
-        composable(route = SlothosScreen.ExerciseList.name + "?mode={mode}"){ backStackEntry ->
+        composable<ExerciseListDestination>{ backStackEntry ->
             val mode = backStackEntry.arguments?.getString("mode")
             ExerciseListScreen(
                 viewModelFactory = viewModelFactory,
                 onExerciseClick = { exerciseDetails ->
                     when (mode) {
                         "view" -> {
-                            navController.navigate("${SlothosScreen.ExerciseDetails}/${exerciseDetails.exercise.id}")
+                            navController.navigate(DisplayExerciseDetails(exerciseDetails.exercise.id))
                         }
                         "select" -> {
                             navController.previousBackStackEntry
@@ -67,11 +67,11 @@ fun SlothosApp(
                             navController.popBackStack()
                         }
                         else -> {
-                            navController.navigate("${SlothosScreen.ExerciseDetails}/${exerciseDetails.exercise.id}")
+                            navController.navigate(DisplayExerciseDetails(exerciseDetails.exercise.id))
                         }
                     }
                                   },
-                onAddClick = { navController.navigate(SlothosScreen.InsertExercise.name) },
+                onAddClick = { navController.navigate(InsertExercise()) },
                 mode = when(mode) {
                     "view" -> {
                         ListMode.VIEW
@@ -87,21 +87,21 @@ fun SlothosApp(
 
             )
         }
-        composable(route = SlothosScreen.InsertExercise.name){
+        composable<InsertExercise> {
             InsertExerciseScreen(
                 viewModelFactory = viewModelFactory,
                 navController = navController,
             )
         }
-        composable(route = SlothosScreen.InsertWorkout.name){
+        composable<InsertWorkout> {
             InsertWorkoutScreen(
                 viewModelFactory = viewModelFactory,
-                navigateToAddSetScreen = { navController.navigate(SlothosScreen.AddSet.name)},
+                navigateToAddSetScreen = { navController.navigate(AddSet())},
                 navController = navController,
             )
         }
         
-        composable(route = SlothosScreen.AddSet.name) {
+        composable<AddSet> {
             AddSetScreen(
                 navController = navController,
                 viewModelFactory = viewModelFactory,
@@ -116,7 +116,7 @@ fun SlothosApp(
             )
         }
 
-        composable(route = SlothosScreen.AddWork.name) {
+        composable<AddWork> {
             AddWorkScreen(
                 navController = navController,
                 viewModelFactory = viewModelFactory,
@@ -129,33 +129,25 @@ fun SlothosApp(
             )
         }
         
-        composable(
-            route = "${SlothosScreen.DisplayWorkout.name}/{workoutId}",
-            arguments = listOf(navArgument("workoutId") { type = NavType.IntType })
-        ){ backStackEntry ->
-            val workoutId = backStackEntry.arguments?.getInt("workoutId")
-            if (workoutId != null) {
-                DisplayWorkoutScreen(
-                    viewModelFactory = viewModelFactory,
-                    workoutId = workoutId,
-                )
-            }
+        composable<DisplayWorkoutDetails> { backStackEntry ->
+            val workoutId: Int = backStackEntry.toRoute<DisplayWorkoutDetails>().id
+            DisplayWorkoutScreen(
+                viewModelFactory = viewModelFactory,
+                workoutId = workoutId,
+            )
         }
 
-        composable(route = SlothosScreen.WorkoutList.name){
+        composable<WorkoutList> {
             WorkoutListScreen(
                 viewModelFactory = viewModelFactory,
                 onWorkoutClick = { workoutDetails ->
-                    navController.navigate("${SlothosScreen.DisplayWorkout}/${workoutDetails.workout.id}")
+                    navController.navigate(DisplayWorkoutDetails(workoutDetails.workout.id))
                 },
-                onAddClick = { navController.navigate(SlothosScreen.InsertWorkout.name)},
+                onAddClick = { navController.navigate(InsertWorkout())},
                 mode = ListMode.VIEW,
             )
         }
-        composable(
-            route = "${SlothosScreen.ExerciseDetails}/{exerciseId}",
-            arguments = listOf(navArgument("exerciseId") { type = NavType.IntType })
-        ) { backStackEntry ->
+        composable<DisplayExerciseDetails> { backStackEntry ->
             val exerciseId = backStackEntry.arguments?.getInt("exerciseId")
             if (exerciseId != null) {
                 ExerciseDetailsScreen(
@@ -167,3 +159,29 @@ fun SlothosApp(
 
     }
 }
+
+// data classes for navigation
+// https://developer.android.com/develop/ui/compose/navigation#nav-with-args
+@Serializable
+data class InsertExercise(val id: Int? = null)
+
+@Serializable
+data class InsertWorkout(val id: Int? = null)
+
+@Serializable
+data class ExerciseListDestination(val mode: String? = null)
+
+@Serializable
+object WorkoutList
+
+@Serializable
+data class AddSet(val id: Int? = null)
+
+@Serializable
+data class AddWork(val id: Int? = null)
+
+@Serializable
+data class DisplayWorkoutDetails(val id: Int)
+
+@Serializable
+data class DisplayExerciseDetails(val id: Int)

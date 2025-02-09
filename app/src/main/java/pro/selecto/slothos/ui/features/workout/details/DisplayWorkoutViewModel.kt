@@ -3,6 +3,7 @@ package pro.selecto.slothos.ui.features.workout.details
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -14,6 +15,7 @@ import pro.selecto.slothos.data.model.WorkoutDetails
 import pro.selecto.slothos.data.services.SetDetailsService
 import pro.selecto.slothos.data.services.WorkDetailsService
 import pro.selecto.slothos.data.services.WorkoutDetailsService
+import pro.selecto.slothos.ui.core.DisplayWorkoutDetails
 import pro.selecto.slothos.ui.features.AssistedSavedStateViewModelFactory
 
 class DisplayWorkoutViewModel @AssistedInject constructor(
@@ -27,7 +29,7 @@ class DisplayWorkoutViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): DisplayWorkoutViewModel
     }
 
-    private val workoutId: Int = savedStateHandle["workoutId"] ?: throw IllegalArgumentException("Workout Id is missing")
+    private val workoutId = savedStateHandle.toRoute<DisplayWorkoutDetails>().id
 
     private val _uiState = MutableStateFlow<WorkoutDisplayUiState>(WorkoutDisplayUiState())
     val uiState: StateFlow<WorkoutDisplayUiState> = _uiState.asStateFlow()

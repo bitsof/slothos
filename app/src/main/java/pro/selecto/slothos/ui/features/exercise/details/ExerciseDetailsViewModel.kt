@@ -3,6 +3,7 @@ package pro.selecto.slothos.ui.features.exercise.details
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -10,10 +11,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import pro.selecto.slothos.data.model.ExerciseDetails
-import pro.selecto.slothos.data.services.ExerciseDetailsService
 import pro.selecto.slothos.data.entities.Exercise
+import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.data.repositories.base.BaseRepository
+import pro.selecto.slothos.data.services.ExerciseDetailsService
+import pro.selecto.slothos.ui.core.DisplayExerciseDetails
 import pro.selecto.slothos.ui.features.AssistedSavedStateViewModelFactory
 
 class ExerciseDetailsViewModel @AssistedInject constructor(
@@ -26,7 +28,7 @@ class ExerciseDetailsViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): ExerciseDetailsViewModel
     }
 
-    val exerciseId: Int = savedStateHandle["exerciseId"] ?: throw IllegalArgumentException("Exercise Id is missing")
+    val exerciseId: Int = savedStateHandle.toRoute<DisplayExerciseDetails>().id
 
     private val _uiState = MutableStateFlow<ExerciseDetailsUiState?>(null)
     val uiState: StateFlow<ExerciseDetailsUiState?> = _uiState.asStateFlow()

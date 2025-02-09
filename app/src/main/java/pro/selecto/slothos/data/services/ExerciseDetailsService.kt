@@ -2,7 +2,7 @@ package pro.selecto.slothos.data.services
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
@@ -48,7 +48,7 @@ class ExerciseDetailsService @Inject constructor(
             }
 
     // returns all exercise details
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun getAllExerciseDetails() : Flow<List<ExerciseDetails>> =
         exerciseRepository.getAllEntitiesStream().flatMapConcat { exercises ->
             val exerciseDetailsFlows = exercises.map { exercise ->

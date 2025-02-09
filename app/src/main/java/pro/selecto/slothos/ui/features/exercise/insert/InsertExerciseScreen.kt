@@ -26,15 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import pro.selecto.slothos.R
-import pro.selecto.slothos.ui.navigation.NavigationDestination
 
-object InsertExerciseDestination : NavigationDestination {
-    override val route = "insert_exercise"
-    override val titleRes = R.string.insert_exercise
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InsertExerciseScreen(
     modifier: Modifier = Modifier,
