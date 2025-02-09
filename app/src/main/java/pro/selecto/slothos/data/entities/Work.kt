@@ -27,7 +27,7 @@ class Work(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "order") val order: Int = 0,
-    @ColumnInfo(name = "value") val value: Float = 0F,
+    @ColumnInfo(name = "value") val value: Double = 0.0,
     @ColumnInfo(name = "name") val name: String = "",
     @ColumnInfo(name = "measurement_type") val measurementType: StandardMeasurementType = StandardMeasurementType.POUNDS,
     @ColumnInfo(name = "set_id") var setId: Int = 0,
