@@ -111,8 +111,8 @@ fun SlothosApp(
                         ?.set("newSetDetails", setDetails)
                     navController.popBackStack()
                 },
-                navigateToAddWorkScreen = { navController.navigate(SlothosScreen.AddWork.name) },
-                navigateToSelectExerciseScreen = { navController.navigate(SlothosScreen.ExerciseList.name + "?mode=select") },
+                navigateToAddWorkScreen = { navController.navigate(AddWork()) },
+                navigateToSelectExerciseScreen = { navController.navigate(ExerciseListDestination(mode = "select")) },
             )
         }
 
