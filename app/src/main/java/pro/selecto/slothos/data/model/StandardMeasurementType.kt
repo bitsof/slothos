@@ -9,7 +9,7 @@ enum class StandardMeasurementType(
     // Distance
     METERS(MeasurementCategory.DISTANCE, "m", 1.0, 2),
     KILOMETERS(MeasurementCategory.DISTANCE, "km", 1000.0, 3),
-    MILES(MeasurementCategory.DISTANCE, "mi", 1609.34, 3),
+    MILES(MeasurementCategory.DISTANCE, "mi", 1609.344, 3),
 
     // Size
     MILLIMETERS(MeasurementCategory.SIZE, "mm", 1.0, 1),
@@ -17,7 +17,7 @@ enum class StandardMeasurementType(
 
     // Weight
     KILOGRAMS(MeasurementCategory.WEIGHT, "kg", 1.0, 2),
-    POUNDS(MeasurementCategory.WEIGHT, "lbs", 0.453592, 2),
+    POUNDS(MeasurementCategory.WEIGHT, "lbs", 0.45359237, 2),
 
     // Effort
     RPE(MeasurementCategory.EFFORT, "RPE", 1.0, 1),
