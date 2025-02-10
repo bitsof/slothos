@@ -24,9 +24,9 @@ class AddWorkViewModel @Inject constructor(
         }
     }
 
-    fun updateDescription(description: String) {
+    fun updateName(name: String) {
         _uiState.update { currentState ->
-            currentState.copy(description = description)
+            currentState.copy(name = name)
         }
     }
 
@@ -58,7 +58,7 @@ class AddWorkViewModel @Inject constructor(
     fun createWorkDetails(): WorkDetails {
         val work = Work(
             value = _uiState.value.value,
-            name = _uiState.value.description,
+            name = _uiState.value.name,
             measurementType = _uiState.value.selectedMeasurement,
         )
         return WorkDetails(work = work)
@@ -67,6 +67,6 @@ class AddWorkViewModel @Inject constructor(
 
 data class AddWorkUiState(
     val value: Double = 0.0,
-    val description: String = "",
+    val name: String = "",
     val selectedMeasurement: StandardMeasurementType = StandardMeasurementType.POUNDS,
 )
