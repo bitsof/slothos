@@ -10,6 +10,8 @@ import pro.selecto.slothos.data.model.StandardMeasurementType
 import pro.selecto.slothos.data.model.WorkDetails
 import pro.selecto.slothos.data.repositories.interfaces.WorkRepository
 import javax.inject.Inject
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 class AddWorkViewModel @Inject constructor(
     workRepository: WorkRepository,
@@ -24,19 +26,19 @@ class AddWorkViewModel @Inject constructor(
         }
     }
 
-    fun updateDescription(description: String) {
+    fun updateName(name: String) {
         _uiState.update { currentState ->
-            currentState.copy(description = description)
+            currentState.copy(name = name)
         }
     }
 
     fun updateMeasurement(newMeasurement: StandardMeasurementType) {
         _uiState.update { currentState ->
-            val currentMeasruement = currentState.selectedMeasurement
+            val currentMeasurement = currentState.selectedMeasurement
 
             when {
                 // When changing category type (e.g. time to RPE), resets to 0
-                newMeasurement.categoryType != currentMeasruement.categoryType -> {
+                newMeasurement.categoryType != currentMeasurement.categoryType -> {
                     currentState.copy(
                         value = 0.0,
                         selectedMeasurement = newMeasurement,
@@ -44,8 +46,13 @@ class AddWorkViewModel @Inject constructor(
                 }
                 // When they are the same category (lbs to kgs, or mm to inches), convert them
                 else -> {
-                    val convertedValue = currentState.value / currentMeasruement.conversionToBase * newMeasurement.conversionToBase
-
+                    val convertedValue = currentState.value / newMeasurement.conversionToBase * currentMeasurement.conversionToBase
+//                    convertedValue = convertedValue.roundToSignificantDigits(
+//                        when (newMeasurement.categoryType) {
+//                            MeasurementCategory.DISTANCE -> 3
+//                            else -> 2
+//                        }
+//                    )
                     currentState.copy(
                         value = convertedValue,
                         selectedMeasurement = newMeasurement,
@@ -58,7 +65,7 @@ class AddWorkViewModel @Inject constructor(
     fun createWorkDetails(): WorkDetails {
         val work = Work(
             value = _uiState.value.value,
-            name = _uiState.value.description,
+            name = _uiState.value.name,
             measurementType = _uiState.value.selectedMeasurement,
         )
         return WorkDetails(work = work)
@@ -67,6 +74,11 @@ class AddWorkViewModel @Inject constructor(
 
 data class AddWorkUiState(
     val value: Double = 0.0,
-    val description: String = "",
+    val name: String = "",
     val selectedMeasurement: StandardMeasurementType = StandardMeasurementType.POUNDS,
 )
+
+fun Double.roundToSignificantDigits(decimals: Int): Double {
+    val factor = 10.0.pow(decimals)
+    return (this * factor).roundToInt() / factor
+}

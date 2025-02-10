@@ -53,8 +53,8 @@ fun AddWorkScreen(
             modifier = Modifier.padding(bottom = 16.dp),
         )
         TextField(
-            value = uiState.description,
-            onValueChange = { viewModel.updateDescription(it) },
+            value = uiState.name,
+            onValueChange = { viewModel.updateName(it) },
             label = { Text(text = "Description")},
             modifier = Modifier,
         )

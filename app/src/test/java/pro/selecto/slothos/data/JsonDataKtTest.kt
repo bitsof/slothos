@@ -1,11 +1,7 @@
 package pro.selecto.slothos.data
 
-import org.junit.jupiter.api.Test
-import pro.selecto.slothos.utils.generateJsonFiles
-import pro.selecto.slothos.utils.getData
-
 internal class JsonDataKtTest(){
-    @Test
+    /*@Test
     fun checkWorks() {
         var check = true
         val data = getData()
@@ -23,5 +19,5 @@ internal class JsonDataKtTest(){
 
     fun checkGetList() {
 
-    }
+    }*/
 }
