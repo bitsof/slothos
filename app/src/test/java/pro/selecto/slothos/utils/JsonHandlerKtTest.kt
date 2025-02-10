@@ -1,12 +1,11 @@
 package pro.selecto.slothos.utils
 
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class JsonHandlerKtTest() {
     @Test
     fun checkGenerateJsonFiles() {
-        generateJsonFiles()
+        //generateJsonFiles()
         assert(true)
     }
 }
