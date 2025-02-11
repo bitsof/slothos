@@ -34,7 +34,7 @@ fun WorkoutListScreen(
 
     WorkoutList(
         modifier = modifier,
-        workoutList = uiState.workoutDetailsList,
+        workoutDetailsList = uiState.workoutDetailsList,
         onWorkoutClick = onWorkoutClick,
         onEditClick = onEditClick,
         onAddClick = onAddClick,

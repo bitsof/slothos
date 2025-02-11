@@ -64,7 +64,7 @@ fun ExerciseListScreen(
     ExerciseList(
         modifier = modifier,
         mode = mode,
-        exerciseList = uiState?.exerciseDetailsList,
+        exerciseDetailsList = uiState?.exerciseDetailsList,
         categories = categories,
         onExerciseClick = onExerciseClick,
         onEditClick = onEditClick,
@@ -79,7 +79,7 @@ fun ExerciseListScreen(
 @Composable
 fun ExerciseList(
     modifier: Modifier,
-    exerciseList: List<ExerciseDetails>?,
+    exerciseDetailsList: List<ExerciseDetails>?,
     categories: List<Category>?,
     filterOptions: FilterOptions,
     onExerciseClick: (ExerciseDetails) -> Unit,
@@ -120,11 +120,15 @@ fun ExerciseList(
             LazyColumn(
                 modifier = modifier.padding(padding),
             ) {
-                exerciseList?.let { list ->
-                    items(list.count()) { index ->
-                        val exerciseDetails = list[index]
+                exerciseDetailsList?.let { exerciseList ->
+                    items(
+                        items = exerciseList,
+                        key = { exercise ->
+                            exercise.exercise.id
+                        }
+                    ) { exercise ->
                         ExerciseItem(
-                            exerciseDetails = exerciseDetails,
+                            exerciseDetails = exercise,
                             onExerciseClick = onExerciseClick,
                             onEditClick = onEditClick,
                         )

@@ -3,6 +3,7 @@ package pro.selecto.slothos.ui.components.workout
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +15,7 @@ import pro.selecto.slothos.ui.features.exercise.list.ListMode
 @Composable
 fun WorkoutList(
     modifier: Modifier,
-    workoutList: List<WorkoutDetails>?,
+    workoutDetailsList: List<WorkoutDetails>?,
     onWorkoutClick: (WorkoutDetails) -> Unit,
     onAddClick: () -> Unit, // Consider making this return WorkoutDetails in situation from Select to Insert
     mode: ListMode = ListMode.VIEW,
@@ -35,10 +36,15 @@ fun WorkoutList(
             LazyColumn(
                 modifier = modifier.padding(padding),
             ) {
-                workoutList?.let { list ->
-                    items(list.count()) { index ->
+                workoutDetailsList?.let { workoutDetailsList ->
+                    items(
+                        workoutDetailsList,
+                        key = { workoutDetails ->
+                            workoutDetails.workout.id
+                        }
+                    ) { workoutDetails ->
                         WorkoutItem(
-                            workoutDetails = list[index],
+                            workoutDetails = workoutDetails,
                             onWorkoutClick = onWorkoutClick,
                             onEditClick = onEditClick,
                         )
