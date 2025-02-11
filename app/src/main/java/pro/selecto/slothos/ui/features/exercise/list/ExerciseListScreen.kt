@@ -10,8 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -28,8 +32,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pro.selecto.slothos.R
-import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.data.entities.Category
+import pro.selecto.slothos.data.model.ExerciseDetails
 import pro.selecto.slothos.ui.common.lists.ListScreen
 import pro.selecto.slothos.ui.navigation.NavigationDestination
 
@@ -43,6 +47,7 @@ fun ExerciseListScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
     onExerciseClick: (ExerciseDetails) -> Unit,
+    onEditClick: (ExerciseDetails) -> Unit,
     onAddClick: () -> Unit,
     mode: ListMode = ListMode.VIEW,
 ) {
@@ -62,6 +67,7 @@ fun ExerciseListScreen(
         exerciseList = uiState?.exerciseDetailsList,
         categories = categories,
         onExerciseClick = onExerciseClick,
+        onEditClick = onEditClick,
         onAddClick = onAddClick,
         filterOptions = filterOptions,
         onFilterChange = { newFilterOptions ->
@@ -77,6 +83,7 @@ fun ExerciseList(
     categories: List<Category>?,
     filterOptions: FilterOptions,
     onExerciseClick: (ExerciseDetails) -> Unit,
+    onEditClick: (ExerciseDetails) -> Unit,
     onAddClick: () -> Unit, // Consider making this return ExerciseDetails in situation with Select to Insert
     onFilterChange: (FilterOptions) -> Unit,
     mode: ListMode = ListMode.VIEW,
@@ -119,6 +126,7 @@ fun ExerciseList(
                         ExerciseItem(
                             exerciseDetails = exerciseDetails,
                             onExerciseClick = onExerciseClick,
+                            onEditClick = onEditClick,
                         )
                     }
                 }
@@ -175,6 +183,7 @@ fun FilterMenu(
 fun ExerciseItem(
     exerciseDetails: ExerciseDetails,
     onExerciseClick: (ExerciseDetails) -> Unit,
+    onEditClick: (ExerciseDetails) -> Unit,
 ) {
     Card(
             modifier = Modifier
@@ -189,6 +198,9 @@ fun ExerciseItem(
             Text(text = "Exercise: ${exerciseDetails.exercise.name}")
             Text(text = "Categories: ${exerciseDetails.categoryList.joinToString { it.name }}")
             Text(text = "Equipment: ${exerciseDetails.equipmentList.joinToString { it.name }}")
+        }
+        IconButton(onClick = { onEditClick(exerciseDetails) }) {
+            Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit")
         }
     }
 }

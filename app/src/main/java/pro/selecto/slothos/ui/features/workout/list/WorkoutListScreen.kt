@@ -23,6 +23,7 @@ fun WorkoutListScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
     onWorkoutClick: (WorkoutDetails) -> Unit,
+    onEditClick: (WorkoutDetails) -> Unit,
     onAddClick: () -> Unit,
     mode: ListMode = ListMode.VIEW,
 ) {
@@ -35,6 +36,7 @@ fun WorkoutListScreen(
         modifier = modifier,
         workoutList = uiState.workoutDetailsList,
         onWorkoutClick = onWorkoutClick,
+        onEditClick = onEditClick,
         onAddClick = onAddClick,
         mode = mode,
     )

@@ -71,6 +71,9 @@ fun SlothosApp(
                         }
                     }
                                   },
+                onEditClick = { exerciseDetails ->
+                    navController.navigate(InsertExercise(exerciseDetails.exercise.id))
+                },
                 onAddClick = { navController.navigate(InsertExercise()) },
                 mode = when(mode) {
                     "view" -> {
@@ -142,6 +145,9 @@ fun SlothosApp(
                 viewModelFactory = viewModelFactory,
                 onWorkoutClick = { workoutDetails ->
                     navController.navigate(DisplayWorkoutDetails(workoutDetails.workout.id))
+                },
+                onEditClick = { workoutDetails ->
+                    navController.navigate(InsertWorkout(workoutDetails.workout.id))
                 },
                 onAddClick = { navController.navigate(InsertWorkout())},
                 mode = ListMode.VIEW,
