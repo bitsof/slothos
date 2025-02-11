@@ -26,7 +26,6 @@ object DisplayWorkoutDestination : NavigationDestination {
 fun DisplayWorkoutScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
-    workoutId: Int,
 ) {
     val viewModel: DisplayWorkoutViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
