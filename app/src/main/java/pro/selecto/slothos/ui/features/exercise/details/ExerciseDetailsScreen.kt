@@ -24,7 +24,6 @@ object ExerciseDetailsDestination : NavigationDestination {
 fun ExerciseDetailsScreen(
     modifier: Modifier = Modifier,
     viewModelFactory: ViewModelProvider.Factory,
-    exerciseId: Int,
 ) {
     val viewModel: ExerciseDetailsViewModel = viewModel(factory = viewModelFactory)
 
