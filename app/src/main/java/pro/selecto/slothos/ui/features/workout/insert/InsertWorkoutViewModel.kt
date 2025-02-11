@@ -54,7 +54,7 @@ class InsertWorkoutViewModel @AssistedInject constructor(
                     description = _uiState.value.workoutDescription,
                     date = _uiState.value.workoutDate,
                 ),
-                setDetailsList = _uiState.value.sets,
+                setDetailsList = _uiState.value.setDetailsList,
             )
             Log.v("Logged stuff", "Insert workout");
             workoutDetailsService.insertWorkout(workoutDetails)
@@ -63,14 +63,14 @@ class InsertWorkoutViewModel @AssistedInject constructor(
 
     fun addSet(setDetails: SetDetails) {
         _uiState.update { currentState ->
-            currentState.copy(sets = currentState.sets + setDetails)
+            currentState.copy(setDetailsList = currentState.setDetailsList + setDetails)
         }
     }
 
     fun removeSet(setDetails: SetDetails) {
         fun removeSet(setDetails: SetDetails) {
             _uiState.update { currentState ->
-                currentState.copy(sets = currentState.sets - setDetails)
+                currentState.copy(setDetailsList = currentState.setDetailsList - setDetails)
             }
         }
     }
@@ -102,4 +102,5 @@ data class InsertWorkoutUiState(
     var workoutDescription: String = "",
     var workoutDate: Long = System.currentTimeMillis(),
     var sets: List<SetDetails> = listOf(),
+    var setDetailsList: List<SetDetails> = listOf(),
 ) : Parcelable
