@@ -8,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
 import pro.selecto.slothos.R
 import pro.selecto.slothos.ui.features.exercise.details.ExerciseDetailsScreen
@@ -71,6 +70,9 @@ fun SlothosApp(
                         }
                     }
                                   },
+                onEditClick = { exerciseDetails ->
+                    navController.navigate(InsertExercise(exerciseDetails.exercise.id))
+                },
                 onAddClick = { navController.navigate(InsertExercise()) },
                 mode = when(mode) {
                     "view" -> {
@@ -130,10 +132,8 @@ fun SlothosApp(
         }
         
         composable<DisplayWorkoutDetails> { backStackEntry ->
-            val workoutId: Int = backStackEntry.toRoute<DisplayWorkoutDetails>().id
             DisplayWorkoutScreen(
                 viewModelFactory = viewModelFactory,
-                workoutId = workoutId,
             )
         }
 
@@ -143,18 +143,17 @@ fun SlothosApp(
                 onWorkoutClick = { workoutDetails ->
                     navController.navigate(DisplayWorkoutDetails(workoutDetails.workout.id))
                 },
+                onEditClick = { workoutDetails ->
+                    navController.navigate(InsertWorkout(workoutDetails.workout.id))
+                },
                 onAddClick = { navController.navigate(InsertWorkout())},
                 mode = ListMode.VIEW,
             )
         }
         composable<DisplayExerciseDetails> { backStackEntry ->
-            val exerciseId = backStackEntry.arguments?.getInt("exerciseId")
-            if (exerciseId != null) {
-                ExerciseDetailsScreen(
-                    viewModelFactory = viewModelFactory,
-                    exerciseId = exerciseId,
-                )
-            }
+            ExerciseDetailsScreen(
+                viewModelFactory = viewModelFactory,
+            )
         }
 
     }

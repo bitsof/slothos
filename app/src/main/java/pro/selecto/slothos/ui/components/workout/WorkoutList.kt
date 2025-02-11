@@ -19,6 +19,7 @@ fun WorkoutList(
     onWorkoutClick: (WorkoutDetails) -> Unit,
     onAddClick: () -> Unit, // Consider making this return WorkoutDetails in situation from Select to Insert
     mode: ListMode = ListMode.VIEW,
+    onEditClick: (WorkoutDetails) -> Unit,
 ) {
     Column {
         Text(
@@ -45,6 +46,7 @@ fun WorkoutList(
                         WorkoutItem(
                             workoutDetails = workoutDetails,
                             onWorkoutClick = onWorkoutClick,
+                            onEditClick = onEditClick,
                         )
                     }
                 }

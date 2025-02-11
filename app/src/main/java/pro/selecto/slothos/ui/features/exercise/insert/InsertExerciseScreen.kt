@@ -10,11 +10,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,11 +35,7 @@ fun InsertExerciseScreen(
 ) {
     val viewModel: InsertExerciseViewModel = viewModel(factory = viewModelFactory)
     val coroutineScope = rememberCoroutineScope()
-
-    val exerciseName by viewModel.exerciseName
-    val exerciseInstructions by viewModel.exerciseInstructions
-    val selectedCategories = viewModel.selectedCategories
-    val selectedEquipment = viewModel.selectedEquipment
+    val uiState by viewModel.uiState.collectAsState()
 
     Column(modifier = modifier.padding(16.dp)) {
         Text(
@@ -47,27 +43,27 @@ fun InsertExerciseScreen(
             style = MaterialTheme.typography.headlineSmall
         )
         TextField(
-            value = exerciseName,
+            value = uiState.exerciseName,
             onValueChange = { viewModel.updateExerciseName(it) },
             label = { Text("Exercise Name") },
             modifier = Modifier.fillMaxWidth()
         )
         TextField(
-            value = exerciseInstructions,
-            onValueChange = { viewModel.exerciseInstructions.value = it },
+            value = uiState.exerciseInstructions,
+            onValueChange = { viewModel.updateExerciseInstructions(it) },
             label = { Text("Exercise Instructions") },
             modifier = Modifier.fillMaxWidth()
         )
         MultiSelectDropdown(
             items = viewModel.allCategories.map { it.name },
-            selectedItems = selectedCategories.mapNotNull { it?.name },
+            selectedItems = uiState.selectedCategories.map { it.name },
             onSelectionChanged = { category -> viewModel.onCategorySelected(category) },
             label = "Select Categories"
         )
 
         MultiSelectDropdown(
             items = viewModel.allEquipment.map { it.name },
-            selectedItems = selectedEquipment.mapNotNull { it?.name },
+            selectedItems = uiState.selectedEquipment.map { it.name },
             onSelectionChanged = { equipment -> viewModel.onEquipmentSelected(equipment) },
             label = "Select Equipment"
         )

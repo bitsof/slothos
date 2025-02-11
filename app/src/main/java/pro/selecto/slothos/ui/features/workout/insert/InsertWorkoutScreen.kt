@@ -94,7 +94,7 @@ fun InsertWorkoutScreen(
 
         Column {
             LazyColumn(modifier = modifier) {
-                uiState.sets.let { list ->
+                uiState.setDetailsList.let { list ->
                     items(list.count()) { index ->
                         val setDetails = list[index]
                         SetItem(setDetails = setDetails)
