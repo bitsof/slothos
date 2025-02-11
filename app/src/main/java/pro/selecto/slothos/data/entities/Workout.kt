@@ -12,7 +12,8 @@ class Workout (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "name") val name: String ="",
-    @ColumnInfo(name = "notes") val description: String = "",
+    @ColumnInfo(name = "notes") val notes: String = "",
+    @ColumnInfo(name = "description") val description:String = "",
     @ColumnInfo(name = "date") val date: Long = 0,
 ) : Parcelable {
 }
