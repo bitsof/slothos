@@ -1,7 +1,9 @@
 package pro.selecto.slothos
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -16,6 +18,6 @@ class ExampleUnitTest {
 
     @Test
     fun always_fail() {
-        assert(false)
+        assertTrue(false)
     }
 }
