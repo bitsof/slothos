@@ -22,8 +22,16 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build || true
-
+    
     - name: Run Unit Tests
-      run: ./gradlew test --scan --info --stacktrace
+      run: ./gradlew test --continue
+      
+    - name: Upload Test Reports
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-reports
+        path: '**/build/reports/tests/'
+        
+    - name: Build with Gradle
+      run: ./gradlew build
